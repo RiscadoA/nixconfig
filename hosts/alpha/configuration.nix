@@ -90,8 +90,8 @@ in
     libinput.enable = true;
     libinput.touchpad.naturalScrolling = true;
     displayManager.sessionCommands = ''
-      {pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 135=space'
-      {pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 65='
+      ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 135=space'
+      ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 65='
     ''; 
   };
 

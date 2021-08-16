@@ -48,6 +48,8 @@
   programs.vscode.enable = true;
 
   services.flameshot.enable = true;
+  
+  home.keyboard = null;
 
   home.stateVersion = "21.05";
 }
