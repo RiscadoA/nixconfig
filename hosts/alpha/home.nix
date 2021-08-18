@@ -24,6 +24,7 @@
     ../../modules/home/gtk.nix
     ../../modules/home/alacritty.nix
     ../../modules/home/firefox.nix
+    ../../modules/home/vscode.nix
     # TODO: dunst
   ];
 
@@ -39,13 +40,14 @@
     minecraft
 
     # Other
+    mattermost-desktop
+    slack
     discord
     spotify
   ];
 
   programs.browserpass.enable = true;
   programs.password-store.enable = true;
-  programs.vscode.enable = true;
 
   services.flameshot.enable = true;
   

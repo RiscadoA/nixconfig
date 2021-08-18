@@ -19,6 +19,7 @@ in
   imports = [
     ./hardware-configuration.nix
 
+    ../../modules/system/wireguard.nix
     ../../modules/system/lightdm.nix
     ../../modules/system/xmonad.nix
   ];
@@ -67,6 +68,7 @@ in
       "/etc/ssh/ssh_host_rsa_key.pub"
       "/etc/ssh/ssh_host_ed25519_key"
       "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/wireguard/privkey"
     ];
   };
 
@@ -151,6 +153,14 @@ in
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Syncthing
+  services.syncthing = {
+    enable = true;
+    user = "minecraft";
+    dataDir = "/srv/minecraft";
+    configDir = "/srv/minecraft/.config/syncthing";
+  };
 
   # Required for gtk.
   services.dbus.packages = [ pkgs.gnome3.dconf ];

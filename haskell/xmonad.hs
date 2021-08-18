@@ -2,6 +2,8 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.Place
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageHelpers
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Layout.NoBorders
@@ -14,7 +16,8 @@ import Data.Maybe
 import qualified Graphics.X11.ExtraTypes.XF86 as XF86
 
 myManageHook = composeAll
-    [ className =? "Gimp"    --> doFloat
+    [ isFullscreen           --> doFullFloat
+    , className =? "Gimp"    --> doFloat
     , className =? "Code"    --> doShift "code"
     , className =? "firefox" --> doShift "network"
     , className =? "discord" --> doShift "discord"
@@ -33,7 +36,7 @@ layoutAll = (layoutSingle ||| layoutFull ||| layoutTiled)
 
 main = do
     xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
-    xmonad $ docks defaultConfig
+    xmonad $ ewmh $ docks defaultConfig
         { manageHook = myManageHook <+> myPlaceHook  <+> manageHook defaultConfig
         , layoutHook = onWorkspace "terminal" layoutTiled $
 		       onWorkspaces ["network", "other"] layoutAll $
@@ -47,6 +50,7 @@ main = do
                            , ppUrgent          = xmobarColor "red" "yellow" . workspaceIcon
                            , ppTitle           = xmobarColor "#e3a84e" "" . shorten 50
                            }
+	, handleEventHook    = handleEventHook defaultConfig <+> fullscreenEventHook
         , modMask            = mod4Mask
         , terminal           = "alacritty"
         , focusFollowsMouse  = True
