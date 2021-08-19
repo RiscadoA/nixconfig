@@ -5,20 +5,22 @@
 #
 # Wireguard system configuration.
 
-{ ... }:
+{ pkgs, ... }:
 {
-  networking.wireguard.interfaces = {
-    rnl = {
-      ips = [ "192.168.20.38/24" "fd92:3315:9e43:c490::38/64" ];
+  networking.wg-quick.interfaces = {
+    wgrnl = {
+      address = [ "192.168.20.38/24" "fd92:3315:9e43:c490::38/64" ];
+      dns = [ "193.136.164.1" "193.136.164.2" ];
       privateKeyFile = "/etc/wireguard/privkey";
-      postSetup = ''
-        wg set %i fwmark 765
-        ip rule add not fwmark 765 table 765
-        ip -6 rule add not fwmark 765 table 765
+      table = "765";
+      postUp = ''
+        ${pkgs.wireguard-tools}/bin/wg set wgrnl fwmark 765
+        ${pkgs.iproute2}/bin/ip rule add not fwmark 765 table 765
+        ${pkgs.iproute2}/bin/ip -6 rule add not fwmark 765 table 765
       '';
-      postShutdown = ''
-        ip rule del not fwmark 765 table 765
-        ip -6 rule del not fwmark 765 table 765
+      postDown = ''
+        ${pkgs.iproute2}/bin/ip rule del not fwmark 765 table 765
+        ${pkgs.iproute2}/bin/ip -6 rule del not fwmark 765 table 765
       '';
       peers = [
         {
