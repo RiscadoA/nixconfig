@@ -60,7 +60,7 @@ main = do
         , focusedBorderColor = "#e3a84e" 
         , workspaces         = myWorkspaces
         } `additionalKeys`
-        [ ((mod4Mask .|. shiftMask, xK_l), spawn "slock -m \"Screen locked\"")
+        [ ((mod4Mask .|. shiftMask, xK_l), spawn "slock")
         , ((mod4Mask .|. controlMask, xK_Left), spawn "playerctl previous")
         , ((mod4Mask .|. controlMask, xK_Right), spawn "playerctl next")
         , ((mod4Mask .|. controlMask, xK_Up), spawn "playerctl play")
