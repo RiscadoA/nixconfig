@@ -21,6 +21,7 @@ in
 
     ../../modules/system/wireguard.nix
     ../../modules/system/lightdm.nix
+    ../../modules/system/slock.nix
     ../../modules/system/xmonad.nix
   ];
 
@@ -40,7 +41,6 @@ in
   ];
 
   programs.steam.enable = true;
-  programs.slock.enable = true;
   programs.light.enable = true;
 
   # Use the systemd-boot EFI boot loader.
