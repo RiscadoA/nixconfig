@@ -17,6 +17,7 @@
     
     # Graphical
     ../../modules/home/picom.nix
+    ../../modules/home/random-background.nix
     ../../modules/home/xmonad.nix
     ../../modules/home/xmobar.nix
     ../../modules/home/dmenu.nix

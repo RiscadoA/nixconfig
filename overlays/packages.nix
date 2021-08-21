@@ -6,5 +6,10 @@
 # Extra packages.
 
 self: super: rec {
+  dmenu = super.dmenu.overrideAttrs (oldAttrs: rec {
+    patches = [
+      ../packages/dmenu/colors.patch
+    ];
+  });
   headsetcontrol = super.callPackage ../packages/headsetcontrol {};
 }
