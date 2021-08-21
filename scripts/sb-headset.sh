@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 if headsetcontrol -c; then
-	echo -ne '\uf590' $(headsetcontrol -bc)% ''
+	level=$(headsetcontrol -bc)
+	if [[ $level != 0 ]]; then
+		echo -ne '\uf590' $level% ''
+	fi
 fi
-
