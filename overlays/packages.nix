@@ -6,4 +6,5 @@
 # Extra packages.
 
 self: super: rec {
+  headsetcontrol = super.callPackage ../packages/headsetcontrol {};
 }

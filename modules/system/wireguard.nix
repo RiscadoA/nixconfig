@@ -11,7 +11,7 @@
     wgrnl = {
       address = [ "192.168.20.38/24" "fd92:3315:9e43:c490::38/64" ];
       dns = [ "193.136.164.1" "193.136.164.2" ];
-      privateKeyFile = "/etc/wireguard/privkey";
+      privateKeyFile = "/etc/nixos/secrets/wg-privkey";
       table = "765";
       postUp = ''
         ${pkgs.wireguard-tools}/bin/wg set wgrnl fwmark 765

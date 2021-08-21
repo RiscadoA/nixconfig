@@ -31,6 +31,12 @@ in
     pciutils
     openjdk
     xorg.xmodmap
+    headsetcontrol
+  ];
+
+  # udev rules
+  services.udev.packages = with pkgs; [
+   headsetcontrol
   ];
 
   programs.steam.enable = true;
@@ -68,7 +74,6 @@ in
       "/etc/ssh/ssh_host_rsa_key.pub"
       "/etc/ssh/ssh_host_ed25519_key"
       "/etc/ssh/ssh_host_ed25519_key.pub"
-      "/etc/wireguard/privkey"
     ];
   };
 
