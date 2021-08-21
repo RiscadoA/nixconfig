@@ -36,6 +36,11 @@
       stack_duplicates = true;
       hide_duplicate_count = false;
       show_indicators = "yes";
+      icon_position = "left";
+      min_icon_size = 0;
+      max_icon_size = 32;
+      sticky_history = "yes";
+      history_length = 20;
       dmenu = "${pkgs.dmenu}/bin/dmenu -p dunst:";
       browser = "${pkgs.firefox}/usr/bin/firefox -new-tab";
       always_run_script = true;
