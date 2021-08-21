@@ -9,7 +9,7 @@
 {
   services.picom.enable = true;
   services.picom.blur = true;
-  services.picom.fade = true;
+  services.picom.fade = false;
   services.picom.inactiveDim = "0.2";
   services.picom.vSync = true;
 }
