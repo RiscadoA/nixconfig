@@ -21,6 +21,7 @@
     ../../modules/home/xmonad.nix
     ../../modules/home/xmobar.nix
     ../../modules/home/dmenu.nix
+    ../../modules/home/dunst.nix
     ../../modules/home/qt.nix
     ../../modules/home/gtk.nix
     ../../modules/home/alacritty.nix
