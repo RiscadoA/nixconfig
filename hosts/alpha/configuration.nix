@@ -38,7 +38,7 @@ in
   # udev rules
   services.udev.packages = with pkgs; [
    headsetcontrol
-  ];
+ ];
 
   programs.steam.enable = true;
   programs.light.enable = true;

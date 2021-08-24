@@ -27,7 +27,6 @@
     ../../modules/home/alacritty.nix
     ../../modules/home/firefox.nix
     ../../modules/home/vscode.nix
-    # TODO: dunst
   ];
 
   home.packages = with pkgs; [
@@ -46,13 +45,16 @@
     slack
     discord
     spotify
+    webots
   ];
 
   programs.browserpass.enable = true;
   programs.password-store.enable = true;
 
   services.flameshot.enable = true;
-  
+
+  nixpkgs.config.allowUnfree = true;
+
   home.keyboard = null;
 
   home.stateVersion = "21.05";

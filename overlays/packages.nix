@@ -17,4 +17,5 @@ self: super: rec {
     ];
   });
   headsetcontrol = super.callPackage ../packages/headsetcontrol {};
+  webots = super.callPackage ../packages/webots {};
 }
