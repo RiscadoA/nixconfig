@@ -6,7 +6,17 @@
 # VS Code home configuration.
 
 { pkgs, ... }:
+
+let
+  extensions = (with pkgs.vscode-extensions; [
+      bbenoist.Nix
+      ms-python.python
+      ms-vscode-remote.remote-ssh
+    ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+  ];
+in
 {
   programs.vscode.enable = true;
-  programs.vscode.package = pkgs.vscode-fhs;
+  programs.vscode.package = pkgs.vscode;
+  programs.vscode.extensions = extensions;
 }

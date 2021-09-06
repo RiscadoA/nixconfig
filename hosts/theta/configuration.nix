@@ -18,9 +18,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ./windows-vm.nix
 
-    ../../modules/system/wireguard.nix
     ../../modules/system/lightdm.nix
     ../../modules/system/slock.nix
     ../../modules/system/xmonad.nix
@@ -176,9 +174,6 @@ in
 
   # Disable firewall.
   networking.firewall.enable = false;
-
-  # Add certificates
-  security.pki.certificateFiles = [ ../../certs/rnl.crt ];
 
   # Version.
   system.stateVersion = "21.05";

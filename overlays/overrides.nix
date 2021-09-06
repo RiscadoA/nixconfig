@@ -9,4 +9,5 @@ self: super: {
   discord = super.latest.discord.override {
     nss = super.pkgs.nss_latest;
   };
+  vscode-with-extensions = super.latest.vscode-with-extensions;
 }

@@ -8,4 +8,10 @@
 { ... }:
 {
   programs.ssh.enable = true;
+  programs.ssh.matchBlocks = {
+    theta = {
+      hostname = "theta.riscadoa.com";
+      user = "riscadoa";
+    };
+  };
 }

@@ -19,7 +19,7 @@ myManageHook = composeAll
     [ isFullscreen           --> doFullFloat
     , className =? "Gimp"    --> doFloat
     , className =? "Code"    --> doShift "code"
-    , className =? "firefox" --> doShift "network"
+    , className =? "Firefox" --> doShift "network"
     , className =? "discord" --> doShift "discord"
     , className =? "Slack" --> doShift "team"
     , className =? "Mattermost" --> doShift "team"
@@ -79,6 +79,7 @@ myWorkspaces =
     , "discord"
     , "team"
     , "video"
+    , "windows"
     , "other"
     , "music"
     ]
@@ -90,6 +91,7 @@ workspaceIcons =
     , "\xf392"
     , "\xf0c0"
     , "\xf008"
+    , "\xf17a"
     , "\xf0eb"
     , "\xf001"
     ]
