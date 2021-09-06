@@ -21,7 +21,7 @@ in
     ./windows-vm.nix
 
     ../../modules/system/wireguard.nix
-    ../../modules/system/lightdm.nix
+    ../../modules/system/lightdm-auto.nix
     ../../modules/system/slock.nix
     ../../modules/system/xmonad.nix
   ];
@@ -131,12 +131,15 @@ in
     mutableUsers = true;
     users.root.initialPassword = "123";
     users.riscadoa = {
-      shell = pkgs.zsh;
       isNormalUser = true;
+      createHome = true;
+      shell = pkgs.zsh;
       extraGroups = [ "wheel" "video" "libvirtd" ];
     };
     users.minecraft = {
       isNormalUser = true;
+      createHome = true;
+      home = "/srv/minecraft";
     };
   };
 

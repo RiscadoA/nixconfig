@@ -8,7 +8,10 @@
 { ... }:
 {
   services.xserver.displayManager = {
+    autoLogin.enable = true;
+    autoLogin.user = "riscadoa";
     lightdm.enable = true;
+    lightdm.greeter.enable = false;
     lightdm.extraConfig = ''
       set logind-check-graphical=true
     '';

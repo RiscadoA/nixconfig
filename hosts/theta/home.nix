@@ -46,7 +46,6 @@
     slack
     discord
     spotify
-    webots
     xournalpp
   ];
 
