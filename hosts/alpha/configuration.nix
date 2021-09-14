@@ -18,7 +18,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ./windows-vm.nix
+    # ./windows-vm.nix
 
     ../../modules/system/wireguard.nix
     ../../modules/system/lightdm-auto.nix
@@ -105,17 +105,17 @@ in
 
   # Configure NVidia PRIME
   hardware.opengl.enable = true; 
-  #hardware.nvidia.nvidiaPersistenced = true; 
-  #hardware.nvidia.prime = {
-  #  offload.enable = true;
-  #  intelBusId = "PCI:0:2:0";
-  #  nvidiaBusId = "PCI:1:0:0";
-  #};
+  hardware.nvidia.nvidiaPersistenced = true; 
+  hardware.nvidia.prime = {
+    offload.enable = true;
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:1:0:0";
+  };
 
   # Configure xserver
   services.xserver = {
     enable = true;
-    #videoDrivers = [ "nvidia" ];
+    videoDrivers = [ "nvidia" ];
   };
 
   # Enable bluetooth
