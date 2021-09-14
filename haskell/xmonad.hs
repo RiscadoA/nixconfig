@@ -45,6 +45,7 @@ main = do
         , logHook    = dynamicLogWithPP xmobarPP
                            { ppOutput          = hPutStrLn xmproc
                            , ppCurrent         = xmobarColor "#e3a84e" "" . workspaceIcon
+                           , ppVisible         = xmobarColor "#ebdbb2" "" . workspaceIcon
                            , ppHidden          = xmobarColor "#dfbf8e" "" . workspaceIcon
                            , ppHiddenNoWindows = xmobarColor "#dfbf8e" "" . workspaceIcon
                            , ppUrgent          = xmobarColor "red" "yellow" . workspaceIcon

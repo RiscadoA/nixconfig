@@ -10,14 +10,12 @@
   imports = [
     ./hardware-configuration.nix
 
-    ../../modules/system/lightdm.nix
     ../../modules/system/slock.nix
     ../../modules/system/xmonad.nix
   ];
 
   environment.systemPackages = with pkgs; [
     # Tools
-    nvidia-offload
     pulsemixer
     openjdk
     headsetcontrol
@@ -29,7 +27,6 @@
   ];
 
   programs.steam.enable = true;
-  programs.light.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -86,7 +83,7 @@
   hardware.opengl.enable = true; 
   services.xserver = {
     enable = true;
-    videoDrivers = [ "nvidia" ];
+    displayManager.startx.enable = true;
   };
 
   # Enable sound.
@@ -131,7 +128,20 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # Syncthing
+  # Minecraft server
+  systemd.services."minecraft@" = {
+    description = "Minecraft server %i";
+    after = [ "fs.target" "network.target" "multi-user.target" ];
+    serviceConfig = {
+      Type = "forking";
+      WorkingDirectory = "/srv/minecraft/%i";
+      ExecStart = "${pkgs.screen}/bin/screen -dmS minecraft_%i java -Xmx1024M -Xms1024M -jar server.jar nogui";
+      ExecStop = "${pkgs.screen}/bin/screen -p 0 -S minecraft_$i eval 'stuff \"stop\"\015'";
+      User = "minecraft";
+      Group = "users";
+    };
+  };
+
   services.syncthing = {
     enable = true;
     user = "minecraft";
