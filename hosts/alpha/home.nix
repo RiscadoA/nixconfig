@@ -19,7 +19,7 @@
     ../../modules/home/picom.nix
     ../../modules/home/random-background.nix
     ../../modules/home/xmonad.nix
-    ../../modules/home/xmobar.nix
+    ../../modules/home/xmobar-laptop.nix
     ../../modules/home/dmenu.nix
     ../../modules/home/dunst.nix
     ../../modules/home/qt.nix
