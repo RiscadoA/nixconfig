@@ -9,8 +9,11 @@ import requests
 #   https://trello.com/1/appKey/generate
 # For the token, access this:
 #   https://trello.com/1/authorize?response_type=token&expiration=30days&name=gui&key=REPLACE_WITH_YOUR_KEY
-API_KEY = '213b8ea77a27607eb8ea3b45c912b618'
-API_TOKEN = '26ad26aa79a6269cc3a29956b533865d4d6723c2b86ea3d722f185a1f5f32cba'
+
+with open('/etc/nixos/secrets/trello-api-key', 'r') as file:
+    API_KEY = file.read().strip()
+with open('/etc/nixos/secrets/trello-api-token', 'r') as file:
+    API_TOKEN = file.read().strip()
 
 BOARD_ID = '60662b7b0097ad2a380690e7'
 
