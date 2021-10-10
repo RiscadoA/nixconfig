@@ -6,8 +6,6 @@
 # Overrides nixpkgs. Useful from getting a pkg from latest.
 
 self: super: {
-  discord = super.latest.discord.override {
-    nss = super.pkgs.nss_latest;
-  };
+  discord = super.latest.discord;
   vscode-with-extensions = super.latest.vscode-with-extensions;
 }
