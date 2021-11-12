@@ -1,9 +1,9 @@
-# modules/home/xmobar.nix
+# modules/home/xmobar-desktop.nix
 #
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
-# xmobar home configuration.
+# xmobar desktop home configuration.
 
 { pkgs, ... }:
 {
@@ -11,6 +11,6 @@
     haskellPackages.xmobar
   ];
   home.file = {
-    ".xmonad/xmobar.hs".source = ../../haskell/xmobar.hs;
+    ".xmonad/xmobar.hs".source = ../../haskell/xmobar-desktop.hs;
   };
 }
