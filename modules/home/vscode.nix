@@ -12,6 +12,7 @@ let
       bbenoist.Nix
       ms-python.python
       ms-vscode-remote.remote-ssh
+      ms-vscode.cpptools
     ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
   ];
 in

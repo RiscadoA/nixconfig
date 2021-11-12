@@ -44,6 +44,9 @@ in
   programs.steam.enable = true;
   programs.light.enable = true;
 
+  # Required by vscode
+  services.gnome.gnome-keyring.enable = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -117,6 +120,9 @@ in
     enable = true;
     videoDrivers = [ "nvidia" ];
   };
+
+  # Enable docker
+  virtualisation.docker.enable = true;
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
