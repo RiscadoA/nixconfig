@@ -13,5 +13,9 @@
       hostname = "theta.riscadoa.com";
       user = "riscadoa";
     };
+    pi = {
+      hostname = "192.168.8.15";
+      user = "pi";
+    };
   };
 }
