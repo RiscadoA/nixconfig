@@ -5,7 +5,7 @@
 #
 # Alpha system configuration.
 
-{ config, pkgs, options, inputs, ... }:
+{ config, pkgs, options, inputs, lib, ... }:
 let
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
@@ -115,6 +115,16 @@ in
     nvidiaBusId = "PCI:1:0:0";
   };
 
+  # Create an external display setup.
+  specialisation = {
+    external-display.configuration = {
+      nixpkgs.pkgs = pkgs;
+      system.nixos.tags = [ "external-display" ];
+      hardware.nvidia.prime.offload.enable = lib.mkForce false;
+      hardware.nvidia.powerManagement.enable = lib.mkForce false;
+    };
+  };
+
   # Configure xserver
   services.xserver = {
     enable = true;
@@ -190,5 +200,5 @@ in
   security.pki.certificateFiles = [ ../../certs/rnl.crt ];
 
   # Version.
-  system.stateVersion = "21.05";
+  system.stateVersion = "21.11";
 }
