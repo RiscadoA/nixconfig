@@ -9,7 +9,7 @@
 
 let
   extensions = (with pkgs.vscode-extensions; [
-      bbenoist.Nix
+      bbenoist.nix
       ms-python.python
       ms-vscode-remote.remote-ssh
       ms-vscode.cpptools

@@ -9,12 +9,12 @@
   description = "Nix configuration for a single user system.";
 
   inputs = {
-    nixpkgs      = { url = "github:nixos/nixpkgs/nixos-21.05"; };
+    nixpkgs      = { url = "github:nixos/nixpkgs/nixos-21.11"; };
     unstable     = { url = "github:nixos/nixpkgs/nixos-unstable"; };
     latest       = { url = "github:nixos/nixpkgs/master"; };
     impermanence = { url = "github:nix-community/impermanence/master"; };
     home         = {
-      url = "github:nix-community/home-manager/release-21.05";
+      url = "github:nix-community/home-manager/release-21.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
