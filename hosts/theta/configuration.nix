@@ -13,13 +13,17 @@
     ../../modules/system/slock.nix
     ../../modules/system/xmonad.nix
     ../../modules/system/minecraft.nix
+    ../../modules/system/ark.nix
   ];
 
   environment.systemPackages = with pkgs; [
     # Tools
     pulsemixer
-    openjdk
     headsetcontrol
+
+    # Game server hosting dependencies
+    openjdk
+    steamcmd
   ];
 
   # udev rules
@@ -107,6 +111,11 @@
       createHome = true;
       home = "/srv/minecraft";
     };
+    users.ark = {
+      isNormalUser = true;
+      createHome = true;
+      home = "/srv/ark";
+    };
   };
 
   # Set fonts.
@@ -138,6 +147,9 @@
     dataDir = "/srv/minecraft";
     configDir = "/srv/minecraft/.config/syncthing";
   };
+
+  # Ark server
+  services.arkServer.enable = true;
 
   # Required for gtk.
   services.dbus.packages = [ pkgs.gnome3.dconf ];
