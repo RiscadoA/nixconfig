@@ -38,8 +38,13 @@ in
 
   # udev rules
   services.udev.packages = with pkgs; [
-   headsetcontrol
- ];
+    headsetcontrol
+  ];
+
+  # Rule for Steelseries Arctis 9
+  services.udev.extraRules = ''
+    ATTRS{idVendor}=="1038", ATTRS{idProduct}=="12c4", ENV{PULSE_PROFILE_SET}="usb-gaming-headset.conf"
+  '';
 
   programs.steam.enable = true;
   programs.light.enable = true;
