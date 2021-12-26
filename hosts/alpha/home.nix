@@ -61,6 +61,7 @@
     discord &
     mattermost-desktop &
     spotify &
+    anki &
   '';
 
   home.keyboard = null;
