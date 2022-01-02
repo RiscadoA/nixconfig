@@ -18,7 +18,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ./windows-vm.nix
+    #./windows-vm.nix
 
     ../../modules/system/wireguard.nix
     ../../modules/system/lightdm-auto.nix
