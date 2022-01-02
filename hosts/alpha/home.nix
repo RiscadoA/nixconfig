@@ -39,7 +39,7 @@
 
     # Games
     anki
-    minecraft
+    multimc
 
     # Other
     mattermost-desktop
