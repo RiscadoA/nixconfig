@@ -24,6 +24,7 @@ in
     ../../modules/system/lightdm-auto.nix
     ../../modules/system/slock.nix
     ../../modules/system/xmonad.nix
+    ../../modules/system/minecraft.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -187,7 +188,9 @@ in
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # Syncthing
+  # Minecraft server
+  services.minecraftServers = [ "main" "lihao" ];
+
   services.syncthing = {
     enable = true;
     user = "minecraft";
