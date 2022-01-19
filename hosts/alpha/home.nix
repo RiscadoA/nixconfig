@@ -34,11 +34,12 @@
     neofetch
     playerctl
     unzip
-    htop
     zip
+    htop
+    man-pages
 
     # Games
-    anki
+    anki-bin mpv
     multimc
 
     # Other
