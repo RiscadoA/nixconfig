@@ -37,6 +37,7 @@
     zip
     htop
     man-pages
+    blender
 
     # Games
     anki-bin mpv
