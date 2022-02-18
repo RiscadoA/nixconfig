@@ -41,7 +41,6 @@
 
     # Games
     anki-bin mpv
-    polymc
 
     # Other
     mattermost-desktop
