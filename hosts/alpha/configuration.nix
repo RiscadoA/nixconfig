@@ -35,6 +35,8 @@ in
     openjdk
     xorg.xmodmap
     headsetcontrol
+    wineWowPackages.stable
+    winetricks
   ];
 
   # udev rules
