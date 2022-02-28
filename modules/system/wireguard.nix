@@ -9,7 +9,7 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.wireguard;
-{
+in {
   options.modules.wireguard.enable = mkEnableOption "wireguard";
 
   config = mkIf cfg.enable {

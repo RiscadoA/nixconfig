@@ -15,14 +15,14 @@ in
   nix.extraOptions = "experimental-features = nix-command flakes";
 
   # Essential packages.
-  environment.systemPackages = with pkgs; {
+  environment.systemPackages = with pkgs; [
     cached-nix-shell
     git
     vim
     wget
     gnumake
     unzip
-  };
+  ];
 
   system.stateVersion = "21.11";
 }

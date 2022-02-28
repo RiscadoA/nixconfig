@@ -71,7 +71,7 @@
                 };
               }
               impermanence
-            ];
+            ] ++ systemModules;
           };
         })
         (attrNames (readDir dir)));      
@@ -80,7 +80,7 @@
         final: prev: {
           unstable = pkgs';
         };
-        
+
       nixosConfigurations = mkHosts ./hosts;
     };
 }

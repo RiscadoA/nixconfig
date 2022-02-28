@@ -5,9 +5,14 @@
 #
 # XDG home configuration.
 
-{ ... }:
-{
-  config = {
+{ lib, config, ... }:
+let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.xdg;
+in {
+  options.modules.xdg.enable = mkEnableOption "xdg";
+
+  config = mkIf cfg.enable {
     xdg = {
       enable = true;
       userDirs = {

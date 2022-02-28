@@ -9,7 +9,7 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.vm.windows;
-{
+in {
   options.modules.vm.windows.enable = mkEnableOption "windows";
 
   config = mkIf cfg.enable {

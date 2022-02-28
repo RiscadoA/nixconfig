@@ -32,7 +32,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    users.ark = {
+    users.users.ark = {
       isNormalUser = true;
       createHome = true;
       home = "/srv/ark";

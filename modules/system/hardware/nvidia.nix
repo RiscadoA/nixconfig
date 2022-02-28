@@ -9,7 +9,7 @@
 let
   inherit (lib) mkEnableOption mkOption mkIf;
   cfg = config.modules.vm.windows;
-{
+in {
   options.modules.hardware.nvdia = {
     enable = mkEnableOption "nvidia";
   };
@@ -39,7 +39,7 @@ let
         export __GLX_VENDOR_LIBRARY_NAME=nvidia
         export __VK_LAYER_NV_optimus=NVIDIA_only
         exec -a "$0" "$@"
-      '';
+      ''
     ];
   };
 }

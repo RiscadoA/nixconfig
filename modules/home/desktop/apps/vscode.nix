@@ -5,7 +5,7 @@
 #
 # VS Code home configuration.
 
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.apps.vscode;

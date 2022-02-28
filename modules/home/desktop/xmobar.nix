@@ -7,10 +7,9 @@
 
 { lib, config, pkgs, ... }:
 let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkOption types mkIf;
   cfg = config.modules.desktop.xmobar;
-in
-{
+in {
   options.modules.desktop.xmobar = {
     enable = mkEnableOption "xmobar";
     type = mkOption {
@@ -21,7 +20,7 @@ in
   config = mkIf cfg.enable {
     home = {
       packages = [ pkgs.haskellPackages.xmobar ];
-      file.".xmonad/xmobar.hs" = "../../config/xmobar/${cfg.type}.hs";
+      file.".xmonad/xmobar.hs" = ../../../config/xmobar + "${cfg.type}.hs";
     };
   };
 }
