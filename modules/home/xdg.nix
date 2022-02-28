@@ -7,15 +7,21 @@
 
 { ... }:
 {
-  xdg.enable = true;
-  xdg.userDirs.enable = true;
-  xdg.userDirs.desktop = "$HOME/desktop";
-  xdg.userDirs.documents = "$HOME/documents";
-  xdg.userDirs.download = "$HOME/downloads";
-  xdg.userDirs.music = "$HOME/music";
-  xdg.userDirs.pictures = "$HOME/pictures";
-  xdg.userDirs.publicShare = "$HOME/public";
-  xdg.userDirs.templates = "$HOME/templates";
-  xdg.userDirs.videos = "$HOME/videos";
-  xdg.userDirs.createDirectories = true;
+  config = {
+    xdg = {
+      enable = true;
+      userDirs = {
+        enable = true;
+        desktop = "$HOME/desktop";
+        documents = "$HOME/documents";
+        download = "$HOME/downloads";
+        music = "$HOME/music";
+        pictures = "$HOME/pictures";
+        publicShare = "$HOME/public";
+        templates = "$HOME/templates";
+        videos = "$HOME/videos";
+        createDirectories = true;
+      };
+    };
+  };
 }

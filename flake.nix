@@ -3,17 +3,16 @@
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
-# The core of my nix configuration. A good starting point.
+# The core of my nix configuration.
 
 {
   description = "Nix configuration for a single user system.";
 
   inputs = {
-    nixpkgs      = { url = "github:nixos/nixpkgs/nixos-21.11"; };
-    unstable     = { url = "github:nixos/nixpkgs/nixos-unstable"; };
-    latest       = { url = "github:nixos/nixpkgs/master"; };
-    impermanence = { url = "github:nix-community/impermanence/master"; };
-    home         = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-21.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    impermanence.url = "github:nix-community/impermanence/master";
+    home = {
       url = "github:nix-community/home-manager/release-21.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -21,62 +20,67 @@
 
   outputs = inputs @ { self, ... }:
     let
-      inherit (builtins) listToAttrs attrValues attrNames readDir;
+      inherit (builtins) readDir listToAttrs concatLists attrNames attrValues;
       inherit (inputs.nixpkgs) lib;
-      inherit (lib) removeSuffix;
+      inherit (inputs.home.nixosModules) home-manager;
+      inherit (inputs.impermanence.nixosModules) impermanence;
+      inherit (lib) mapAttrs removeSuffix nixosSystem;
 
       system = "x86_64-linux";
       user = "riscadoa";
 
-      pkgs = (import inputs.nixpkgs) {
+      pkgs = mkPkgs inputs.nixpkgs [ self.overlay ];
+      pkgs' = mkPkgs inputs.nixpkgs-unstable [];
+
+      systemModules = mkModules ./modules/system;
+      homeModules = mkModules ./modules/home;
+
+      mkPkgs = pkgs: extraOverlays: import pkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = attrValues self.overlays;
+        overlays = extraOverlays;
       };
 
-      mkOverlays = dir: listToAttrs (map
-        (name: {
-          name = removeSuffix ".nix" name;
-          value = import (dir + "/${name}");
-        })
-        (attrNames (readDir dir)));
+      # Imports every nix module from a directory, recursively.
+      mkModules = dir: concatLists (attrValues (mapAttrs
+        (name: value:
+          if value == "directory"
+          then mkModules "${dir}/${name}"
+          else if value == "regular"
+          then [ (import "${dir}/${name}") ]
+          else [])
+        (readDir dir)));
 
-      mkHosts = dir: listToAttrs (map
+      # Imports every host defined in a directory.
+      mkHosts = dir: listToAttrs (map 
         (name: {
           inherit name;
-          value = inputs.nixpkgs.lib.nixosSystem {
+          value = nixosSystem {
             inherit system pkgs;
+            specialArgs = { inherit user; };
             modules = [
-              dir
-              (dir + "/${name}/configuration.nix")
-              inputs.home.nixosModules.home-manager {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users.${user} = import (dir + "/${name}/home.nix");
+              (import "${dir}/system.nix")
+              (import "${dir}/${name}/hardware.nix")
+              (import "${dir}/${name}/system.nix")
+              home-manager {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  sharedModules = homeModules ++ [ (import "${dir}/home.nix") ];
+                  users.${user} = import "${dir}/${name}/home.nix";
+                };
               }
-	      inputs.impermanence.nixosModules.impermanence
+              impermanence
             ];
           };
-       })
-       (attrNames (readDir dir)));
-
+        })
+        (attrNames (readDir dir)));      
     in {
-
-      overlays = mkOverlays ./overlays // {
-        unstable = final: prev: {
-          unstable = import inputs.unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
+      overlay =
+        final: prev: {
+          unstable = pkgs';
         };
-        latest = final: prev: {
-          latest = import inputs.latest {
-            inherit system;
-            config.allowUnfree = true;
-          };
-        };
-      };
-
+        
       nixosConfigurations = mkHosts ./hosts;
     };
 }

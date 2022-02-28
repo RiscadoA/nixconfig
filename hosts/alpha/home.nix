@@ -7,27 +7,40 @@
 
 { pkgs, ... }:
 {
-  imports = [
-    ../../modules/home/git.nix
-    ../../modules/home/ssh.nix
-    ../../modules/home/zsh.nix
-    ../../modules/home/gnupg.nix
-    ../../modules/home/vim.nix
-    ../../modules/home/xdg.nix
-    
-    # Graphical
-    ../../modules/home/picom.nix
-    ../../modules/home/random-background.nix
-    ../../modules/home/xmonad.nix
-    ../../modules/home/xmobar-laptop.nix
-    ../../modules/home/dmenu.nix
-    ../../modules/home/dunst.nix
-    ../../modules/home/qt.nix
-    ../../modules/home/gtk.nix
-    ../../modules/home/alacritty.nix
-    ../../modules/home/firefox.nix
-    ../../modules/home/vscode.nix
-  ];
+  modules = {
+    xdg.enable = true;
+
+    shell = {
+      git.enable = true;
+      gpg.enable = true;
+      ssh.enable = true;
+      zsh.enable = true;
+      vim.enable = true;
+    };
+
+    desktop = {
+      xmonad.enable = true;
+      xmobar = {
+        enable = true;
+        type = "laptop";
+      };
+
+      gtk.enable = true;
+      qt.enable = true;
+      picom.enable = true;
+      random-background.enable = true;
+      
+      term.alacritty.enable = true;
+
+      apps = {
+        dmenu.enable = true;
+        dunst.enable = true;
+        discord.enable = true;
+        firefox.enable = true;
+        vscode.enable = true;
+      };
+    };
+  };
 
   home.packages = with pkgs; [
     # Tools
@@ -45,7 +58,6 @@
     # Other
     mattermost-desktop
     slack
-    discord
     spotify
     webots
     xournalpp
@@ -64,8 +76,4 @@
     spotify &
     anki &
   '';
-
-  home.keyboard = null;
-
-  home.stateVersion = "21.11";
 }

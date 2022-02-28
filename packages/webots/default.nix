@@ -62,11 +62,6 @@ stdenv.mkDerivation rec {
     echo "${steam-run}/bin/steam-run $out/local/webots/webots" >> $out/bin/webots
     chmod 555 $out/bin/webots
   '';
-
-
-  # mkdir $out/usr/bin
-  # mv $out/usr/local/bin/* $out/usr/bin
-  # rm -rf $out/usr/local/bin
   
   meta = {
     description = "desktop app for webots";

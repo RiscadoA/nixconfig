@@ -11,11 +11,13 @@ self: super: rec {
       ../packages/dmenu/colors.patch
     ];
   });
+
   slock = super.slock.overrideAttrs (oldAttrs: rec {
     patches = [
       ../packages/slock/colors.patch
     ];
   });
+  
   headsetcontrol = super.callPackage ../packages/headsetcontrol {};
   webots = super.callPackage ../packages/webots {};
 }
