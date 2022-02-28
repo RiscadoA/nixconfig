@@ -24,7 +24,7 @@
       inherit (inputs.nixpkgs) lib;
       inherit (inputs.home.nixosModules) home-manager;
       inherit (inputs.impermanence.nixosModules) impermanence;
-      inherit (lib) mapAttrs removeSuffix nixosSystem;
+      inherit (lib) mapAttrs removeSuffix hasSuffix nixosSystem;
 
       system = "x86_64-linux";
       user = "riscadoa";
@@ -46,7 +46,7 @@
         (name: value:
           if value == "directory"
           then mkModules "${dir}/${name}"
-          else if value == "regular"
+          else if value == "regular" && hasSuffix ".nix" name
           then [ (import "${dir}/${name}") ]
           else [])
         (readDir dir)));

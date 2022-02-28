@@ -1,4 +1,4 @@
-# modules/home/desktop/xmonad.nix
+# modules/home/desktop/xmonad/xmonad.nix
 #
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
@@ -19,7 +19,7 @@ in
       windowManager.xmonad = {
         enable = true;
         enableContribAndExtras = true;
-        config = "../../config/xmonad.hs";
+        config = ./xmonad.hs;
       };
     };
   };

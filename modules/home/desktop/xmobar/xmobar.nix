@@ -1,4 +1,4 @@
-# modules/home/desktop/xmobar.nix
+# modules/home/desktop/xmobar/xmobar.nix
 #
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
@@ -20,7 +20,7 @@ in {
   config = mkIf cfg.enable {
     home = {
       packages = [ pkgs.haskellPackages.xmobar ];
-      file.".xmonad/xmobar.hs" = ../../../config/xmobar + "${cfg.type}.hs";
+      file.".xmonad/xmobar.hs" = ./. + "/${cfg.type}.hs";
     };
   };
 }
