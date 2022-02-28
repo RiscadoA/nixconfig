@@ -40,7 +40,7 @@
     blender
 
     # Games
-    anki-bin mpv
+    anki-bin mpv polymc
 
     # Other
     mattermost-desktop
