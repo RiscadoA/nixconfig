@@ -59,6 +59,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.blacklistedKernelModules = [ "i2c_nvidia_gpu" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.rtl8192eu ];
 
   # LUKS
   boot.initrd.luks.devices = {
