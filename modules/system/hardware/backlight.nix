@@ -13,6 +13,6 @@ in {
   options.modules.hardware.backlight.enable = mkEnableOption "backlight";
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.light ];
+    programs.light.enable = true;
   };
 }
