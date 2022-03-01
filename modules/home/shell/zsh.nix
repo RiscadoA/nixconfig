@@ -20,7 +20,7 @@ in
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" "systemd" ];
-        theme = "robyrussell";
+        theme = "robbyrussell";
       };
     };
   }; 
