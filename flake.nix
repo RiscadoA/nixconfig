@@ -68,6 +68,7 @@
             inherit system pkgs;
             specialArgs = { inherit user; configDir = ./config; };
             modules = [
+              { networking.hostName = name; }
               (import "${dir}/system.nix")
               (import "${dir}/${name}/hardware.nix")
               (import "${dir}/${name}/system.nix")
