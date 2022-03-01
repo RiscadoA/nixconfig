@@ -21,7 +21,10 @@ in
     vim
     wget
     gnumake
+    zip
     unzip
+    neofetch
+    man-pages
   ];
 
   system.stateVersion = "21.11";

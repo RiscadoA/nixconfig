@@ -1,17 +1,17 @@
-# modules/home/desktop/term/alacritty.nix
+# modules/home/desktop/apps/alacritty.nix
 #
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
-# Alacritty home configuration.
+# alacritty home configuration.
 
 { lib, config, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.desktop.term.alacritty;
+  cfg = config.modules.desktop.apps.alacritty;
 in
 {
-  options.modules.desktop.term.alacritty.enable = mkEnableOption "alacritty";
+  options.modules.desktop.apps.alacritty.enable = mkEnableOption "alacritty";
 
   config = mkIf cfg.enable { 
     programs.alacritty = {

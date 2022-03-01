@@ -1,4 +1,4 @@
-# hosts/alpha/home.nix
+# hosts/theta/home.nix
 #
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
@@ -7,6 +7,7 @@
 
 { pkgs, ... }:
 {
+  # Modules configuration.
   modules = {
     xdg.enable = true;
 
@@ -16,6 +17,7 @@
       ssh.enable = true;
       zsh.enable = true;
       vim.enable = true;
+      pass.enable = true;
     };
 
     desktop = {
@@ -27,45 +29,34 @@
 
       gtk.enable = true;
       qt.enable = true;
-      picom.enable = true;
-      random-background.enable = true;
-      
-      term.alacritty.enable = true;
 
+      services = {
+        picom.enable = true;
+        wallpaper.enable = true;
+        flameshot.enable = true;
+      };
+      
       apps = {
+        alacritty.enable = true;
         dmenu.enable = true;
         dunst.enable = true;
         discord.enable = true;
         firefox.enable = true;
+        spotify.enable = true;
         vscode.enable = true;
       };
     };
   };
 
+  # Extra packages.
   home.packages = with pkgs; [
-    # Tools
-    neofetch
-    playerctl
-    unzip
     htop
-    zip
-
-    # Games
-    anki
-    minecraft
-
-    # Other
     mattermost-desktop
     slack
-    spotify
     xournalpp
   ];
 
-  programs.browserpass.enable = true;
-  programs.password-store.enable = true;
-
-  services.flameshot.enable = true;
-
+  # Launch applications on startup. 
   home.file.".xinitrc".text = ''
     if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
       eval $(dbus-launch --exit-with-session --sh-syntax)
@@ -82,12 +73,5 @@
     spotify &
 
     exec xmonad
-  '';
-
-  xsession.initExtra = ''
-    firefox &
-    discord &
-    mattermost-desktop &
-    spotify &
   '';
 }

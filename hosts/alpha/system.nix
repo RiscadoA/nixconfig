@@ -96,30 +96,30 @@
   # Set your time zone.
   time.timeZone = "Europe/Lisbon";
 
-  # Keyboard Layout
   console.useXkbConfig = true;
+
   services.xserver = {
+    enable = true;
+    dpi = 96;
+
     layout = "pt";
-    libinput.enable = true;
-    libinput.touchpad.naturalScrolling = true;
+    libinput = {
+      enable = true;
+      touchpad.naturalScrolling = true;
+    };
+
     displayManager.sessionCommands = ''
       ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 135=space'
       ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 65='
     ''; 
   };
 
-  # Configure xserver
-  services.xserver.enable = true;
+  hardware = {
+    bluetooth.enable = true;
+    pulseaudio.enable = true;
+  };
 
-  # Enable docker
-  virtualisation.docker.enable = true;
-
-  # Enable bluetooth
-  hardware.bluetooth.enable = true;
-
-  # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
 
   # Define a user account.
   nix.trustedUsers = [ "root" "@wheel" ];
@@ -133,9 +133,6 @@
       extraGroups = [ "wheel" "video" "libvirtd" ];
     };
   };
-
-  # Set DPI
-  services.xserver.dpi = 96;
 
   # Set fonts.
   fonts = {
@@ -154,8 +151,7 @@
     };
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  virtualisation.docker.enable = true;
 
   # Required for gtk.
   services.dbus.packages = [ pkgs.gnome3.dconf ];

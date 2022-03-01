@@ -1,17 +1,17 @@
-# modules/home/desktop/random-background.nix
+# modules/home/desktop/services/wallpaper.nix
 #
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
-# random-background home configuration.
+# wallpaper home configuration.
 
 { lib, config, configDir, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.desktop.random-background;
+  cfg = config.modules.desktop.services.wallpaper;
 in
 {
-  options.modules.desktop.random-background.enable = mkEnableOption "random-background";
+  options.modules.desktop.services.wallpaper.enable = mkEnableOption "wallpaper";
 
   config = mkIf cfg.enable {
     services.random-background = {

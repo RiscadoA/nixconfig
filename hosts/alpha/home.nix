@@ -7,6 +7,7 @@
 
 { pkgs, ... }:
 {
+  # Modules configuration.
   modules = {
     xdg.enable = true;
 
@@ -16,6 +17,7 @@
       ssh.enable = true;
       zsh.enable = true;
       vim.enable = true;
+      pass.enable = true;
     };
 
     desktop = {
@@ -27,48 +29,41 @@
 
       gtk.enable = true;
       qt.enable = true;
-      picom.enable = true;
-      random-background.enable = true;
-      
-      term.alacritty.enable = true;
+
+      services = {
+        picom.enable = true;
+        wallpaper.enable = true;
+        flameshot.enable = true;
+      };      
 
       apps = {
+        alacritty.enable = true;
         dmenu.enable = true;
         dunst.enable = true;
         discord.enable = true;
         firefox.enable = true;
+        spotify.enable = true;
         vscode.enable = true;
+      };
+
+      games = {
+        anki.enable = true;
+        minecraft.enable = true;
       };
     };
   };
 
+  # Extra packages.
   home.packages = with pkgs; [
-    # Tools
-    neofetch
-    playerctl
-    unzip
-    zip
     htop
-    man-pages
     blender
-
-    # Games
-    anki-bin mpv
-
-    # Other
     mattermost-desktop
     slack
-    spotify
     webots
     xournalpp
   ];
 
-  programs.browserpass.enable = true;
-  programs.password-store.enable = true;
-
-  services.flameshot.enable = true;
-
-  xsession.enable = true;
+  # Launch applications on startup. 
   xsession.initExtra = ''
     firefox &
     discord &

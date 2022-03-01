@@ -5,7 +5,7 @@
 #
 # xmonad home configuration.
 
-{ lib, config, configDir, ... }:
+{ lib, config, pkgs, configDir, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.xmonad;
@@ -22,5 +22,7 @@ in
         config = "${configDir}/xmonad.hs";
       };
     };
+    
+    home.packages = [ pkgs.playerctl ];
   };
 }

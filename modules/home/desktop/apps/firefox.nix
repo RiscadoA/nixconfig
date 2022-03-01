@@ -14,5 +14,6 @@ in {
 
   config = mkIf cfg.enable {
     programs.firefox.enable = true;
+    programs.browserpass.enable = true;
   };
 }

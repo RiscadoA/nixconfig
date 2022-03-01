@@ -1,17 +1,17 @@
-# modules/home/desktop/picom.nix
+# modules/home/desktop/services/picom.nix
 #
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
-# Picom home configuration.
+# picom home configuration.
 
 { lib, config, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.desktop.picom;
+  cfg = config.modules.desktop.services.picom;
 in
 {
-  options.modules.desktop.picom.enable = mkEnableOption "picom";
+  options.modules.desktop.services.picom.enable = mkEnableOption "picom";
 
   config = mkIf cfg.enable {
     services.picom = {
