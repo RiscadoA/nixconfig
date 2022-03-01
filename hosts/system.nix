@@ -14,6 +14,9 @@ in
   nix.package = pkgs.nixUnstable;
   nix.extraOptions = "experimental-features = nix-command flakes";
 
+  # Every host shares the same time zone.
+  time.timeZone = "Europe/Lisbon";
+
   # Essential packages.
   environment.systemPackages = with pkgs; [
     cached-nix-shell

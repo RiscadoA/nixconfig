@@ -7,8 +7,13 @@
 
 { config, pkgs, options, ... }:
 {
+  # Modules configuration.
   modules = {
-    desktop.slock.enable = true;
+    desktop = {
+      slock.enable = true;
+      fonts.enable = true;
+    };
+
     services = {
       minecraft = {
         enable = true;
@@ -19,85 +24,74 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    # Tools
-    pulsemixer
-    headsetcontrol
-
-    # Game server hosting dependencies
-    openjdk
-    steamcmd
+  # Extra packages.
+  environment.systemPackages = [
+    pkgs.pulsemixer
   ];
-
-  # udev rules
-  services.udev.packages = with pkgs; [
-    headsetcontrol
-  ];
-
-  programs.steam.enable = true;
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
   # Define hostname and enable network manager
-  networking.wireless.enable = false;
-  networking.nameservers = [
-    "193.136.164.1"
-    "193.136.164.2"
-  ];
-  networking.interfaces.enp0s31f6 = {
-    ipv4 = {
-      addresses = [
-        {
-          address = "193.136.164.197";
-          prefixLength = 27;
-        }
-      ];
-      routes = [
-        {
-          address = "0.0.0.0";
-          prefixLength = 0;
-          via = "193.136.164.222";
-        }
-      ];
-    };
-    ipv6 = {
-      addresses = [
-        {
-          address = "2001:690:2100:82::197";
-          prefixLength = 64;
-        }
-      ];
-      routes = [
-        {
-          address = "::";
-          prefixLength = 0;
-          via = "2001:690:2100:82::ffff:1";
-        }
-      ];
+  networking = {
+    firewall.enable = false;
+    wireless.enable = false;
+    nameservers = [
+      "193.136.164.1"
+      "193.136.164.2"
+    ];
+    interfaces.enp0s31f6 = {
+      ipv4 = {
+        addresses = [
+          {
+            address = "193.136.164.197";
+            prefixLength = 27;
+          }
+        ];
+        routes = [
+          {
+            address = "0.0.0.0";
+            prefixLength = 0;
+            via = "193.136.164.222";
+          }
+        ];
+      };
+      ipv6 = {
+        addresses = [
+          {
+            address = "2001:690:2100:82::197";
+            prefixLength = 64;
+          }
+        ];
+        routes = [
+          {
+            address = "::";
+            prefixLength = 0;
+            via = "2001:690:2100:82::ffff:1";
+          }
+        ];
+      };
     };
   };
 
-  # Set your time zone.
-  time.timeZone = "Europe/Lisbon";
-
-  # Keyboard Layout
   console.useXkbConfig = true;
-  services.xserver.layout = "pt";
 
-  # Configure xserver
-  hardware.opengl.enable = true; 
   services.xserver = {
     enable = true;
+    layout = "pt";
     displayManager.startx.enable = true;
   };
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware = {
+    opengl.enable = true;
+    pulseaudio.enable = true; 
+  };
 
-  # Define a user account.
+  sound.enable = true;
+
   nix.trustedUsers = [ "root" "@wheel" ];
   users = {
     mutableUsers = true;
@@ -110,32 +104,10 @@
     };
   };
 
-  # Set fonts.
-  fonts = {
-    enableDefaultFonts = true;
-    fonts = with pkgs; [
-      noto-fonts 
-      noto-fonts-cjk
-      font-awesome
-    ];
-
-    fontconfig.defaultFonts = {
-      serif = [ "Noto Serif" "Noto Sans CJK JP" ];
-      sansSerif = [ "Noto Sans Serif" "Noto Sans CJK JP" ];
-      monospace = [ "Noto Sans Mono" "Noto Sans Mono CJK JP" ];
-      emoji = [ "Noto Color Emoji" ];
-    };
-  };
-
-  # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
   # Required for gtk.
   services.dbus.packages = [ pkgs.gnome3.dconf ];
 
-  # Disable firewall.
-  networking.firewall.enable = false;
-
-  # Add certificates
   security.pki.certificateFiles = [ ../../config/certs/rnl.crt ];
 }
