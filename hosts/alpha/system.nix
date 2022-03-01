@@ -5,7 +5,7 @@
 #
 # Alpha system configuration.
 
-{ config, pkgs, options, inputs, lib, ... }:
+{ config, pkgs, options, inputs, lib, configDir, ... }:
 {
   modules = {
     wireguard.enable = true;
@@ -164,5 +164,5 @@
   networking.firewall.enable = false;
 
   # Add certificates
-  security.pki.certificateFiles = [ ../../config/certs/rnl.crt ];
+  security.pki.certificateFiles = [ "${configDir}/certs/rnl.crt" ];
 }

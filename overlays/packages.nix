@@ -18,6 +18,6 @@
     ];
   });
   
-  headsetcontrol = prev.callPackage ."${packageDir}/headsetcontrol" {};
+  headsetcontrol = prev.callPackage "${packageDir}/headsetcontrol" {};
   webots = prev.callPackage "${packageDir}/webots" {};
 }
