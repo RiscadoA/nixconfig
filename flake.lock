@@ -27,8 +27,8 @@
         "narHash": "sha256-OG4/4cD2sGNM+ROaYhczwUJ3YCtzaIgX96rFjCs85JE=",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "635bcd2d88739197a0b584aa9fadaa53c717a853",
-        "type": "github"
+        "rev": "00df1e57bb9c7551b45a11c70f5472d0cbfbfff7",
+	      "type": "github"
       },
       "original": {
         "owner": "nix-community",
