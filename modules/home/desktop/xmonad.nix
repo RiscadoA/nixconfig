@@ -1,11 +1,11 @@
-# modules/home/desktop/xmonad/xmonad.nix
+# modules/home/desktop/xmonad.nix
 #
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
 # xmonad home configuration.
 
-{ lib, config, ... }:
+{ lib, config, configDir, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.xmonad;
@@ -19,7 +19,7 @@ in
       windowManager.xmonad = {
         enable = true;
         enableContribAndExtras = true;
-        config = ./xmonad.hs;
+        config = "${configDir}/xmonad.hs";
       };
     };
   };

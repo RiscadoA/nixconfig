@@ -5,19 +5,19 @@
 #
 # Extra packages.
 
-self: super: rec {
-  dmenu = super.dmenu.overrideAttrs (oldAttrs: rec {
+{ packageDir, ... }: final: prev: rec {
+  dmenu = prev.dmenu.overrideAttrs (oldAttrs: rec {
     patches = [
-      ../packages/dmenu/colors.patch
+      "${packageDir}/dmenu/colors.patch"
     ];
   });
 
-  slock = super.slock.overrideAttrs (oldAttrs: rec {
+  slock = prev.slock.overrideAttrs (oldAttrs: rec {
     patches = [
-      ../packages/slock/colors.patch
+      "${packageDir}/slock/colors.patch"
     ];
   });
   
-  headsetcontrol = super.callPackage ../packages/headsetcontrol {};
-  webots = super.callPackage ../packages/webots {};
+  headsetcontrol = prev.callPackage ."${packageDir}/headsetcontrol" {};
+  webots = prev.callPackage "${packageDir}/webots" {};
 }

@@ -5,7 +5,6 @@
 #
 # Picom home configuration.
 
-
 { lib, config, ... }:
 let
   inherit (lib) mkEnableOption mkIf;

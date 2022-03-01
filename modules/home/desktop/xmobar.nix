@@ -1,11 +1,11 @@
-# modules/home/desktop/xmobar/xmobar.nix
+# modules/home/desktop/xmobar.nix
 #
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
 # xmobar home configuration.
 
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, configDir, ... }:
 let
   inherit (lib) mkEnableOption mkOption types mkIf;
   cfg = config.modules.desktop.xmobar;
@@ -20,7 +20,7 @@ in {
   config = mkIf cfg.enable {
     home = {
       packages = [ pkgs.haskellPackages.xmobar ];
-      file.".xmonad/xmobar.hs" = ./. + "/${cfg.type}.hs";
+      file.".xmonad/xmobar.hs".source = "${configDir}/${cfg.type}.hs";
     };
   };
 }

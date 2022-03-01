@@ -20,30 +20,42 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
-    services.xserver.displayManager = if cfg.auto then {
-      autoLogin = {
-        enable = true;
-        inherit user;
-      };
-      lightdm = {
-        enable = true;
-        extraConfig = ''
-          set logind-check-graphical=true
-        '';
-        greeter.enable = false;
-      };
-    } else {
-      lightdm = {
-        enable = true;
-        extraConfig = ''
-          set logind-check-graphical=true
-        '';
-        greeters.mini = {
+  config = mkIf cfg.enable (mkMerge [
+    {
+      services.xserver.displayManager = {
+        lightdm = {
           enable = true;
-          inherit user;
+          extraConfig = ''
+            set logind-check-graphical=true
+          '';
         };
+        
+        defaultSession = "my-session";
+        session = [
+          {
+            name = "my-session";
+            manage = "desktop";
+            start = ''exec $HOME/.xsession'';
+          }
+        ];
       };
-    };
-  };
+    }
+    {
+      services.xserver.displayManager =
+        if cfg.auto
+        then {
+          lightdm.greeter.enable = false;
+          autoLogin = {
+            enable = true;
+            inherit user;
+          };
+        }
+        else {
+          lightdm.greeters.mini = {
+            enable = true;
+            inherit user;
+          };
+        };
+    }
+  ]);
 }

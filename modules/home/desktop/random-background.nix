@@ -5,7 +5,7 @@
 #
 # random-background home configuration.
 
-{ lib, config, ... }:
+{ lib, config, configDir, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.random-background;
@@ -16,7 +16,7 @@ in
   config = mkIf cfg.enable {
     services.random-background = {
       enable = true;
-      imageDirectory = "${../../wallpapers}";
+      imageDirectory = "${configDir}/wallpapers";
     };
   };
 }

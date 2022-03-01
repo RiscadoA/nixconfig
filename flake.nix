@@ -20,7 +20,7 @@
 
   outputs = inputs @ { self, ... }:
     let
-      inherit (builtins) readDir listToAttrs concatLists attrNames attrValues;
+      inherit (builtins) readDir listToAttrs concatLists attrNames attrValues removeAttrs;
       inherit (inputs.nixpkgs) lib;
       inherit (inputs.home.nixosModules) home-manager;
       inherit (inputs.impermanence.nixosModules) impermanence;
@@ -38,8 +38,17 @@
       mkPkgs = pkgs: extraOverlays: import pkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = extraOverlays;
+        overlays = extraOverlays ++ (attrValues self.overlays);
       };
+
+      mkOverlays = dir: listToAttrs (map
+        (name: {
+          name = removeSuffix ".nix" name;
+          value = import "${dir}/${name}" {
+            packageDir = ./packages;
+          };
+        })
+        (attrNames (readDir dir)));
 
       # Imports every nix module from a directory, recursively.
       mkModules = dir: concatLists (attrValues (mapAttrs
@@ -57,7 +66,7 @@
           inherit name;
           value = nixosSystem {
             inherit system pkgs;
-            specialArgs = { inherit user; };
+            specialArgs = { inherit user; configDir = ./config; };
             modules = [
               (import "${dir}/system.nix")
               (import "${dir}/${name}/hardware.nix")
@@ -66,6 +75,7 @@
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;
+                  extraSpecialArgs.configDir = ./config;
                   sharedModules = homeModules ++ [ (import "${dir}/home.nix") ];
                   users.${user} = import "${dir}/${name}/home.nix";
                 };
@@ -74,12 +84,14 @@
             ] ++ systemModules;
           };
         })
-        (attrNames (readDir dir)));      
+        (attrNames (removeAttrs (readDir dir) [ "system.nix" "home.nix" ])));      
     in {
       overlay =
         final: prev: {
           unstable = pkgs';
         };
+
+      overlays = mkOverlays ./overlays;
 
       nixosConfigurations = mkHosts ./hosts;
     };

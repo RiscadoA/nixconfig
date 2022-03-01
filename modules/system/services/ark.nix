@@ -7,6 +7,7 @@
 
 { lib, config, pkgs, ... }:
 let
+  inherit (builtins) toString;
   inherit (lib) mkEnableOption mkOption types mkIf;
   cfg = config.modules.services.ark;
 in
@@ -15,7 +16,7 @@ in
     enable = mkEnableOption "ark";
     sessionName = mkOption {
       default = "LLRA";
-      type = types.string;
+      type = types.str;
     };
     queryPort = mkOption {
       default = 31100;
@@ -44,7 +45,7 @@ in
       after = [ "syslog.target" "network.target" "nss-lookup.target" "network-online.target" ];
       serviceConfig = {
         ExecStartPre = "${pkgs.steamcmd}/bin/steamcmd +login anonymous +force_install_dir /srv/ark/server +app_update 376030 +quit";
-        ExecStart = "${pkgs.steam-run}/bin/steam-run /srv/ark/server/ShooterGame/Binaries/Linux/ShooterGameServer TheIsland?listen?sessionName=${cfg.sessionName}?QueryPort=${cfg.queryPort}?RCONPort=${cfg.rconPort}?Port=${cfg.port} -server -log";
+        ExecStart = "${pkgs.steam-run}/bin/steam-run /srv/ark/server/ShooterGame/Binaries/Linux/ShooterGameServer TheIsland?listen?sessionName=${cfg.sessionName}?QueryPort=${toString cfg.queryPort}?RCONPort=${toString cfg.rconPort}?Port=${toString cfg.port} -server -log";
         LimitNOFILE = 100000;
         ExecReload = "/usr/bin/env kill -s HUP $MAINPID";
         ExecStop = "/usr/bin/env kill -s INT $MAINPID";
