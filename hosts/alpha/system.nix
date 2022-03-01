@@ -16,6 +16,7 @@
         auto = true;
       };
       slock.enable = true;
+      games.steam.enable = true;
     };
 
     services.minecraft = {
@@ -32,8 +33,6 @@
     openjdk
     xorg.xmodmap
     headsetcontrol
-    wineWowPackages.stable
-    winetricks
   ];
 
   # udev rules
@@ -46,7 +45,6 @@
     ATTRS{idVendor}=="1038", ATTRS{idProduct}=="12c4", ENV{PULSE_PROFILE_SET}="usb-gaming-headset.conf"
   '';
 
-  programs.steam.enable = true;
   programs.light.enable = true;
 
   # Required by vscode

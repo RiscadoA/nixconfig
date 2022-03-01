@@ -10,12 +10,12 @@ let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.apps.vscode;
 
-  extensions = (with pkgs.vscode-extensions; [
+  extensions = (with pkgs.unstable.vscode-extensions; [
       bbenoist.nix
       ms-python.python
       ms-vscode-remote.remote-ssh
       ms-vscode.cpptools
-    ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    ]) ++ pkgs.unstable.vscode-utils.extensionsFromVscodeMarketplace [
   ];
 in
 {
@@ -24,7 +24,7 @@ in
   config = mkIf cfg.enable {
     programs.vscode = {
       enable = true;
-      package = pkgs.vscode;
+      package = pkgs.unstable.vscode;
       extensions = extensions;
     };
   };
