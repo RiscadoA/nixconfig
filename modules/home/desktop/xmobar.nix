@@ -20,7 +20,7 @@ in {
   config = mkIf cfg.enable {
     home = {
       packages = [ pkgs.haskellPackages.xmobar ];
-      file.".xmonad/xmobar.hs".source = "${configDir}/${cfg.type}.hs";
+      file.".xmonad/xmobar.hs".source = "${configDir}/xmobar/${cfg.type}.hs";
     };
   };
 }
