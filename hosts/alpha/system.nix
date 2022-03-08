@@ -45,6 +45,9 @@
     pkgs.pulsemixer
   ];
 
+  # For saving battery
+  services.tls.enable = true;
+
   # Required by vscode
   services.gnome.gnome-keyring.enable = true;
   
