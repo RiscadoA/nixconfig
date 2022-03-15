@@ -61,6 +61,7 @@
     slack
     webots
     xournalpp
+    libqalculate
   ];
 
   # Launch applications on startup. 
