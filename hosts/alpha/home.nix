@@ -62,6 +62,7 @@
     webots
     xournalpp
     libqalculate
+    kdenlive
   ];
 
   # Launch applications on startup. 
