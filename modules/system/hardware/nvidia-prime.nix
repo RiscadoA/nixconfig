@@ -22,7 +22,7 @@ in {
     hardware = {
       opengl.enable = true;
       nvidia = {
-        nvidiaPersistenced = true; 
+        modesetting.enable = true;
         prime = {
           offload.enable = true;
           inherit (cfg) intelBusId nvidiaBusId;
