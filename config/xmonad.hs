@@ -26,7 +26,6 @@ myManageHook = composeAll
     , className =? "zoom"    --> doShift "video"
     , className =? "" --> doShift "music" -- Spotify
     ]
-
 myPlaceHook = placeHook (withGaps (16,0,16,0) (smart (0.5, 0.5)))
 
 layoutFull = (noBorders Full)
@@ -36,12 +35,12 @@ layoutAll = (layoutSingle ||| layoutFull ||| layoutTiled)
 
 main = do
     xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
-    xmonad $ ewmh $ docks defaultConfig
-        { manageHook = myManageHook <+> myPlaceHook  <+> manageHook defaultConfig
+    xmonad $ ewmhFullscreen . ewmh $ docks def
+        { manageHook = myManageHook <+> myPlaceHook  <+> manageHook def
         , layoutHook = onWorkspace "terminal" layoutTiled $
-		       onWorkspaces ["network", "other"] layoutAll $
-		       onWorkspaces ["video", "code"] (layoutSingle ||| layoutFull) $
-		       layoutSingle
+	               onWorkspaces ["network", "other"] layoutAll $
+                       onWorkspaces ["video", "code"] (layoutSingle ||| layoutFull) $
+                       layoutSingle
         , logHook    = dynamicLogWithPP xmobarPP
                            { ppOutput          = hPutStrLn xmproc
                            , ppCurrent         = xmobarColor "#e3a84e" "" . workspaceIcon
@@ -51,7 +50,7 @@ main = do
                            , ppUrgent          = xmobarColor "red" "yellow" . workspaceIcon
                            , ppTitle           = xmobarColor "#e3a84e" "" . shorten 50
                            }
-	    , handleEventHook    = handleEventHook defaultConfig <+> fullscreenEventHook
+	    , handleEventHook    = handleEventHook def
         , modMask            = mod4Mask
         , terminal           = "alacritty"
         , focusFollowsMouse  = True
