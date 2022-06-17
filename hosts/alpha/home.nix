@@ -59,6 +59,7 @@
     blender
     mattermost-desktop
     slack
+    teams
     webots
     xournalpp
     libqalculate
