@@ -1,6 +1,6 @@
 Config {
     -- appearance
-      font        = "xft:Noto Sans Mono:size=11:bold:antialias=true:hinting=true,Font Awesome 5 Free Solid:size=11:antialias=true:hinting=true:style=Solid,Font Awesome 5 Brands:size=11:antialias=true:hinting=true:style=Regular"
+      font        = "xft:Noto Sans Mono:size=11:bold:antialias=true:hinting=true,Font Awesome 6 Free Solid:size=11:antialias=true:hinting=true:style=Solid,Font Awesome 6 Brands:size=11:antialias=true:hinting=true:style=Regular"
     , bgColor     = "#000000"
     , fgColor     = "#dfbf8e"
     , position    = Top
