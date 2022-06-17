@@ -111,5 +111,5 @@
   security.pki.certificateFiles = [ "${configDir}/certs/rnl.crt" ];
 
   # Required for gtk.
-  services.dbus.packages = [ pkgs.gnome3.dconf ];
+  services.dbus.packages = [ pkgs.dconf ];
 }
