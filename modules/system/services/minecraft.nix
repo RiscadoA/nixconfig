@@ -36,7 +36,7 @@ in {
               serviceConfig = {
                 Type = "forking";
                 WorkingDirectory = "/srv/minecraft/${name}";
-                ExecStart = "${pkgs.screen}/bin/screen -dmS minecraft_${name} ${pkgs.openjdk}/bin/java -Xmx1024M -Xms1024M -jar server.jar nogui";
+                ExecStart = "${pkgs.screen}/bin/screen -dmS minecraft_${name} ${pkgs.openjdk}/bin/java -Xmx2048M -Xms2048M -jar server.jar nogui";
                 ExecStop = "${pkgs.screen}/bin/screen -p 0 -S minecraft_${name} -X 'eval stuff \\\"stop\\\"\\015'";
                 User = "minecraft";
                 Group = "users";  
