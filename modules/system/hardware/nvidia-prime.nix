@@ -21,6 +21,7 @@ in {
     
     hardware = {
       opengl.enable = true;
+      opengl.extraPackages = [ pkgs.mesa.drivers ];
       nvidia = {
         modesetting.enable = true;
         prime = {

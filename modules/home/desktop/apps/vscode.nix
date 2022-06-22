@@ -15,6 +15,7 @@ let
       ms-python.python
       ms-vscode-remote.remote-ssh
       ms-vscode.cpptools
+      ms-vsliveshare.vsliveshare
     ]) ++ pkgs.unstable.vscode-utils.extensionsFromVscodeMarketplace [
   ];
 in
