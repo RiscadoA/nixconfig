@@ -36,7 +36,7 @@
     services.minecraft = {
       enable = true;
       syncthing.enable = true;
-      servers = [ "main" "lihao" ];
+      servers = [ "main" "lihao" "modded" ];
     };
   };
 
