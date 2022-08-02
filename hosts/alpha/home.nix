@@ -64,6 +64,7 @@
     xournalpp
     libqalculate
     kdenlive
+    freecad
   ];
 
   # Launch applications on startup. 
