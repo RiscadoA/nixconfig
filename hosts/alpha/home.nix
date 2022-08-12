@@ -57,7 +57,6 @@
   home.packages = with pkgs; [
     htop
     blender
-    mattermost-desktop
     slack
     teams
     webots
@@ -65,13 +64,13 @@
     libqalculate
     kdenlive
     freecad
+    timewarrior
   ];
 
   # Launch applications on startup. 
   xsession.initExtra = ''
     firefox &
     discord &
-    mattermost-desktop &
     spotify &
     anki &
   '';
