@@ -9,8 +9,6 @@
 {
   # Modules configuration.
   modules = {
-    wireguard.enable = true;
-
     hardware = {
       arctis9.enable = true;
       impermanence.enable = true;
