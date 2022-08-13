@@ -18,6 +18,7 @@
       zsh.enable = true;
       vim.enable = true;
       pass.enable = true;
+      taskwarrior.enable = true;
     };
 
     desktop = {
