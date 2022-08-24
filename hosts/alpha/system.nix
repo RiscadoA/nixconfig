@@ -34,7 +34,7 @@
     services.minecraft = {
       enable = true;
       syncthing.enable = true;
-      servers = [ "main" "lihao" "modded" ];
+      servers = [ "main" "all" "modded" ];
     };
   };
 
@@ -105,8 +105,6 @@
   };
 
   virtualisation.docker.enable = true;
-
-  security.pki.certificateFiles = [ "${configDir}/certs/rnl.crt" ];
 
   # Required for gtk.
   services.dbus.packages = [ pkgs.dconf ];
