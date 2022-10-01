@@ -4,7 +4,7 @@ Config {
     , bgColor     = "#000000"
     , fgColor     = "#dfbf8e"
     , position    = Top
-    , template    = "%StdinReader%}{%tasks% | %mail% | %bright% | %headset%%battery% | %network% | %time% | %date% | %kbd% "
+    , template    = "%StdinReader%}{%tasks% | %mail% | %bright% | %multicoretemp% | %headset%%battery% | %network% | %time% | %date% | %kbd% "
     , commands = 
         [ Run StdinReader
 	, Run Com "/etc/nixos/bin/sb-tasks.sh" [] "tasks" 100
@@ -14,7 +14,11 @@ Config {
         , Run Brightness     [ "--template" , "\xf185 <percent>%"
                              , "--", "-D", "intel_backlight"
                              ] 5 
-        , Run Battery        [ "--template" , "<acstatus>"
+        , Run MultiCoreTemp  [ "--template" , "\xf769 <maxpc>°C"
+	                     , "--Low", "60"
+			     , "--High", "90"
+			     ] 10
+	, Run Battery        [ "--template" , "<acstatus>"
                              , "--" -- battery specific options
                                        -- discharging status
                                        , "-o"	, "\xf240 <left>% (<timeleft>)"

@@ -12,6 +12,7 @@
     xdg.enable = true;
 
     shell = {
+      lf.enable = true;
       git.enable = true;
       gpg.enable = true;
       ssh.enable = true;

@@ -30,7 +30,7 @@ myPlaceHook = placeHook (withGaps (16,0,16,0) (smart (0.5, 0.5)))
 
 layoutFull = (noBorders Full)
 layoutSingle = (avoidStruts (noBorders Full))
-layoutTiled = (avoidStruts (spacingRaw False (Border 5 5 5 5) True (Border 5 5 5 5) True $ Tall 1 (10/100) (50/100)))
+layoutTiled = (lessBorders OnlyFloat (avoidStruts (spacingRaw False (Border 5 5 5 5) True (Border 5 5 5 5) True $ Tall 1 (10/100) (50/100))))
 layoutAll = (layoutSingle ||| layoutFull ||| layoutTiled)
 
 main = do

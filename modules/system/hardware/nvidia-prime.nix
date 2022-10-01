@@ -33,15 +33,6 @@ in {
 
     services.xserver.videoDrivers = [ "nvidia" ];
 
-    specialisation.external-display.configuration = {
-      nixpkgs.pkgs = pkgs;
-      system.nixos.tags = [ "external-display" ];
-      hardware.nvidia = {
-        prime.offload.enable = lib.mkForce false;
-        powerManagement.enable = lib.mkForce false;
-      };
-    };
-
     environment.systemPackages = [
       (pkgs.writeShellScriptBin "nvidia-offload" ''
         export __NV_PRIME_RENDER_OFFLOAD=1
@@ -51,5 +42,15 @@ in {
         exec -a "$0" "$@"
       '')
     ];
+    
+    specialisation.external-display.configuration = {
+      nixpkgs.pkgs = pkgs;
+      system.nixos.tags = [ "external-display" ];
+      hardware.nvidia = {
+        prime.offload.enable = lib.mkForce false;
+        prime.sync.enable = true;
+        powerManagement.enable = lib.mkForce false;
+      };
+    };
   };
 }

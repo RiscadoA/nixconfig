@@ -45,6 +45,9 @@
 
   # For saving battery
   services.tlp.enable = true;
+  
+  # For overheating
+  services.thermald.enable = true;
 
   # Required by vscode
   services.gnome.gnome-keyring.enable = true;
@@ -61,6 +64,8 @@
         preLVM = true;
       };
     };
+
+    kernelModules = [ "coretemp" ];
   };
 
   networking = {
