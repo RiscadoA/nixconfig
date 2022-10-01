@@ -67,6 +67,7 @@
     kdenlive
     freecad
     timewarrior
+    ckan
   ];
 
   # Launch applications on startup. 
