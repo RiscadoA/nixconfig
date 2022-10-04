@@ -23,7 +23,7 @@ in {
       opengl.enable = true;
       opengl.extraPackages = [ pkgs.mesa.drivers ];
       nvidia = {
-        modesetting.enable = true;
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
         prime = {
           offload.enable = true;
           inherit (cfg) intelBusId nvidiaBusId;

@@ -93,6 +93,7 @@
   hardware = {
     bluetooth.enable = true;
     pulseaudio.enable = true;
+    cpu.intel.updateMicrocode = true;
   };
 
   sound.enable = true;
