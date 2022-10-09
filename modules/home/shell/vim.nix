@@ -15,7 +15,11 @@ in {
   config = mkIf cfg.enable {
     programs.vim = {
       enable = true;
-      plugins = with pkgs.vimPlugins; [ vim-nix ];
+      plugins = with pkgs.vimPlugins; [
+        vim-nix
+        vimwiki
+        taskwiki
+      ];
     };
 
     home.sessionVariables = {
