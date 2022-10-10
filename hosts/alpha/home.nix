@@ -67,6 +67,7 @@
     kdenlive
     freecad
     timewarrior
+    calcurse
     ckan
   ];
 
