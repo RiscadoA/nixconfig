@@ -13,8 +13,10 @@ in {
   options.modules.shell.vim.enable = mkEnableOption "vim";
 
   config = mkIf cfg.enable {
-    programs.vim = {
+    programs.neovim = {
       enable = true;
+      vimAlias = true;
+      withPython3 = true;
       plugins = with pkgs.vimPlugins; [
         vim-nix
         vimwiki
