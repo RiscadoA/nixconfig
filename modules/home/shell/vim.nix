@@ -20,7 +20,7 @@ in {
       plugins = with pkgs.vimPlugins; [
         vim-nix
         vimwiki
-        taskwiki
+        gruvbox
       ];
     };
 
