@@ -22,6 +22,10 @@ in {
         vimwiki
         gruvbox
       ];
+      extraConfig = ''
+        let g:vimwiki_list = [{'path': '~/documents/wiki'}]
+        let g:vimwiki_global_ext = 0
+      '';
     };
 
     home.sessionVariables = {
