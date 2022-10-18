@@ -27,5 +27,9 @@ in {
     home.sessionVariables = {
       EDITOR = "vim";
     };
+
+    home.shellAliases = {
+      wiki = "vim -c :VimwikiIndex";
+    };
   };
 }
