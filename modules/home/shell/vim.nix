@@ -23,8 +23,14 @@ in {
         gruvbox
       ];
       extraConfig = ''
-        let g:vimwiki_list = [{'path': '~/documents/wiki'}]
-        let g:vimwiki_global_ext = 0
+        let g:vimwiki_list=[{'path': '~/documents/wiki'}]
+        let g:vimwiki_global_ext=0
+        let g:vimwiki_folding='list'
+
+        set tabstop=4
+        set shiftwidth=4
+        set softtabstop=4
+        set expandtab
       '';
     };
 
