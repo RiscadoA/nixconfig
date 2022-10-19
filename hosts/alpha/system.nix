@@ -36,6 +36,8 @@
       syncthing.enable = true;
       servers = [ "main" "all" "modded" ];
     };
+    
+    vm.windows.enable = true;
   };
 
   # Extra packages.
@@ -43,11 +45,11 @@
     pkgs.pulsemixer
   ];
 
-  # For saving battery
-  services.tlp.enable = true;
-  
-  # For overheating
+  # Battery saving and preventing overheating.
+  services.auto-cpufreq.enable = true;
   services.thermald.enable = true;
+  services.throttled.enable = true;
+  powerManagement.powertop.enable = true;
 
   # Required by vscode
   services.gnome.gnome-keyring.enable = true;
