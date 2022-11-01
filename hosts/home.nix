@@ -7,6 +7,12 @@
 
 { ... }:
 {
-  home.keyboard = null;
-  home.stateVersion = "21.11";
+  home = {
+    keyboard = null;
+    stateVersion = "21.11";
+
+    shellAliases = {
+      "rebuild" = "sudo nixos-rebuild switch --flake $HOME/nixos";
+    };
+  };
 }

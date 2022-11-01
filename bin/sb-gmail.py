@@ -2,9 +2,9 @@
 
 import imaplib
 
-with open('/etc/nixos/secrets/gmail-username', 'r') as file:
+with open('/home/riscadoa/secrets/gmail-username', 'r') as file:
     username = file.read().strip()
-with open('/etc/nixos/secrets/gmail-password', 'r') as file:
+with open('/home/riscadoa/secrets/gmail-password', 'r') as file:
     password = file.read().strip()
 
 obj = imaplib.IMAP4_SSL('imap.gmail.com', '993')

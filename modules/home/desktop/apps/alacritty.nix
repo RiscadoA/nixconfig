@@ -7,17 +7,23 @@
 
 { lib, config, ... }:
 let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkOption types mkIf;
   cfg = config.modules.desktop.apps.alacritty;
 in
 {
-  options.modules.desktop.apps.alacritty.enable = mkEnableOption "alacritty";
+  options.modules.desktop.apps.alacritty = {
+    enable = mkEnableOption "alacritty";
+    fontSize = mkOption {
+      type = types.int;
+      default = 9;
+    };
+  };
 
   config = mkIf cfg.enable { 
     programs.alacritty = {
       enable = true;
       settings = {
-        font.size = 9.0;
+        font.size = cfg.fontSize;
         colors = {
           primary = {
             background = "#1d2021";

@@ -7,10 +7,10 @@ Config {
     , template    = "%StdinReader%}{%tasks% | %mail% | %bright% | %multicoretemp% | %headset%%battery% | %network% | %time% | %date% | %kbd% "
     , commands = 
         [ Run StdinReader
-	, Run Com "/etc/nixos/bin/sb-tasks.sh" [] "tasks" 100
-	, Run Com "/etc/nixos/bin/sb-gmail.sh" [] "mail" 100
-	, Run Com "/etc/nixos/bin/sb-headset.sh" [] "headset" 10
-	, Run Com "/etc/nixos/bin/sb-network.sh" [] "network" 10
+	, Run Com "/home/riscadoa/bin/sb-tasks.sh" [] "tasks" 100
+	, Run Com "/home/riscadoa/bin/sb-gmail.sh" [] "mail" 100
+	, Run Com "/home/riscadoa/bin/sb-headset.sh" [] "headset" 10
+	, Run Com "/home/riscadoa/bin/sb-network.sh" [] "network" 10
         , Run Brightness     [ "--template" , "\xf185 <percent>%"
                              , "--", "-D", "intel_backlight"
                              ] 5 

@@ -30,10 +30,10 @@ in
           '';
         };
         
-        defaultSession = "my-session";
+        defaultSession = "default";
         session = [
           {
-            name = "my-session";
+            name = "default";
             manage = "desktop";
             start = ''exec $HOME/.xsession'';
           }
