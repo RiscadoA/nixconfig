@@ -6,7 +6,7 @@
 # The core of my nix configuration.
 
 {
-  description = "Nix configuration for a single user system.";
+  description = "Nix configuration for a multi user system.";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
@@ -27,9 +27,8 @@
       inherit (lib) mapAttrs removeSuffix hasSuffix nixosSystem;
 
       system = "x86_64-linux";
-      user = "riscadoa";
 
-      pkgs = mkPkgs inputs.nixpkgs [ self.overlay ];
+      pkgs = mkPkgs inputs.nixpkgs [ self.overlays.default ];
       pkgs' = mkPkgs inputs.nixpkgs-unstable [];
 
       systemModules = mkModules ./modules/system;
@@ -48,7 +47,12 @@
             packageDir = ./packages;
           };
         })
-        (attrNames (readDir dir)));
+        (attrNames (readDir dir)) ++ [{
+          name = "default";
+          value = final: prev: {
+            unstable = pkgs';
+          };
+        }]);
 
       # Imports every nix module from a directory, recursively.
       mkModules = dir: concatLists (attrValues (mapAttrs
@@ -60,40 +64,56 @@
           else [])
         (readDir dir)));
 
+      # Imports every user defined in a host directory.
+      mkUsers = dir: map
+        (name: {
+          name = removeSuffix ".nix" name;
+          value = import "${dir}/${name}";
+        })
+        (attrNames (readDir dir));
+
       # Imports every host defined in a directory.
       mkHosts = dir: listToAttrs (map 
         (name: {
           inherit name;
           value = nixosSystem {
             inherit system pkgs;
-            specialArgs = { inherit user; configDir = ./config; };
-            modules = [
-              { networking.hostName = name; }
-              (import "${dir}/system.nix")
-              (import "${dir}/${name}/hardware.nix")
-              (import "${dir}/${name}/system.nix")
-              home-manager {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  extraSpecialArgs.configDir = ./config;
-                  sharedModules = homeModules ++ [ (import "${dir}/home.nix") ];
-                  users.${user} = import "${dir}/${name}/home.nix";
-                };
-              }
-              impermanence
-            ] ++ systemModules;
+            specialArgs = { configDir = ./config; };
+            modules =
+              let
+                users = mkUsers "${dir}/${name}/users"; 
+              in [
+                { networking.hostName = name; }
+                (import "${dir}/system.nix")
+                (import "${dir}/${name}/hardware.nix")
+                (import "${dir}/${name}/system.nix")
+                home-manager {
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    extraSpecialArgs.configDir = ./config;
+                    sharedModules = homeModules ++ [
+                      (import "${dir}/home.nix")
+                      (import "${dir}/${name}/home.nix")
+                    ];
+                    users = listToAttrs (map
+                      (user: {
+                        name = user.name;
+                        value = args @ { pkgs, ... }: removeAttrs (user.value args) [ "user" ];
+                      })
+                      users);
+                  };
+                }
+                impermanence
+              ] ++ systemModules
+                ++ (map (user: args @ { pkgs, ... }: {
+                    users.users.${user.name} = (user.value args).user;
+                  }) users);
           };
         })
         (attrNames (removeAttrs (readDir dir) [ "system.nix" "home.nix" ])));      
     in {
-      overlay =
-        final: prev: {
-          unstable = pkgs';
-        };
-
       overlays = mkOverlays ./overlays;
-
       nixosConfigurations = mkHosts ./hosts;
     };
 }

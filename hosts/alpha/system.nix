@@ -28,6 +28,7 @@
       lightdm = {
         enable = true;
         auto = true;
+        users = [ "riscadoa" ];
       };
     };
 
@@ -101,16 +102,9 @@
 
   sound.enable = true;
 
-  nix.trustedUsers = [ "root" "@wheel" ];
   users = {
     mutableUsers = true;
     users.root.initialPassword = "123";
-    users.riscadoa = {
-      isNormalUser = true;
-      createHome = true;
-      shell = pkgs.zsh;
-      extraGroups = [ "wheel" "video" "libvirtd" ];
-    };
   };
 
   virtualisation.docker.enable = true;

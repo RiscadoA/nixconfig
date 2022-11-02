@@ -17,7 +17,10 @@
       slock.enable = true;
       fonts.enable = true;
       games.steam.enable = true;
-      lightdm.enable = true;
+      lightdm = {
+        enable = true;
+        users = [ "riscadoa" ];
+      };
     };
 
     #services.minecraft = {
@@ -95,6 +98,7 @@
   services.openssh = {
     enable = true;
     startWhenNeeded = true;
+    passwordAuthentication = false;
   };
   
   hardware = {
@@ -104,17 +108,6 @@
   };
 
   sound.enable = true;
-
-  nix.trustedUsers = [ "root" "@wheel" ];
-  users = {
-    mutableUsers = true;
-    users.riscadoa = {
-      isNormalUser = true;
-      createHome = true;
-      shell = pkgs.zsh;
-      extraGroups = [ "wheel" "video" "libvirtd" ];
-    };
-  };
 
   virtualisation.docker.enable = true;
 

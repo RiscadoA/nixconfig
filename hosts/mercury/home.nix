@@ -3,7 +3,7 @@
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
-# Home configuration.
+# Home configuration common to all users.
 
 { pkgs, ... }:
 {
@@ -14,15 +14,13 @@
     shell = {
       lf.enable = true;
       git.enable = true;
-      gpg.enable = true;
       ssh.enable = true;
       zsh.enable = true;
       vim.enable = true;
-      pass.enable = true;
-      taskwarrior.enable = true;
     };
 
     desktop = {
+      xscreensaver.enable = true;
       xmonad.enable = true;
       xmobar = {
         enable = true;
@@ -45,15 +43,7 @@
         };
         dmenu.enable = true;
         dunst.enable = true;
-        discord.enable = true;
         firefox.enable = true;
-        spotify.enable = true;
-        vscode.enable = true;
-      };
-
-      games = {
-        anki.enable = true;
-        minecraft.enable = true;
       };
     };
   };
@@ -62,24 +52,11 @@
   home.packages = with pkgs; [
     htop
     blender
-    slack
     xournalpp
     libqalculate
     kdenlive
     freecad
-    timewarrior
     ckan
+    lutris
   ];
-
-  # Syncthing for vimwiki.
-  services.syncthing.enable = true;
-
-  # Launch applications on startup. 
-  xsession.initExtra = ''
-    firefox &
-    discord &
-    spotify &
-  '';
-
-  
 }

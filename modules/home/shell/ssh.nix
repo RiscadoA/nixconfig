@@ -13,14 +13,6 @@ in {
   options.modules.shell.ssh.enable = mkEnableOption "ssh";
 
   config = mkIf cfg.enable {
-    programs.ssh = {
-      enable = true;
-      matchBlocks = {
-        theta = {
-          hostname = "theta.riscadoa.com";
-          user = "riscadoa";
-        };
-      };
-    };
+    programs.ssh.enable = true;
   };
 }

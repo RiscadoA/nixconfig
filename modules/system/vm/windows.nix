@@ -5,7 +5,7 @@
 #
 # Windows virtual machine configuration.
 
-{ lib, config, pkgs, user,... }:
+{ lib, config, pkgs,... }:
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.vm.windows;
@@ -36,6 +36,6 @@ in {
     programs.dconf.enable = true;
     environment.systemPackages = with pkgs; [ virt-manager spice-gtk looking-glass-client ];
 
-    systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 666 ${user} qemu-libvirtd -" ];
+    systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 666 root qemu-libvirtd -" ];
   };
 }

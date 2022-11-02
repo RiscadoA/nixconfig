@@ -11,8 +11,11 @@ let
   inherit (lib.my) mapModules;
 in
 {
-  nix.package = pkgs.nixUnstable;
-  nix.extraOptions = "experimental-features = nix-command flakes";
+  nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = "experimental-features = nix-command flakes";
+    trustedUsers = [ "root" "@wheel" ];
+  };
 
   # Every host shares the same time zone.
   time.timeZone = "Europe/Lisbon";
@@ -28,6 +31,10 @@ in
     unzip
     neofetch
     man-pages
+  ];
+
+  environment.shells = with pkgs; [
+    zsh
   ];
 
   system.stateVersion = "21.11";

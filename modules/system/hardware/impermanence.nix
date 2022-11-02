@@ -16,7 +16,7 @@ in {
     # Persistent files
     environment.persistence."/nix/persist" = {
       directories = [
-        "/home/riscadoa"
+        "/home/riscadoa/nixos"
         "/etc/NetworkManager/system-connections"
         "/var/lib"
         "/var/log"

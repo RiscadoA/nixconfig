@@ -5,15 +5,20 @@
 #
 # LightDM system configuration.
 
-{ lib, config, user, ... }:
+{ lib, config, ... }:
 
 let
+  inherit (builtins) length head;
   inherit (lib) mkEnableOption mkOption types mkIf mkMerge;
   cfg = config.modules.desktop.lightdm;
 in
 {
   options.modules.desktop.lightdm = {
     enable = mkEnableOption "lightdm";
+    users = mkOption {
+      default = [];
+      type = types.listOf types.str;
+    };
     auto = mkOption {
       default = false;
       type = types.bool;
@@ -39,21 +44,25 @@ in
           }
         ];
       };
+
+      security.pam.services.lightdm.text = ''
+        auth sufficient pam_succeed_if.so user ingroup nopasswdlogin
+      '';
     }
     {
       services.xserver.displayManager =
         if cfg.auto
-        then {
+        then assert (length cfg.users == 1); {
           lightdm.greeter.enable = false;
           autoLogin = {
             enable = true;
-            inherit user;
+            user = head cfg.users;
           };
         }
-        else {
-          lightdm.greeters.mini = {
+        else assert (length cfg.users >= 1); {
+          lightdm.greeters.gtk = {
             enable = true;
-            inherit user;
+            indicators = [];
           };
         };
     }
