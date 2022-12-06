@@ -4,6 +4,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.Place
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.SetWMName
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Layout.NoBorders
@@ -49,7 +50,7 @@ main = do
                            , ppHiddenNoWindows = xmobarColor "#dfbf8e" "" . workspaceIcon
                            , ppUrgent          = xmobarColor "red" "yellow" . workspaceIcon
                            , ppTitle           = xmobarColor "#e3a84e" "" . shorten 50
-                           }
+                           } >> setWMName "LG3D"
 	    , handleEventHook    = handleEventHook def
         , modMask            = mod4Mask
         , terminal           = "alacritty"
