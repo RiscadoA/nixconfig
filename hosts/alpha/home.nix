@@ -62,6 +62,7 @@
     slack
     teams
     webots
+    camunda-modeler
     xournalpp
     libqalculate
     kdenlive
