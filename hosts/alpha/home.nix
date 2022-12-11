@@ -63,6 +63,7 @@
     teams
     webots
     camunda-modeler
+    archi
     xournalpp
     libqalculate
     kdenlive

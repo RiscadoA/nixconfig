@@ -21,4 +21,5 @@
   headsetcontrol = prev.callPackage "${packageDir}/headsetcontrol" {};
   webots = prev.callPackage "${packageDir}/webots" {};
   camunda-modeler = prev.callPackage "${packageDir}/camunda-modeler" {};
+  archi = prev.callPackage "${packageDir}/archi" {};
 }

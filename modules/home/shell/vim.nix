@@ -23,7 +23,7 @@ in {
         gruvbox
       ];
       extraConfig = ''
-        let g:vimwiki_list=[{'path': '~/documents/wiki'}]
+        let g:vimwiki_list=[{'path': '~/documents/wiki', 'syntax': 'markdown', 'ext': '.md'}, {'path': '~/documents/wiki-shared', 'syntax': 'markdown', 'ext': '.md'}]
         let g:vimwiki_global_ext=0
         let g:vimwiki_folding='list'
 
@@ -31,6 +31,13 @@ in {
         set shiftwidth=4
         set softtabstop=4
         set expandtab
+      
+        command! Diary VimwikiDiaryIndex
+        augroup vimwikigroup
+          autocmd!
+          autocmd BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
+          autocmd BufNewFile ~/documents/wiki/diary/*.md :silent 0r !/etc/nixos/bin/diary-template.sh '%'
+        augroup end
       '';
     };
 
@@ -40,6 +47,7 @@ in {
 
     home.shellAliases = {
       wiki = "vim -c :VimwikiIndex";
+      diary = "vim -c :VimwikiMakeDiaryNote";
     };
   };
 }
