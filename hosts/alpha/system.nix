@@ -43,6 +43,7 @@
   # Extra packages.
   environment.systemPackages = [
     pkgs.pulsemixer
+    pkgs.wineWowPackages.stable
   ];
 
   # Battery saving and preventing overheating.
