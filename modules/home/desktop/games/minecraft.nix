@@ -14,6 +14,6 @@ in
   options.modules.desktop.games.minecraft.enable = mkEnableOption "minecraft";
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.unstable.polymc ];
+    home.packages = [ pkgs.unstable.prismlauncher ];
   };
 }
