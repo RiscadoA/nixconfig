@@ -54,5 +54,6 @@
     lutris
     vlc
     qbittorrent
+    ripgrep
   ];
 }
