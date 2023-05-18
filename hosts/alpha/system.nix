@@ -38,7 +38,10 @@
       servers = [ "main" "all" "modded" ];
     };
     
-    vm.windows.enable = true;
+    vm.vfio = {
+      mode = "dual";
+      devices = [ "10de:1f15" "10de:10f9" "10de:1ada" "10de:1adb" ];
+    };
   };
 
   # Extra packages.
