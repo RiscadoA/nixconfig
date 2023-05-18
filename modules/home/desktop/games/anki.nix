@@ -14,6 +14,6 @@ in
   options.modules.desktop.games.anki.enable = mkEnableOption "anki";
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.anki-bin pkgs.mpv ];
+    home.packages = [ pkgs.unstable.anki-bin pkgs.mpv ];
   };
 }
