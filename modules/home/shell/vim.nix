@@ -37,7 +37,7 @@ in {
         augroup vimwikigroup
           autocmd!
           autocmd BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
-          autocmd BufNewFile ~/documents/wiki/diary/*.md :silent 0r !/etc/nixos/bin/diary-template.sh '%'
+          autocmd BufNewFile ~/documents/wiki/diary/*.md :silent 0r !~/nixos/bin/diary-template.sh '%'
         augroup end
       '';
     };
