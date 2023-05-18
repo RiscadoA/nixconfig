@@ -21,12 +21,6 @@
 
     desktop = {
       xscreensaver.enable = true;
-      xmonad.enable = true;
-      xmobar = {
-        enable = true;
-        type = "desktop";
-      };
-
       gtk.enable = true;
       qt.enable = true;
 
@@ -58,5 +52,7 @@
     freecad
     ckan
     lutris
+    vlc
+    qbittorrent
   ];
 }

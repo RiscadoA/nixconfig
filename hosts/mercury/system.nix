@@ -29,7 +29,10 @@
     #  servers = [ "main" "all" "modded" ];
     #};
     
-    #vm.windows.enable = true;
+    vm.vfio = {
+      mode = "single";
+      devices = [ "10de:13c0" "10de:0fbb" ];
+    };
   };
 
   # Extra packages.
@@ -87,7 +90,7 @@
 
   services.xserver = {
     enable = true;
-    dpi = 120;
+    dpi = 96;
     layout = "pt";
     libinput = {
       enable = true;
@@ -98,7 +101,7 @@
   services.openssh = {
     enable = true;
     startWhenNeeded = true;
-    passwordAuthentication = false;
+    #passwordAuthentication = false;
   };
   
   hardware = {

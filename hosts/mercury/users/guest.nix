@@ -9,10 +9,12 @@
 {
   user = {
     isNormalUser = true;
-    createHome = true;
     shell = pkgs.zsh;
-    extraGroups = [ "nopasswdlogin" "libvirtd" ];
+    extraGroups = [ "steam" "nopasswdlogin" "libvirtd" ];
   };
 
-  #services.xserver.windowManager.openbox.enable = true;
+  # Modules configuration.
+  #modules = {
+  #xsession.windowManager.fluxbox.enable = true;
+  #};
 }
