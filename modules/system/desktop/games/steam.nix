@@ -17,8 +17,8 @@ in
     programs.steam.enable = true;
 
     environment.systemPackages = with pkgs; [
-      wineWowPackages.stable
-      winetricks
+      unstable.wineWowPackages.stable
+      unstable.winetricks
     ];
   };
 }
