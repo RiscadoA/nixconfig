@@ -35,6 +35,7 @@
         discord.enable = true;
         spotify.enable = true;
         vscode.enable = true;
+        thunderbird.enable = true;
       };
 
       games = {
