@@ -14,7 +14,7 @@ in
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = "experimental-features = nix-command flakes";
-    trustedUsers = [ "root" "@wheel" ];
+    settings.trusted-users = [ "root" "@wheel" ];
   };
 
   # Every host shares the same time zone.
@@ -33,9 +33,7 @@ in
     man-pages
   ];
 
-  environment.shells = with pkgs; [
-    zsh
-  ];
+  programs.zsh.enable = true;
 
   system.stateVersion = "21.11";
 }

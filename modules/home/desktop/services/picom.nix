@@ -16,10 +16,12 @@ in
   config = mkIf cfg.enable {
     services.picom = {
       enable = true;
-      blur = true;
       fade = false;
-      inactiveDim = "0.2";
       vSync = true;
+      settings = {
+        inactiveDim = "0.2";
+        blur.enable = true;
+      };
     };
   };
 }
