@@ -1,5 +1,5 @@
 import XMonad
-import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.Place
 import XMonad.Hooks.EwmhDesktops
@@ -44,12 +44,12 @@ main = do
                        layoutSingle
         , logHook    = dynamicLogWithPP xmobarPP
                            { ppOutput          = hPutStrLn xmproc
-                           , ppCurrent         = xmobarColor "#e3a84e" "" . workspaceIcon
-                           , ppVisible         = xmobarColor "#ebdbb2" "" . workspaceIcon
-                           , ppHidden          = xmobarColor "#dfbf8e" "" . workspaceIcon
-                           , ppHiddenNoWindows = xmobarColor "#dfbf8e" "" . workspaceIcon
-                           , ppUrgent          = xmobarColor "red" "yellow" . workspaceIcon
-                           , ppTitle           = xmobarColor "#e3a84e" "" . shorten 50
+                           , ppCurrent         = xmobarFont 1 . xmobarColor "#e3a84e" "" . workspaceIcon
+                           , ppVisible         = xmobarFont 1 . xmobarColor "#ebdbb2" "" . workspaceIcon
+                           , ppHidden          = xmobarFont 1 . xmobarColor "#dfbf8e" "" . workspaceIcon
+                           , ppHiddenNoWindows = xmobarFont 1 . xmobarColor "#dfbf8e" "" . workspaceIcon
+                           , ppUrgent          = xmobarFont 1 . xmobarColor "red" "yellow" . workspaceIcon
+                           , ppTitle           = xmobarFont 0 . xmobarColor "#e3a84e" "" . shorten 50
                            } >> setWMName "LG3D"
 	    , handleEventHook    = handleEventHook def
         , modMask            = mod4Mask
