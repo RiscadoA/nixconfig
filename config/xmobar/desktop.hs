@@ -7,10 +7,11 @@ Config {
     , bgColor     = "#000000"
     , fgColor     = "#dfbf8e"
     , position    = Top
-    , template    = "%StdinReader%}{%mail% | %time% | %date% | %kbd% "
+    , template    = "%StdinReader%}{%mail% | %timew% | %time% | %date% | %kbd% "
     , commands = 
         [ Run StdinReader
 	    , Run Com  "/home/riscadoa/nixos/bin/sb-gmail.sh" [] "mail" 100
+	    , Run Com  "/home/riscadoa/nixos/bin/sb-timew.sh" [] "timew" 10
         , Run Date "\xf073 %F (%a)" "date" 10
         , Run Date "\xf017 %T" "time" 10
         , Run Kbd  [ ("pt", "\xf11c PT"), ("us(cmk_ed_dh)", "\xf11c CMK") ] 
