@@ -21,10 +21,13 @@ in
           github.copilot
           ms-vscode-remote.remote-ssh
           ms-vsliveshare.vsliveshare
-          pkgs.vscode-extensions.eamodio.gitlens
 
           # Theme
           file-icons.file-icons
+
+          # Git
+          mhutchie.git-graph
+          waderyan.gitblame
 
           # Spell checker
           streetsidesoftware.code-spell-checker
