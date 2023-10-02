@@ -50,6 +50,9 @@ in
           # C#
           ms-dotnettools.csharp
 
+          # Protos
+          zxh404.vscode-proto3
+
           # Rust
           rust-lang.rust-analyzer
           tamasfe.even-better-toml
