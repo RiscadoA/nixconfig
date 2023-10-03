@@ -46,6 +46,7 @@ in
           # C++
           ms-vscode.cpptools
           ms-vscode.cmake-tools
+          xaver.clang-format 
 
           # C#
           ms-dotnettools.csharp
