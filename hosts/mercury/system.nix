@@ -91,7 +91,7 @@
   services.xserver = {
     enable = true;
     dpi = 96;
-    layout = "pt";
+    layout = "us";
     libinput = {
       enable = true;
       touchpad.naturalScrolling = true;
