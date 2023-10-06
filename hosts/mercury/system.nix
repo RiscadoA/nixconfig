@@ -92,7 +92,8 @@
     enable = true;
     dpi = 96;
     layout = "us";
-    xkbVariant = "intl";
+    xkbVariant = "altgr-intl";
+    xkbOptions = "compose:ralt nodeadkeys";
     libinput = {
       enable = true;
       touchpad.naturalScrolling = true;
