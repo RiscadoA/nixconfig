@@ -92,6 +92,7 @@
     enable = true;
     dpi = 96;
     layout = "us";
+    xkbVariant = "intl";
     libinput = {
       enable = true;
       touchpad.naturalScrolling = true;
