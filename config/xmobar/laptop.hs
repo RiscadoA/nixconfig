@@ -28,6 +28,6 @@ Config {
                              ] 50
         , Run Date           "\xf073 %F (%a)" "date" 10
         , Run Date           "\xf017 %T" "time" 10
-        , Run Kbd           [ ("pt", "\xf11c PT"), ("us(cmk_ed_dh)", "\xf11c CMK") ] 
+        , Run Kbd           [ ("pt", "\xf11c PT"), ("us(cmk_ed_dh)", "\xf11c CMK"), ("us(intl)", "\xf11c US") ] 
         ]
 }
