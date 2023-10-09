@@ -11,6 +11,7 @@
   modules = {
     hardware = {
       arctis9.enable = true;
+      qmk.enable = true;
     };
 
     desktop = {
