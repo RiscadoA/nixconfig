@@ -4,7 +4,9 @@ import datetime
 
 template = """# {date}
 
-## Notas"""
+## Geral
+
+## Dev Log"""
 
 date = (datetime.date.today() if len(sys.argv) < 2
         # Expecting filename in YYYY-MM-DD.foo format
