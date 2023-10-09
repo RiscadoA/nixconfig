@@ -20,6 +20,7 @@
       vim.enable = true;
       pass.enable = true;
       taskwarrior.enable = true;
+      direnv.enable = true;
     };
 
     desktop = {
