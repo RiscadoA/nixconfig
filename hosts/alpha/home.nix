@@ -60,14 +60,10 @@
     htop
     blender
     slack
-    teams
     xournalpp
     libqalculate
-    kdenlive
-    freecad
     timewarrior
-    calcurse
-    ckan
+    ripgrep
   ];
 
   # Syncthing for vimwiki.
