@@ -29,6 +29,11 @@
     #  syncthing.enable = true;
     #  servers = [ "main" "all" "modded" ];
     #};
+
+    services.grocy = {
+      enable = true;
+      hostName = "mercury.riscadoa.com";
+    };
     
     vm.vfio = {
       mode = "single";
