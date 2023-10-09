@@ -16,16 +16,17 @@ import Data.Maybe
 
 import qualified Graphics.X11.ExtraTypes.XF86 as XF86
 
-myManageHook = composeAll
-    [ isFullscreen           --> doFullFloat
-    , className =? "Gimp"    --> doFloat
-    , className =? "Code"    --> doShift "code"
-    , className =? "Firefox" --> doShift "network"
-    , className =? "discord" --> doShift "discord"
-    , className =? "Slack" --> doShift "team"
-    , className =? "Mattermost" --> doShift "team"
-    , className =? "zoom"    --> doShift "video"
-    , className =? "" --> doShift "music" -- Spotify
+myManageHook = composeAll . concat $
+    [ [ isFullscreen           --> doFullFloat ]
+    , [ className =? "Gimp"    --> doFloat ]
+    , [ className =? "Code"    --> doShift "code" ]
+    , [ className =? "Firefox" --> doShift "network" ]
+    , [ className =? "discord" --> doShift "discord" ]
+    , [ className =? "Slack" --> doShift "team" ]
+    , [ className =? "Mattermost" --> doShift "team" ]
+    , [ className =? "zoom"    --> doShift "video" ]
+    , [ className =? "" --> doShift "music" ] -- For Spotify
+    , [ fmap ( c `isInfixOf`) className --> doFloat | c <- ["defold", "Defold"] ]
     ]
 myPlaceHook = placeHook (withGaps (16,0,16,0) (smart (0.5, 0.5)))
 
