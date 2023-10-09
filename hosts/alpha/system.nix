@@ -113,5 +113,6 @@
   virtualisation.docker.enable = true;
 
   # Required for gtk.
+  programs.dconf.enable = true;
   services.dbus.packages = [ pkgs.dconf ];
 }
