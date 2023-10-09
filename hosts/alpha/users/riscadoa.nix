@@ -11,6 +11,6 @@
     isNormalUser = true;
     createHome = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "video" "libvirtd" ];
+    extraGroups = [ "wheel" "video" "libvirtd" "docker" ];
   };
 }
