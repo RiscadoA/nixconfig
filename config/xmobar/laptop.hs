@@ -1,6 +1,9 @@
 Config {
     -- appearance
-      font        = "xft:Noto Sans Mono:size=11:bold:antialias=true:hinting=true,Font Awesome 6 Free Solid:size=11:antialias=true:hinting=true:style=Solid,Font Awesome 6 Brands:size=11:antialias=true:hinting=true:style=Regular"
+      font        = "Noto Sans Mono Bold 11"
+    , additionalFonts =
+        [ "Font Awesome 6 Free Solid 11"
+        ]
     , bgColor     = "#000000"
     , fgColor     = "#dfbf8e"
     , position    = Top
@@ -13,7 +16,7 @@ Config {
         , Run Brightness     [ "--template" , "\xf185 <percent>%"
                              , "--", "-D", "intel_backlight"
                              ] 5 
-        , Run MultiCoreTemp  [ "--template" , "\xf769 <maxpc>°C"
+        , Run MultiCoreTemp  [ "--template" , "\xf2c8 <maxpc>°C"
 	                     , "--Low", "60"
 			     , "--High", "90"
 			     ] 10
