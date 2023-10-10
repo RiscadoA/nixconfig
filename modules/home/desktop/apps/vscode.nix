@@ -9,6 +9,13 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.apps.vscode;
+  buildExtension = ({ name, publisher, version, sha256, buildInputs ? [ ] }:
+    pkgs.unstable.vscode-utils.buildVscodeMarketplaceExtension {
+    inherit buildInputs;
+    mktplcRef = {
+      inherit name publisher version sha256;
+    };
+  });
 in
 {
   options.modules.desktop.apps.vscode.enable = mkEnableOption "vscode";
@@ -44,10 +51,15 @@ in
           jnoortheen.nix-ide
           
           # C++
+          xaver.clang-format 
           ms-vscode.cpptools
           ms-vscode.cmake-tools
-          ms-vscode.cpptools-themes
-          xaver.clang-format 
+          (buildExtension {
+            name = "cpptools-themes";
+            publisher = "ms-vscode";
+            version = "2.0.0";
+            sha256 = "sha256-YWA5UsA+cgvI66uB9d9smwghmsqf3vZPFNpSCK+DJxc=";
+          })
 
           # C#
           ms-dotnettools.csharp
