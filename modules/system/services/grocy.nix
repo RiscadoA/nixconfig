@@ -14,6 +14,7 @@ in
 {
   options.modules.services.grocy = {
     enable = mkEnableOption "grocy";
+    package = pkgs.unstable.grocy;
     hostName = mkOption {
       type = types.str;
     };
@@ -24,6 +25,11 @@ in
       enable = true;
       hostName = cfg.hostName;
       settings.currency = "EUR";
+    };
+
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "acme@riscadoa.com";
     };
   };
 }
