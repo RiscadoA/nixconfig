@@ -4,7 +4,7 @@
   modules = {
     services.grocy = {
       enable = true;
-      hostName = "pluto.riscadoa.com";
+      hostName = "grocy.riscadoa.com";
     };
   };
   
