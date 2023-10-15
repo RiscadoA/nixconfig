@@ -6,6 +6,8 @@
       enable = true;
       hostName = "grocy.riscadoa.com";
     };
+
+    services.zomboid.enable = true;
   };
   
   boot.tmp.cleanOnBoot = true;
