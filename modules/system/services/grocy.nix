@@ -27,6 +27,8 @@ in
       settings.currency = "EUR";
     };
 
+    networking.firewall.allowedTCPPorts = [ 80 ];
+
     security.acme = {
       acceptTerms = true;
       defaults.email = "acme@riscadoa.com";
