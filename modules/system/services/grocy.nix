@@ -27,7 +27,7 @@ in
       settings.currency = "EUR";
     };
 
-    networking.firewall.allowedTCPPorts = [ 80 ];
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
 
     security.acme = {
       acceptTerms = true;
