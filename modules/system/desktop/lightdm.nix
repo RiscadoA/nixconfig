@@ -52,14 +52,14 @@ in
     {
       services.xserver.displayManager =
         if cfg.auto
-        then assert (length cfg.users == 1); {
+        then {
           lightdm.greeter.enable = false;
           autoLogin = {
             enable = true;
             user = head cfg.users;
           };
         }
-        else assert (length cfg.users >= 1); {
+        else {
           lightdm.greeters.gtk = {
             enable = true;
             indicators = [];
