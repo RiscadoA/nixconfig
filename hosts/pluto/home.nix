@@ -5,7 +5,6 @@
     xdg.enable = true;
 
     shell = {
-      lf.enable = true;
       git.enable = true;
       ssh.enable = true;
       zsh.enable = true;
