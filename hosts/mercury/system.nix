@@ -30,11 +30,6 @@
     #  servers = [ "main" "all" "modded" ];
     #};
 
-    services.grocy = {
-      enable = true;
-      hostName = "mercury.riscadoa.com";
-    };
-    
     vm.vfio = {
       mode = "single";
       devices = [ "10de:13c0" "10de:0fbb" ];
