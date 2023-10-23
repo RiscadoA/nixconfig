@@ -49,6 +49,7 @@
   # Extra packages.
   home.packages = with pkgs; [
     timewarrior
+    gdb
   ];
 
   # Syncthing for vimwiki.
