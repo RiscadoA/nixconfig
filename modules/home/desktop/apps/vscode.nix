@@ -72,7 +72,7 @@ in
           tamasfe.even-better-toml
 
           # Python
-          ms-python.python
+          #ms-python.python
         ]);
       })
     ];
