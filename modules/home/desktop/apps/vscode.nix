@@ -35,6 +35,7 @@ in
           # Git
           mhutchie.git-graph
           waderyan.gitblame
+          github.vscode-github-actions
 
           # Spell checker
           streetsidesoftware.code-spell-checker
