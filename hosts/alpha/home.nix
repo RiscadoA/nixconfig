@@ -69,12 +69,4 @@
 
   # Syncthing for vimwiki.
   services.syncthing.enable = true;
-
-  # Launch applications on startup. 
-  xsession.initExtra = ''
-    firefox &
-    discord &
-    spotify &
-    anki &
-  '';
 }
