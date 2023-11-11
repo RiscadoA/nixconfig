@@ -17,40 +17,31 @@ in {
   };
 
   config = mkIf cfg.enable {
-    boot.blacklistedKernelModules = [ "i2c_nvidia_gpu" ];
-    
     hardware = {
-      opengl.enable = true;
-      opengl.extraPackages = [ pkgs.mesa.drivers ];
+      opengl = {
+        enable = true;
+        driSupport = true;
+        driSupport32Bit = true;
+      };
+
       nvidia = {
+        modesetting.enable = true;
+        powerManagement.enable = false;
+        powerManagement.finegrained = false;
+        open = false;
+        nvidiaSettings = true;
+
         package = config.boot.kernelPackages.nvidiaPackages.stable;
+
         prime = {
-          offload.enable = true;
+          reverseSync.enable = true;
+          allowExternalGpu = false;
+
           inherit (cfg) intelBusId nvidiaBusId;
         };
       };
     };
 
     services.xserver.videoDrivers = [ "nvidia" ];
-
-    environment.systemPackages = [
-      (pkgs.writeShellScriptBin "nvidia-offload" ''
-        export __NV_PRIME_RENDER_OFFLOAD=1
-        export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-        export __GLX_VENDOR_LIBRARY_NAME=nvidia
-        export __VK_LAYER_NV_optimus=NVIDIA_only
-        exec -a "$0" "$@"
-      '')
-    ];
-    
-    specialisation.external-display.configuration = {
-      nixpkgs.pkgs = pkgs;
-      system.nixos.tags = [ "external-display" ];
-      hardware.nvidia = {
-        prime.offload.enable = lib.mkForce false;
-        prime.sync.enable = true;
-        powerManagement.enable = lib.mkForce false;
-      };
-    };
   };
 }
