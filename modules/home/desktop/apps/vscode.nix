@@ -55,6 +55,7 @@ in
           xaver.clang-format 
           ms-vscode.cpptools
           ms-vscode.cmake-tools
+          twxs.cmake
           (buildExtension {
             name = "cpptools-themes";
             publisher = "ms-vscode";
