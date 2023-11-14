@@ -65,6 +65,7 @@
     libqalculate
     timewarrior
     ripgrep
+    obsidian
   ];
 
   # Syncthing for vimwiki.
