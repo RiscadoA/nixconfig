@@ -50,11 +50,12 @@ in
 
           # Nix
           jnoortheen.nix-ide
-          
-          # C++
+
+          # C/C++
           xaver.clang-format 
           ms-vscode.cpptools
           ms-vscode.cmake-tools
+          ms-vscode.makefile-tools
           twxs.cmake
           (buildExtension {
             name = "cpptools-themes";
