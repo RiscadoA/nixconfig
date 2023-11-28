@@ -50,6 +50,10 @@
     pkgs.wineWowPackages.stable
   ];
 
+  services.openvpn.servers = {
+    tecnicoVPN = { config = '' config ${configDir}/tecnico.ovpn ''; };
+  };
+
   # Battery saving and preventing overheating.
   services.auto-cpufreq.enable = true;
   services.thermald.enable = true;
