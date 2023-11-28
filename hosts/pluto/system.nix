@@ -9,7 +9,7 @@
 
     services.taskserver = {
       enable = true;
-      hostName = "riscadoa.com";
+      hostName = "pluto.riscadoa.com";
     };
 
     services.zomboid.enable = true;
