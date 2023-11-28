@@ -7,6 +7,11 @@
       hostName = "grocy.riscadoa.com";
     };
 
+    services.taskserver = {
+      enable = true;
+      hostName = "riscadoa.com";
+    };
+
     services.zomboid.enable = true;
   };
   
