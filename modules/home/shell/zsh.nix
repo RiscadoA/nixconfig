@@ -24,6 +24,9 @@ in
         plugins = [ "git" "systemd" ];
         theme = "robbyrussell";
       };
+      initExtra = ''
+        DISABLE_MAGIC_FUNCTIONS=true
+      '';
     };
   }; 
 }
