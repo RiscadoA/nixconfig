@@ -22,5 +22,6 @@
   networking.domain = "";
 
   services.openssh.enable = true;
+  services.syncthing.enable = true;
 }
 
