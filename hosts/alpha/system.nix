@@ -51,7 +51,10 @@
   ];
 
   services.openvpn.servers = {
-    tecnicoVPN = { config = '' config ${configDir}/tecnico.ovpn ''; };
+    tecnicoVPN = {
+      config = '' config ${configDir}/tecnico.ovpn '';
+      autoStart = false;
+    };
   };
 
   # Battery saving and preventing overheating.

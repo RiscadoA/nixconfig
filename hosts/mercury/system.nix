@@ -104,9 +104,15 @@
   services.openssh = {
     enable = true;
     startWhenNeeded = true;
-    #passwordAuthentication = false;
   };
-  
+
+  services.openvpn.servers = {
+    tecnicoVPN = {
+      config = '' config ${configDir}/tecnico.ovpn '';
+      autoStart = false;
+    };
+  };
+
   hardware = {
     bluetooth.enable = true;
     pulseaudio.enable = true;
