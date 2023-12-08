@@ -2,17 +2,21 @@
 {
   # Modules configuration.
   modules = {
-    services.grocy = {
-      enable = true;
-      hostName = "grocy.riscadoa.com";
-    };
+    services = {
+      tailscale.enable = true;
 
-    services.taskserver = {
-      enable = true;
-      hostName = "pluto.riscadoa.com";
-    };
+      grocy = {
+        enable = true;
+        hostName = "grocy.riscadoa.com";
+      };
 
-    services.zomboid.enable = true;
+      taskserver = {
+        enable = true;
+        hostName = "pluto.riscadoa.com";
+      };
+
+      zomboid.enable = true;
+    };
   };
   
   boot.tmp.cleanOnBoot = true;
