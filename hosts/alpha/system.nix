@@ -32,10 +32,13 @@
       };
     };
 
-    services.minecraft = {
-      enable = true;
-      syncthing.enable = true;
-      servers = [ "main" "all" "modded" ];
+    services = {
+      tailscale.enable = true;
+      minecraft = {
+        enable = true;
+        syncthing.enable = true;
+        servers = [ "main" "all" "modded" ];
+      };
     };
     
     #vm.vfio = {
