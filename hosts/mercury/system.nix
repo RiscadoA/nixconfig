@@ -30,6 +30,8 @@
     #  servers = [ "main" "all" "modded" ];
     #};
 
+    services.tailscale.enable = true;
+
     vm.vfio = {
       mode = "single";
       devices = [ "10de:13c0" "10de:0fbb" ];
