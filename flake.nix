@@ -26,15 +26,13 @@
       inherit (inputs.impermanence.nixosModules) impermanence;
       inherit (lib) mapAttrs removeSuffix hasSuffix nixosSystem;
 
-      system = "x86_64-linux";
-
       pkgs = mkPkgs inputs.nixpkgs [ self.overlays.default ];
       pkgs' = mkPkgs inputs.nixpkgs-unstable [];
 
       systemModules = mkModules ./modules/system;
       homeModules = mkModules ./modules/home;
 
-      mkPkgs = pkgs: extraOverlays: import pkgs {
+      mkPkgs = pkgs: extraOverlays: system: import pkgs {
         inherit system;
         config.allowUnfree = true;
         config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
@@ -51,7 +49,7 @@
         (attrNames (readDir dir)) ++ [{
           name = "default";
           value = final: prev: {
-            unstable = pkgs';
+            unstable = pkgs' prev.system;
           };
         }]);
 
@@ -78,7 +76,8 @@
         (name: {
           inherit name;
           value = nixosSystem {
-            inherit system pkgs;
+            system = "x86_64-linux";
+            pkgs = pkgs "x86_64-linux";
             specialArgs = { configDir = ./config; };
             modules =
               let
