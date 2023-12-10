@@ -71,13 +71,15 @@
         })
         (attrNames (readDir dir));
 
+      mkSystem = name: if name == "charon" then "aarch64-linux" else "x86_64-linux";
+
       # Imports every host defined in a directory.
       mkHosts = dir: listToAttrs (map 
         (name: {
           inherit name;
           value = nixosSystem {
-            system = "x86_64-linux";
-            pkgs = pkgs "x86_64-linux";
+            system = mkSystem name;
+            pkgs = pkgs (mkSystem name);
             specialArgs = { configDir = ./config; };
             modules =
               let
