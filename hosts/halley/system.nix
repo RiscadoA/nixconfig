@@ -92,6 +92,8 @@
     cpu.amd.updateMicrocode = true;
   };
 
+  services.tlp.enable = true;
+
   sound.enable = true;
 
   users = {
