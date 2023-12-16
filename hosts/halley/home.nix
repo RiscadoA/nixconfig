@@ -18,7 +18,7 @@
       xmonad.enable = true;
       xmobar = {
         enable = true;
-        type = "laptop";
+        type = "laptop-hidpi";
       };
 
       gtk.enable = true;

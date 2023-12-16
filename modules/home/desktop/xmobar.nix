@@ -13,10 +13,10 @@ in {
   options.modules.desktop.xmobar = {
     enable = mkEnableOption "xmobar";
     type = mkOption {
-      type = types.enum [ "laptop" "desktop" ];
+      type = types.enum [ "laptop" "desktop" "laptop-hidpi" ];
     };
   };
-  
+
   config = mkIf cfg.enable {
     home = {
       packages = [ pkgs.haskellPackages.xmobar ];
