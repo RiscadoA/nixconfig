@@ -34,29 +34,33 @@
     };
   };
 
-  # Battery saving and preventing overheating.
-  services.auto-cpufreq.enable = true;
-  services.thermald.enable = true;
-  services.throttled.enable = true;
-  powerManagement.powertop.enable = true;
-
   # Required by vscode
   services.gnome.gnome-keyring.enable = true;
   
   boot = {
     loader = {
-      systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-    };
 
-    initrd.luks.devices = {
-      enc-pv = {
-        device = "/dev/disk/by-uuid/a65c0d75-f83b-4a05-80b4-9e6db4e06133";
-        preLVM = true;
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
       };
     };
 
-    kernelModules = [ "coretemp" ];
+    initrd = {
+      systemd.enable = true;
+
+      luks.devices."luks-19e4635a-716a-44c4-82c6-0fe2e33c034a" = {
+        device = "/dev/disk/by-uuid/19e4635a-716a-44c4-82c6-0fe2e33c034a";
+        allowDiscards = true;
+      };
+    };
+
+    kernelParams = [ "quiet" ];
+    consoleLogLevel = 3;
+    plymouth.enable = true;
+    plymouth.theme = "breeze";
   };
 
   networking = {
@@ -72,7 +76,8 @@
 
   services.xserver = {
     enable = true;
-    dpi = 96;
+    videoDrivers = [ "amdgpu" ];
+    dpi = 140;
 
     layout = "pt";
     libinput = {
