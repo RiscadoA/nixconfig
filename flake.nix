@@ -9,11 +9,11 @@
   description = "Nix configuration for a multi user system.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     impermanence.url = "github:nix-community/impermanence/master";
     home = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -35,7 +35,7 @@
       mkPkgs = pkgs: extraOverlays: system: import pkgs {
         inherit system;
         config.allowUnfree = true;
-        config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
+        config.permittedInsecurePackages = [ "electron-25.9.0" ];
         overlays = extraOverlays ++ (attrValues self.overlays);
       };
 

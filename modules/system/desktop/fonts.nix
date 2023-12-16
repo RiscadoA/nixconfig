@@ -14,8 +14,8 @@ in {
 
   config = mkIf cfg.enable {
     fonts = {
-      enableDefaultFonts = true;
-      fonts = with pkgs; [
+      enableDefaultPackages = true;
+      packages = with pkgs; [
         noto-fonts 
         noto-fonts-cjk
         font-awesome

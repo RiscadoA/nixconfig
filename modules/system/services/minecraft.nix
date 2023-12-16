@@ -48,7 +48,7 @@ in {
       (mkIf cfg.syncthing.enable {
         services.syncthing = {
           enable = true;
-          folders."Minecraft".path = "/srv/minecraft";
+          settings.folders."Minecraft".path = "/srv/minecraft";
         };
       })
     ]);

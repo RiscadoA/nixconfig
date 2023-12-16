@@ -15,11 +15,11 @@ let
 in {
   options.modules.vm.vfio = {
     mode = mkOption {
-      type = with types; uniq string;
+      type = with types; uniq str;
       default = "none";
     };
     devices = mkOption {
-      type = with types; listOf string;
+      type = with types; listOf str;
       default = [];
     };
   };
