@@ -15,7 +15,7 @@ Config {
 	, Run Com "/home/riscadoa/nixos/bin/sb-headset.sh" [] "headset" 10
 	, Run Com "/home/riscadoa/nixos/bin/sb-network.sh" [] "network" 10
         , Run Brightness     [ "--template" , "\xf185 <percent>%"
-                             , "--", "-D", "intel_backlight"
+                             , "--", "-D", "amdgpu_bl0"
                              ] 5 
         , Run MultiCoreTemp  [ "--template" , "\xf2c8 <maxpc>°C"
 	                     , "--Low", "60"
