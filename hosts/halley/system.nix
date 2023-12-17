@@ -60,8 +60,13 @@
     kernelPackages = pkgs.linuxPackages_6_6;
     kernelParams = [ "quiet" ];
     consoleLogLevel = 3;
-    plymouth.enable = true;
-    plymouth.theme = "breeze";
+    plymouth = {
+      enable = true;
+      theme = "breeze";
+      extraConfig = ''
+        DeviceScale=1
+      '';
+    };
   };
 
   networking = {
