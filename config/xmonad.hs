@@ -69,6 +69,8 @@ main = do
         , ((mod4Mask .|. controlMask, xK_Down), spawn "playerctl pause")
         , ((mod4Mask, xK_F8), spawn "light -U 5")
         , ((mod4Mask, xK_F9), spawn "light -A 5")
+        , ((0, XF86.xF86XK_MonBrightnessDown), spawn "light -U 5")
+        , ((0, XF86.xF86XK_MonBrightnessUp), spawn "light -A 5")
         , ((0, xK_Print), spawn "flameshot gui")
         ]
 
