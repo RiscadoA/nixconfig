@@ -78,6 +78,8 @@ in
           ms-python.python
         ]);
       })
+
+      nixpkgs-fmt # Used by the Nix IDE extension
     ];
   };
 }
