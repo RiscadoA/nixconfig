@@ -79,7 +79,7 @@ in
         ]);
       })
 
-      nixpkgs-fmt # Used by the Nix IDE extension
+      pkgs.nixpkgs-fmt # Used by the Nix IDE extension
     ];
   };
 }
