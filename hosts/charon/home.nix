@@ -17,5 +17,6 @@
     htop
     libqalculate
     ripgrep
+    wol
   ];
 }
