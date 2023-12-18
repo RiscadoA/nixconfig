@@ -64,10 +64,10 @@
     };
 
     consoleLogLevel = 3;
-    plymouth = {
-      enable = true;
-      theme = "breeze";
-    };
+    #plymouth = {
+    #  enable = true;
+    #  theme = "breeze";
+    #};
   };
 
   hardware = {
@@ -88,6 +88,8 @@
       insertNameservers = [ "1.1.1.1" ];
     };
   };
+
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   console.useXkbConfig = true;
 
