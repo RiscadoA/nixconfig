@@ -10,6 +10,6 @@
   boot.loader.generic-extlinux-compatible.enable = true;
 
   services.openssh.enable = true;
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
 }
-
