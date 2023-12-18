@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkOption mkIf;
   cfg = config.modules.hardware.impermanence;
-in {
+in
+{
   options.modules.hardware.impermanence.enable = mkEnableOption "impermanence";
 
   config = mkIf cfg.enable {
@@ -33,7 +34,7 @@ in {
         "/etc/ssh/ssh_host_ed25519_key.pub"
       ];
     };
-    
+
     fileSystems = {
       "/".options = [ "defaults" "size=2G" "mode=755" ];
       "/nix".neededForBoot = true;

@@ -5,14 +5,15 @@
 #
 # Windows virtual machine configuration.
 
-{ lib, config, pkgs,... }:
+{ lib, config, pkgs, ... }:
 let
   inherit (builtins) concatStringsSep;
   inherit (lib) mkEnableOption mkOption types mkMerge mkIf;
   cfg = config.modules.vm.vfio;
 
   devices = concatStringsSep "," cfg.devices;
-in {
+in
+{
   options.modules.vm.vfio = {
     mode = mkOption {
       type = with types; uniq str;
@@ -20,7 +21,7 @@ in {
     };
     devices = mkOption {
       type = with types; listOf str;
-      default = [];
+      default = [ ];
     };
   };
 
@@ -48,7 +49,7 @@ in {
         };
         spiceUSBRedirection.enable = true;
       };
-      
+
       programs.dconf.enable = true;
       environment.systemPackages = with pkgs; [
         virt-manager
@@ -56,7 +57,7 @@ in {
         looking-glass-client
         swtpm
       ];
-      
+
       systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 666 root libvirtd -" ];
     })
     (mkIf (cfg.mode == "dual") {
@@ -91,7 +92,7 @@ in {
       system.activationScripts.libvirt-hooks.text = ''
         ln -Tfs /etc/libvirt/hooks /var/lib/libvirt/hooks
       '';
-    
+
       environment.etc = {
         "libvirt/hooks/qemu" = {
           text = ''
@@ -133,11 +134,11 @@ in {
         };
 
         "libvirt/hooks/kvm.conf" = {
-            text = ''
-              VIRSH_GPU_VIDEO=pci_0000_01_00_0
-              VIRSH_GPU_AUDIO=pci_0000_01_00_1
-            '';
-            mode = "0755";
+          text = ''
+            VIRSH_GPU_VIDEO=pci_0000_01_00_0
+            VIRSH_GPU_AUDIO=pci_0000_01_00_1
+          '';
+          mode = "0755";
         };
 
         "libvirt/hooks/qemu.d/win11/prepare/begin/start.sh" = {

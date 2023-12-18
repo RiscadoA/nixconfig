@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.shell.taskwarrior;
-in {
+in
+{
   options.modules.shell.taskwarrior.enable = mkEnableOption "taskwarrior";
 
   config = mkIf cfg.enable {

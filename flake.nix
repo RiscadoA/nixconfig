@@ -27,7 +27,7 @@
       inherit (lib) mapAttrs removeSuffix hasSuffix nixosSystem;
 
       pkgs = mkPkgs inputs.nixpkgs [ self.overlays.default ];
-      pkgs' = mkPkgs inputs.nixpkgs-unstable [];
+      pkgs' = mkPkgs inputs.nixpkgs-unstable [ ];
 
       systemModules = mkModules ./modules/system;
       homeModules = mkModules ./modules/home;
@@ -47,11 +47,11 @@
           };
         })
         (attrNames (readDir dir)) ++ [{
-          name = "default";
-          value = final: prev: {
-            unstable = pkgs' prev.system;
-          };
-        }]);
+        name = "default";
+        value = final: prev: {
+          unstable = pkgs' prev.system;
+        };
+      }]);
 
       # Imports every nix module from a directory, recursively.
       mkModules = dir: concatLists (attrValues (mapAttrs
@@ -60,7 +60,7 @@
           then mkModules "${dir}/${name}"
           else if value == "regular" && hasSuffix ".nix" name
           then [ (import "${dir}/${name}") ]
-          else [])
+          else [ ])
         (readDir dir)));
 
       # Imports every user defined in a host directory.
@@ -74,7 +74,7 @@
       mkSystem = name: if name == "charon" then "aarch64-linux" else "x86_64-linux";
 
       # Imports every host defined in a directory.
-      mkHosts = dir: listToAttrs (map 
+      mkHosts = dir: listToAttrs (map
         (name: {
           inherit name;
           value = nixosSystem {
@@ -83,13 +83,15 @@
             specialArgs = { configDir = ./config; };
             modules =
               let
-                users = mkUsers "${dir}/${name}/users"; 
-              in [
+                users = mkUsers "${dir}/${name}/users";
+              in
+              [
                 { networking.hostName = name; }
                 (import "${dir}/system.nix")
                 (import "${dir}/${name}/hardware.nix")
                 (import "${dir}/${name}/system.nix")
-                home-manager {
+                home-manager
+                {
                   home-manager = {
                     useGlobalPkgs = true;
                     useUserPackages = true;
@@ -108,13 +110,16 @@
                 }
                 impermanence
               ] ++ systemModules
-                ++ (map (user: args @ { pkgs, ... }: {
-                    users.users.${user.name} = (user.value args).user;
-                  }) users);
+              ++ (map
+                (user: args @ { pkgs, ... }: {
+                  users.users.${user.name} = (user.value args).user;
+                })
+                users);
           };
         })
-        (attrNames (removeAttrs (readDir dir) [ "system.nix" "home.nix" ])));      
-    in {
+        (attrNames (removeAttrs (readDir dir) [ "system.nix" "home.nix" ])));
+    in
+    {
       overlays = mkOverlays ./overlays;
       nixosConfigurations = mkHosts ./hosts;
     };

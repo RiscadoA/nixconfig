@@ -15,5 +15,5 @@ in
 
   config = mkIf cfg.enable {
     programs.password-store.enable = true;
-  }; 
+  };
 }

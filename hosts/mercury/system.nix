@@ -49,7 +49,7 @@
 
   # Required by vscode
   services.gnome.gnome-keyring.enable = true;
-  
+
   boot = {
     kernelParams = [ "quiet" ];
 

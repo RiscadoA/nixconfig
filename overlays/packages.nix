@@ -17,6 +17,6 @@
       "${packageDir}/slock/colors.patch"
     ];
   });
-  
-  headsetcontrol = prev.callPackage "${packageDir}/headsetcontrol" {};
+
+  headsetcontrol = prev.callPackage "${packageDir}/headsetcontrol" { };
 }

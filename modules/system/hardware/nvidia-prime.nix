@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkOption types mkIf;
   cfg = config.modules.hardware.nvidia-prime;
-in {
+in
+{
   options.modules.hardware.nvidia-prime = {
     enable = mkEnableOption "nvidia-prime";
     intelBusId = mkOption { type = types.str; };

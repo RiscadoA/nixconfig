@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkOption types mkIf;
   cfg = config.modules.desktop.xmobar;
-in {
+in
+{
   options.modules.desktop.xmobar = {
     enable = mkEnableOption "xmobar";
     type = mkOption {

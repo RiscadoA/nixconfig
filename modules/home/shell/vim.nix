@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.shell.vim;
-in {
+in
+{
   options.modules.shell.vim.enable = mkEnableOption "vim";
 
   config = mkIf cfg.enable {

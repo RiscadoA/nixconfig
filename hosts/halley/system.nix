@@ -36,7 +36,7 @@
 
   # Required by vscode
   services.gnome.gnome-keyring.enable = true;
-  
+
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;

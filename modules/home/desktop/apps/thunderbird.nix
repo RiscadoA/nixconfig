@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.apps.thunderbird;
-in {
+in
+{
   options.modules.desktop.apps.thunderbird.enable = mkEnableOption "thunderbird";
 
   config = mkIf cfg.enable {

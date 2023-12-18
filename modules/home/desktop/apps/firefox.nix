@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.apps.firefox;
-in {
+in
+{
   options.modules.desktop.apps.firefox.enable = mkEnableOption "firefox";
 
   config = mkIf cfg.enable {

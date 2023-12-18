@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.hardware.backlight;
-in {
+in
+{
   options.modules.hardware.backlight.enable = mkEnableOption "backlight";
 
   config = mkIf cfg.enable {

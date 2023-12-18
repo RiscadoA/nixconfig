@@ -40,7 +40,7 @@
         servers = [ "main" "all" "modded" ];
       };
     };
-    
+
     #vm.vfio = {
     #  mode = "dual";
     #  devices = [ "10de:1f15" "10de:10f9" "10de:1ada" "10de:1adb" ];
@@ -68,7 +68,7 @@
 
   # Required by vscode
   services.gnome.gnome-keyring.enable = true;
-  
+
   boot = {
     loader = {
       systemd-boot.enable = true;

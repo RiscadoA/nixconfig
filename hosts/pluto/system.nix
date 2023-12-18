@@ -18,9 +18,9 @@
       zomboid.enable = true;
     };
   };
-  
+
   boot.tmp.cleanOnBoot = true;
-  
+
   zramSwap.enable = true;
 
   networking.domain = "";

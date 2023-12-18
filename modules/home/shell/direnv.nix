@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.shell.direnv;
-in {
+in
+{
   options.modules.shell.direnv.enable = mkEnableOption "direnv";
 
   config = mkIf cfg.enable {

@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkOption mkIf;
   cfg = config.modules.hardware.arctis9;
-in {
+in
+{
   options.modules.hardware.arctis9.enable = mkEnableOption "arctis9";
 
   config = mkIf cfg.enable {

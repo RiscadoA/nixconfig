@@ -28,7 +28,7 @@
         picom.enable = true;
         wallpaper.enable = true;
         flameshot.enable = true;
-      };      
+      };
 
       apps = {
         alacritty = {

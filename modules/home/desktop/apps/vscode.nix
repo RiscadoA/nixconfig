@@ -11,11 +11,11 @@ let
   cfg = config.modules.desktop.apps.vscode;
   buildExtension = ({ name, publisher, version, sha256, buildInputs ? [ ] }:
     pkgs.unstable.vscode-utils.buildVscodeMarketplaceExtension {
-    inherit buildInputs;
-    mktplcRef = {
-      inherit name publisher version sha256;
-    };
-  });
+      inherit buildInputs;
+      mktplcRef = {
+        inherit name publisher version sha256;
+      };
+    });
 in
 {
   options.modules.desktop.apps.vscode.enable = mkEnableOption "vscode";
@@ -52,7 +52,7 @@ in
           jnoortheen.nix-ide
 
           # C/C++
-          xaver.clang-format 
+          xaver.clang-format
           ms-vscode.cpptools
           ms-vscode.cmake-tools
           ms-vscode.makefile-tools

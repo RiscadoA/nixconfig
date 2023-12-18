@@ -35,7 +35,7 @@ in
           ExecStop = "${pkgs.bash}/bin/bash -c \"echo save > /srv/zomboid/server/zomboid.control; sleep 15; echo quit > /srv/zomboid/server/zomboid.control\"";
           KillSignal = "SIGCONT";
           User = "zomboid";
-          Group = "users";  
+          Group = "users";
         };
       };
 

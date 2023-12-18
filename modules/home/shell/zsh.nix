@@ -28,5 +28,5 @@ in
         DISABLE_MAGIC_FUNCTIONS=true
       '';
     };
-  }; 
+  };
 }

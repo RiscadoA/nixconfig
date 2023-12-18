@@ -9,14 +9,15 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.fonts;
-in {
+in
+{
   options.modules.desktop.fonts.enable = mkEnableOption "fonts";
 
   config = mkIf cfg.enable {
     fonts = {
       enableDefaultPackages = true;
       packages = with pkgs; [
-        noto-fonts 
+        noto-fonts
         noto-fonts-cjk
         font-awesome
       ];

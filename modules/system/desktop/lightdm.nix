@@ -16,7 +16,7 @@ in
   options.modules.desktop.lightdm = {
     enable = mkEnableOption "lightdm";
     users = mkOption {
-      default = [];
+      default = [ ];
       type = types.listOf types.str;
     };
     auto = mkOption {
@@ -34,7 +34,7 @@ in
             set logind-check-graphical=true
           '';
         };
-        
+
         defaultSession = "default";
         session = [
           {
@@ -62,7 +62,7 @@ in
         else {
           lightdm.greeters.gtk = {
             enable = true;
-            indicators = [];
+            indicators = [ ];
           };
         };
     }

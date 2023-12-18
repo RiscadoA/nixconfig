@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.shell.git;
-in {
+in
+{
   options.modules.shell.git.enable = mkEnableOption "git";
 
   config = mkIf cfg.enable {

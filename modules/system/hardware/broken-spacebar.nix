@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkOption mkIf;
   cfg = config.modules.hardware.broken-spacebar;
-in {
+in
+{
   options.modules.hardware.broken-spacebar.enable = mkEnableOption "broken-spacebar";
 
   config = mkIf cfg.enable {

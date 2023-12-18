@@ -22,7 +22,7 @@ in
         config = "${configDir}/xmonad.hs";
       };
     };
-    
+
     home.packages = [ pkgs.playerctl ];
   };
 }

@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.shell.lf;
-in {
+in
+{
   options.modules.shell.lf.enable = mkEnableOption "lf";
 
   config = mkIf cfg.enable {

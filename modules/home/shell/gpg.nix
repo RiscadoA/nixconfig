@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.shell.gpg;
-in {
+in
+{
   options.modules.shell.gpg.enable = mkEnableOption "gpg";
 
   config = mkIf cfg.enable {

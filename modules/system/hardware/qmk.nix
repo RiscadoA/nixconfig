@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.hardware.qmk;
-in {
+in
+{
   options.modules.hardware.qmk.enable = mkEnableOption "qmk";
 
   config = mkIf cfg.enable {

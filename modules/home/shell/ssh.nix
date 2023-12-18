@@ -9,7 +9,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.shell.ssh;
-in {
+in
+{
   options.modules.shell.ssh.enable = mkEnableOption "ssh";
 
   config = mkIf cfg.enable {

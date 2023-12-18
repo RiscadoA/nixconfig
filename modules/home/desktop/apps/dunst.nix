@@ -69,7 +69,7 @@ in
           history = "mod4+ctrl+comma";
           context = "mod4+ctrl+period";
         };
-        
+
         urgency_low = {
           background = "#000000";
           foreground = "#e3a84e";

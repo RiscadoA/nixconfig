@@ -51,7 +51,7 @@ in
         ExecStop = "/usr/bin/env kill -s INT $MAINPID";
 
         User = "ark";
-        Group = "users";  
+        Group = "users";
       };
     };
   };
