@@ -29,5 +29,18 @@ in
       time = cfg.autolock.time;
       locker = "${pkgs.slock}/bin/slock";
     };
+
+    systemd.services.lock-before-sleep = {
+      description = "Lock the screen before going to sleep";
+      wantedBy = [ "sleep.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.slock}/bin/slock";
+      };
+      environment = {
+        DISPLAY = ":0";
+        XAUTHORITY = "/home/riscadoa/.Xauthority";
+      };
+    };
   };
 }
