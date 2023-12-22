@@ -100,6 +100,10 @@
 
   services.tlp.enable = true;
 
+  services.logind.extraConfig = ''
+    HandlePowerKey=suspend
+  '';
+
   sound.enable = true;
 
   users = {
