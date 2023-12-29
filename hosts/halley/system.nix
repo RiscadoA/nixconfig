@@ -111,7 +111,10 @@
   };
 
   hardware = {
-    bluetooth.enable = true;
+    bluetooth = {
+      enable = true;
+      package = pkgs.unstable.bluez;
+    };
     pulseaudio.enable = true;
     cpu.amd.updateMicrocode = true;
   };
