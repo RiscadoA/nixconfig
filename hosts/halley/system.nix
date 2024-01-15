@@ -120,6 +120,7 @@
   };
 
   services.tlp.enable = true;
+  services.ntp.enable = true;
 
   services.logind.extraConfig = ''
     HandlePowerKey=suspend
