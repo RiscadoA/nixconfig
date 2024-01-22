@@ -117,8 +117,16 @@
       enable = true;
       package = pkgs.unstable.bluez;
     };
-    pulseaudio.enable = true;
     cpu.amd.updateMicrocode = true;
+  };
+
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse.enable = true;
   };
 
   services.tlp.enable = true;
@@ -127,8 +135,6 @@
   services.logind.extraConfig = ''
     HandlePowerKey=suspend
   '';
-
-  sound.enable = true;
 
   users = {
     mutableUsers = true;
