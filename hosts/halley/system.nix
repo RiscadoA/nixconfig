@@ -57,7 +57,7 @@
       };
     };
 
-    kernelPackages = pkgs.linuxPackages_6_6;
+    kernelPackages = pkgs.linuxPackages_6_7;
     kernelParams = [ "quiet" ];
     consoleLogLevel = 3;
     plymouth = {
@@ -68,6 +68,8 @@
       '';
     };
   };
+
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   networking = {
     firewall.enable = false;
