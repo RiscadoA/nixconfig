@@ -141,7 +141,12 @@
     users.root.initialPassword = "123";
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+  };
+
+  programs.virt-manager.enable = true;
 
   # Required for gtk.
   programs.dconf.enable = true;
