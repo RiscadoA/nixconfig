@@ -6,6 +6,7 @@
     shell = {
       lf.enable = true;
       git.enable = true;
+      gdb.enable = true;
       gpg.enable = true;
       ssh.enable = true;
       zsh.enable = true;
