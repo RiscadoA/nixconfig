@@ -28,6 +28,7 @@ in
           github.copilot
           ms-vscode-remote.remote-ssh
           ms-vsliveshare.vsliveshare
+          ms-vscode.hexeditor
 
           # Theme
           file-icons.file-icons
