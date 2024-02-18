@@ -40,8 +40,9 @@ in
       description = "Mover";
       after = [ "syslog.target" "network.target" "nss-lookup.target" "network-online.target" ];
       serviceConfig = {
-        ExecStartPre = "cd /srv/mover/Mover/Server; ${pkgs.yarn}/bin/yarn build";
-        ExecStart = "cd /srv/mover/Mover/Server; ${pkgs.yarn}/bin/yarn prod";
+        WorkingDirectory = "/srv/mover/Mover/Server";
+        ExecStartPre = "${pkgs.yarn}/bin/yarn build";
+        ExecStart = "${pkgs.yarn}/bin/yarn prod";
         Restart = "always";
 
         User = "mover";
