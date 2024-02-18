@@ -55,6 +55,17 @@ in
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
+    services.nginx = {
+      enable = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+      virtualHosts."${cfg.hostName}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/".proxyPass = "http://localhost:3000";
+      };
+    };
+
     security.acme = {
       acceptTerms = true;
       defaults.email = "acme@riscadoa.com";
