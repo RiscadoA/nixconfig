@@ -41,7 +41,10 @@ in
       after = [ "syslog.target" "network.target" "nss-lookup.target" "network-online.target" ];
       serviceConfig = {
         WorkingDirectory = "/srv/mover/Mover/Server";
-        ExecStartPre = "${pkgs.yarn}/bin/yarn build";
+        ExecStartPre = [
+          "${pkgs.yarn}/bin/yarn install"
+          "${pkgs.yarn}/bin/yarn build"
+        ];
         ExecStart = "${pkgs.yarn}/bin/yarn prod";
         Restart = "always";
 
