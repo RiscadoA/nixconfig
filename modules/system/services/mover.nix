@@ -8,7 +8,7 @@
 { lib, config, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkOption types mkMerge mkIf;
-  cfg = config.modules.services.minecraft;
+  cfg = config.modules.services.mover;
 in
 {
   options.modules.services.mover = {
