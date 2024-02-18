@@ -16,6 +16,11 @@
       };
 
       zomboid.enable = true;
+
+      mover = {
+        enable = true;
+        hostName = "api.flyptmover.com";
+      };
     };
   };
 
