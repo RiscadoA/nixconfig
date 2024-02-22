@@ -26,6 +26,7 @@ in
         vscodeExtensions = (with pkgs.unstable.vscode-extensions; [
           mkhl.direnv
           github.copilot
+          github.copilot-chat
           ms-vscode-remote.remote-ssh
           ms-vsliveshare.vsliveshare
           ms-vscode.hexeditor
