@@ -66,6 +66,12 @@ in
             sha256 = "sha256-YWA5UsA+cgvI66uB9d9smwghmsqf3vZPFNpSCK+DJxc=";
           })
 
+          # Java
+          redhat.java
+          vscjava.vscode-java-debug
+          vscjava.vscode-java-dependency
+          vscjava.vscode-maven
+
           # C#
           ms-dotnettools.csharp
 
