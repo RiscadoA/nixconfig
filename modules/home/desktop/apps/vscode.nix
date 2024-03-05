@@ -72,6 +72,20 @@ in
           vscjava.vscode-java-dependency
           vscjava.vscode-maven
 
+          # Groovy
+          (buildExtension {
+            name = "code-groovy";
+            publisher = "marlon407";
+            version = "0.1.2";
+            sha256 = "sha256-8jR4miZL3m5344wGpQaQ8pJjGcm0A3+5gX99x+G5QL8=";
+          })
+          (buildExtension {
+            name = "vscode-groovy-lint";
+            publisher = "NicolasVuillamy";
+            version = "3.2.1";
+            sha256 = "sha256-CUzJyqZmUOtmaRAOsAV3PTkKzgGyyBXhT3T2mMES3cA=";
+          })
+
           # C#
           ms-dotnettools.csharp
 
