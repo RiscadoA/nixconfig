@@ -59,7 +59,7 @@
     };
 
     kernelPackages = pkgs.linuxPackages_6_7;
-    kernelParams = [ "quiet" ];
+    kernelParams = [ "quiet" "amdgpu.sg_display=0" ];
     consoleLogLevel = 3;
     plymouth = {
       enable = true;
