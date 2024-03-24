@@ -289,7 +289,7 @@ programs:								      \
 - GL: 				chompytower --root			    \n\
   GL: 				hextrail --root				    \n\
 - GL: 				nakagin --root				    \n\
-
+- GL: 				skulloop --root			    \n\
 
 pointerHysteresis:  10
 authWarningSlack:   20
