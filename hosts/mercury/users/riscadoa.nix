@@ -19,6 +19,7 @@
   # Modules configuration.
   modules = {
     shell = {
+      gdb.enable = true;
       gpg.enable = true;
       pass.enable = true;
       taskwarrior.enable = true;
@@ -49,7 +50,6 @@
   # Extra packages.
   home.packages = with pkgs; [
     timewarrior
-    gdb
   ];
 
   # Syncthing for vimwiki.
