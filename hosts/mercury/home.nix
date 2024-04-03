@@ -39,6 +39,10 @@
         dunst.enable = true;
         firefox.enable = true;
       };
+
+      games = {
+        vintagestory.enable = true;
+      };
     };
   };
 
