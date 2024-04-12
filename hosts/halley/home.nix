@@ -58,5 +58,9 @@
     unstable.obsidian
   ];
 
+  programs.readline.extraConfig = ''
+    set bell-style none
+  '';
+
   services.syncthing.enable = true;
 }
