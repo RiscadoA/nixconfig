@@ -89,6 +89,9 @@ in
           # C#
           ms-dotnettools.csharp
 
+          # Coq
+          maximedenes.vscoq
+
           # Protos
           zxh404.vscode-proto3
 
