@@ -90,7 +90,12 @@ in
           ms-dotnettools.csharp
 
           # Coq
-          maximedenes.vscoq
+          (buildExtension {
+            name = "vscoq";
+            publisher = "maximedenes";
+            version = "2.1.2";
+            sha256 = "sha256-cjpDKrn1BhC66tNJM86cMuLrCWgxen+MfSIZ8cmzIDE=";
+          })
 
           # Protos
           zxh404.vscode-proto3
