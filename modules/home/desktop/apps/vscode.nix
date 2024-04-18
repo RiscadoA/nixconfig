@@ -106,10 +106,25 @@ in
 
           # Python
           ms-python.python
+
+          # Shaders
+          (buildExtension {
+            name = "shader";
+            publisher = "slevesque";
+            version = "1.1.5";
+            sha256 = "sha256-Pf37FeQMNlv74f7LMz9+CKscF6UjTZ7ZpcaZFKtX2ZM=";
+          })
+          (buildExtension {
+            name = "vscode-glsllint";
+            publisher = "dtoplak";
+            version = "1.8.1";
+            sha256 = "sha256-8awWoDcYUUnwUEHfwO8n9c8l2699/TWwO8Eg0ce2t6s=";
+          })
         ]);
       })
 
       pkgs.nixpkgs-fmt # Used by the Nix IDE extension
+      pkgs.glslang # Used by the GLSL Lint extension
     ];
   };
 }
