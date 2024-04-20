@@ -50,6 +50,7 @@
   # Extra packages.
   home.packages = with pkgs; [
     timewarrior
+    renderdoc
   ];
 
   # Syncthing for vimwiki.
