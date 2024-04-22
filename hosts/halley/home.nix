@@ -56,6 +56,7 @@
     timewarrior
     ripgrep
     unstable.obsidian
+    renderdoc
   ];
 
   programs.readline.extraConfig = ''
