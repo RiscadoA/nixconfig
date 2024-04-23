@@ -51,6 +51,7 @@
   home.packages = with pkgs; [
     timewarrior
     renderdoc
+    openmsx
   ];
 
   # Syncthing for vimwiki.
