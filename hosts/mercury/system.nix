@@ -42,6 +42,7 @@
   environment.systemPackages = [
     pkgs.pulsemixer
     pkgs.unstable.grapejuice
+    pkgs.wineWowPackages.stable
   ];
 
   services.thermald.enable = true;
