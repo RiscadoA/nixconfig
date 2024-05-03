@@ -119,7 +119,14 @@
   };
 
   hardware = {
-    bluetooth.enable = true;
+    bluetooth = {
+      enable = true;
+      input = {
+        General = {
+          ClassicBondedOnly = false;
+        };
+      };
+    };
     pulseaudio.enable = true;
     cpu.intel.updateMicrocode = true;
   };
