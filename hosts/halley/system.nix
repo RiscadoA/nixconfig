@@ -116,6 +116,11 @@
     bluetooth = {
       enable = true;
       package = pkgs.unstable.bluez;
+      input = {
+        General = {
+          ClassicBondedOnly = false;
+        };
+      };
     };
     cpu.amd.updateMicrocode = true;
   };
