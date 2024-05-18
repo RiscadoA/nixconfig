@@ -25,11 +25,23 @@ in
       (pkgs.unstable.vscode-with-extensions.override {
         vscodeExtensions = (with pkgs.unstable.vscode-extensions; [
           mkhl.direnv
-          github.copilot
-          github.copilot-chat
           ms-vscode-remote.remote-ssh
           ms-vsliveshare.vsliveshare
           ms-vscode.hexeditor
+
+          # Copilot
+          (buildExtension {
+            name = "copilot";
+            publisher = "github";
+            version = "1.194.885";
+            sha256 = "sha256-rBWCvOWT0M5CEy9+ndWEr9z+O70UncKyMYnNipEZePo=";
+          })
+          (buildExtension {
+            name = "copilot-chat";
+            publisher = "github";
+            version = "0.16.2024051702";
+            sha256 = "sha256-u10WGo29lCi29sQJt3hAdD79OqgcUlIza1NCh4GyM4Y=";
+          })
 
           # Theme
           file-icons.file-icons
