@@ -15,8 +15,6 @@
         hostName = "pluto.riscadoa.com";
       };
 
-      zomboid.enable = true;
-
       mover = {
         enable = true;
         hostName = "api.flyptmover.com";
