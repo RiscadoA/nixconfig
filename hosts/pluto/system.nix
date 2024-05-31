@@ -43,7 +43,6 @@
       gamemode = "survival";
       difficulty = "hard";
       white-list = true;
-      enable-rcon = true;
     };
 
     whitelist = {
