@@ -64,6 +64,8 @@
       efi.canTouchEfiVariables = true;
     };
 
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
+
     consoleLogLevel = 3;
     #plymouth = {
     #  enable = true;
