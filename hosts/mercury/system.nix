@@ -92,15 +92,18 @@
       insertNameservers = [ "1.1.1.1" ];
     };
 
-    interfaces.enp6s0.ipv4 = {
-      addresses = [{
-        address = "10.0.0.1";
-        prefixLength = 32;
-      }];
-      routes = [{
-        address = "10.0.0.2";
-        prefixLength = 32;
-      }];
+    interfaces.enp6s0 = {
+      wakeOnLan.enable = true;
+      ipv4 = {
+        addresses = [{
+          address = "10.0.0.1";
+          prefixLength = 32;
+        }];
+        routes = [{
+          address = "10.0.0.2";
+          prefixLength = 32;
+        }];
+      };
     };
   };
 
