@@ -108,7 +108,7 @@
     xkb.layout = "pt";
   };
 
-  service.libinput = {
+  services.libinput = {
     enable = true;
     touchpad.naturalScrolling = true;
   };
