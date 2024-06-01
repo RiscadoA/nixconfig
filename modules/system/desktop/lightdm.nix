@@ -35,7 +35,6 @@ in
           '';
         };
 
-        defaultSession = "default";
         session = [
           {
             name = "default";
@@ -44,6 +43,8 @@ in
           }
         ];
       };
+
+      services.displayManager.defaultSession = "default";
 
       security.pam.services.lightdm.text = ''
         auth sufficient pam_succeed_if.so user ingroup nopasswdlogin

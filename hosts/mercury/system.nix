@@ -53,6 +53,7 @@
 
   boot = {
     kernelParams = [ "quiet" ];
+    kernelPackages = pkgs.linuxPackages_latest;
 
     loader = {
       grub = {
@@ -99,13 +100,16 @@
   services.xserver = {
     enable = true;
     dpi = 96;
-    layout = "us";
-    xkbVariant = "altgr-intl";
-    xkbOptions = "compose:ralt nodeadkeys";
-    libinput = {
-      enable = true;
-      touchpad.naturalScrolling = true;
+    xkb = {
+      layout = "us";
+      variant = "altgr-intl";
+      options = "compose:ralt nodeadkeys";
     };
+  };
+
+  services.libinput = {
+    enable = true;
+    touchpad.naturalScrolling = true;
   };
 
   services.openssh = {

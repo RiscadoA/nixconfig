@@ -100,11 +100,12 @@
     enable = true;
     dpi = 96;
 
-    layout = "pt";
-    libinput = {
-      enable = true;
-      touchpad.naturalScrolling = true;
-    };
+    xkb.layout = "pt";
+  };
+
+  services.libinput = {
+    enable = true;
+    touchpad.naturalScrolling = true;
   };
 
   hardware = {

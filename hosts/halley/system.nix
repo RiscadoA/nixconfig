@@ -105,11 +105,12 @@
     videoDrivers = [ "amdgpu" ];
     dpi = 140;
 
-    layout = "pt";
-    libinput = {
-      enable = true;
-      touchpad.naturalScrolling = true;
-    };
+    xkb.layout = "pt";
+  };
+
+  service.libinput = {
+    enable = true;
+    touchpad.naturalScrolling = true;
   };
 
   hardware = {
