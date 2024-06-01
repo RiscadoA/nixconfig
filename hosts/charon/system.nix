@@ -12,4 +12,15 @@
   services.openssh.enable = true;
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
+
+  networking.interfaces.enu1u1.ipv4 = {
+    addresses = [{
+      address = "10.0.0.2";
+      prefixLength = 32;
+    }];
+    routes = [{
+      address = "10.0.0.1";
+      prefixLength = 32;
+    }];
+  };
 }
