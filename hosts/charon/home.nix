@@ -18,5 +18,6 @@
     libqalculate
     ripgrep
     busybox
+    ethtool
   ];
 }
