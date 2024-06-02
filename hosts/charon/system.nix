@@ -10,7 +10,10 @@
   boot.loader.generic-extlinux-compatible.enable = true;
 
   services.openssh.enable = true;
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    unmanaged = [ "enu1u1" ];
+  };
   systemd.services.NetworkManager-wait-online.enable = false;
 
   networking.interfaces.enu1u1.ipv4 = {
