@@ -17,6 +17,6 @@
     htop
     libqalculate
     ripgrep
-    wol
+    busybox
   ];
 }
