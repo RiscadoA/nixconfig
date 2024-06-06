@@ -23,6 +23,7 @@ in
     systemd.services."cubos-discord-bot" = {
       description = "Cubos Discord Bot";
       after = [ "syslog.target" "network.target" "nss-lookup.target" "network-online.target" ];
+      path = [ pkgs.nodejs pkgs.bash ];
       serviceConfig = {
         WorkingDirectory = "/srv/cubos-discord-bot/cubos-discord-bot";
         ExecStartPre = [ "${pkgs.nodejs}/bin/npm install" ];
