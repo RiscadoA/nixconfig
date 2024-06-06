@@ -28,6 +28,7 @@ in
         ExecStartPre = [ "${pkgs.nodejs}/bin/npm install" ];
         ExecStart = "${pkgs.nodejs}/bin/npm start";
         Restart = "always";
+        RestartSec = "10";
 
         User = "cubos-discord-bot";
         Group = "users";
