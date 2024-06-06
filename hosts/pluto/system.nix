@@ -19,6 +19,8 @@
         enable = true;
         hostName = "api.flyptmover.com";
       };
+
+      cubos-discord-bot.enable = true;
     };
   };
 
