@@ -26,7 +26,7 @@ in
       serviceConfig = {
         WorkingDirectory = "/srv/cubos-discord-bot/cubos-discord-bot";
         ExecStartPre = [ "${pkgs.nodejs}/bin/npm install" ];
-        ExecStart = "${pkgs.yarn}/bin/npm start";
+        ExecStart = "${pkgs.nodejs}/bin/npm start";
         Restart = "always";
 
         User = "cubos-discord-bot";
