@@ -55,10 +55,6 @@ in
         if cfg.auto
         then {
           lightdm.greeter.enable = false;
-          autoLogin = {
-            enable = true;
-            user = head cfg.users;
-          };
         }
         else {
           lightdm.greeters.gtk = {
@@ -66,6 +62,16 @@ in
             indicators = [ ];
           };
         };
+
+      services.displayManager =
+        if cfg.auto
+        then {
+          autoLogin = {
+            enable = true;
+            user = head cfg.users;
+          };
+        }
+        else { };
     }
   ]);
 }
