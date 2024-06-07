@@ -69,8 +69,6 @@
     };
   };
 
-  systemd.services.NetworkManager-wait-online.enable = false;
-
   networking = {
     firewall.enable = false;
     wireless.enable = false;
