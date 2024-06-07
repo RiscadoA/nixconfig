@@ -162,11 +162,6 @@
     };
   };
 
-  # For some reason, bass is set to 0 by default, which makes earplugs basically inaudible.
-  services.xserver.displayManager.sessionCommands = ''
-    ${pkgs.alsa-utils}/bin/amixer -c1 set 'Bass Speaker' 100
-  '';
-
   programs.virt-manager.enable = true;
 
   # Required for gtk.
