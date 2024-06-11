@@ -49,14 +49,8 @@
       };
     };
 
-    initrd = {
-      systemd.enable = true;
-
-      luks.devices."luks-19e4635a-716a-44c4-82c6-0fe2e33c034a" = {
-        device = "/dev/disk/by-uuid/19e4635a-716a-44c4-82c6-0fe2e33c034a";
-        allowDiscards = true;
-      };
-    };
+    initrd.systemd.enable = true;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     kernelParams = [ "quiet" "amdgpu.sg_display=0" ];
     consoleLogLevel = 3;

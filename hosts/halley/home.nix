@@ -55,7 +55,7 @@
     libqalculate
     timewarrior
     ripgrep
-    unstable.obsidian
+    obsidian
     renderdoc
   ];
 

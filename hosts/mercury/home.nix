@@ -59,6 +59,6 @@
     vlc
     qbittorrent
     ripgrep
-    unstable.obsidian
+    obsidian
   ];
 }
