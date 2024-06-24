@@ -24,11 +24,10 @@
       };
     };
 
-    #services.minecraft = {
-    #  enable = true;
-    #  syncthing.enable = true;
-    #  servers = [ "main" "all" "modded" ];
-    #};
+    services.minecraft = {
+      enable = true;
+      servers = [ "create" ];
+    };
 
     services.tailscale.enable = true;
 
