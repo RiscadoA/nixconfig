@@ -26,7 +26,7 @@
 
     services.minecraft = {
       enable = true;
-      servers = [ "create" ];
+      servers = [ "create" "castro" ];
     };
 
     services.tailscale.enable = true;
