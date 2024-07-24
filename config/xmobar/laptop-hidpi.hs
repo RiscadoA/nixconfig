@@ -8,10 +8,11 @@ Config {
     , fgColor     = "#dfbf8e"
     , position    = TopH 30
     , dpi         = 140
-    , template    = " %StdinReader%}{%mail% | %bright% | %multicoretemp% | %headset%%battery% | %network% | %time% | %date% | %kbd% "
+    , template    = " %StdinReader%}{%mail% | %timew% | %bright% | %multicoretemp% | %headset%%battery% | %network% | %time% | %date% | %kbd% "
     , commands = 
         [ Run StdinReader
 	, Run Com "/home/riscadoa/nixos/bin/sb-gmail.sh" [] "mail" 100
+  , Run Com  "/home/riscadoa/nixos/bin/sb-timew.sh" [] "timew" 10
 	, Run Com "/home/riscadoa/nixos/bin/sb-headset.sh" [] "headset" 10
 	, Run Com "/home/riscadoa/nixos/bin/sb-network.sh" [] "network" 10
         , Run Brightness     [ "--template" , "\xf185 <percent>%"
