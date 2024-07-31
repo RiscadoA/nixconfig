@@ -57,6 +57,7 @@
     ripgrep
     obsidian
     renderdoc
+    godot_4
   ];
 
   programs.readline.extraConfig = ''
