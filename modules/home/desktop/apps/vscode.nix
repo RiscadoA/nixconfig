@@ -132,6 +132,12 @@ in
             version = "1.8.1";
             sha256 = "sha256-8awWoDcYUUnwUEHfwO8n9c8l2699/TWwO8Eg0ce2t6s=";
           })
+          (buildExtension {
+            name = "wgsl";
+            publisher = "PolyMeilex";
+            version = "0.1.17";
+            sha256 = "sha256-vGqvVrr3wNG6HOJxOnJEohdrzlBYspysTLQvWuP0QIw=";
+          })
         ]);
       })
 
