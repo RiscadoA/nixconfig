@@ -119,6 +119,14 @@ in
           # Python
           ms-python.python
 
+          # Agda
+          (buildExtension {
+            name = "agda-mode";
+            publisher = "banacorn";
+            version = "0.4.7";
+            sha256 = "sha256-gNa3n16lP3ooBRvGaugTua4IXcIzpMk7jBYMJDQsY00=";
+          })
+
           # Shaders
           (buildExtension {
             name = "shader";
