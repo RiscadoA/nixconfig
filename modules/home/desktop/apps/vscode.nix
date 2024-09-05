@@ -126,6 +126,12 @@ in
             version = "0.4.7";
             sha256 = "sha256-gNa3n16lP3ooBRvGaugTua4IXcIzpMk7jBYMJDQsY00=";
           })
+          (buildExtension {
+            name = "agda";
+            publisher = "j-mueller";
+            version = "0.1.7";
+            sha256 = "sha256-S0svSulHJKN7JwznVj3KTLd341oeMainUiY/peQdPSY=";
+          })
 
           # Shaders
           (buildExtension {
