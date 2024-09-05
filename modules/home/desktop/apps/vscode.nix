@@ -133,6 +133,14 @@ in
             sha256 = "sha256-S0svSulHJKN7JwznVj3KTLd341oeMainUiY/peQdPSY=";
           })
 
+          # Promela
+          (buildExtension {
+            name = "promela";
+            publisher = "dsvictor94";
+            version = "0.4.0";
+            sha256 = "sha256-Jt188cui5bOk89u1Fd4v64ASxBf7/6iUKjQfzfqNNoc=";
+          })
+
           # Shaders
           (buildExtension {
             name = "shader";
