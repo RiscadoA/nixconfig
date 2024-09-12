@@ -100,6 +100,11 @@
     xkb.layout = "pt";
   };
 
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
+  };
+
   services.libinput = {
     enable = true;
     touchpad.naturalScrolling = true;
