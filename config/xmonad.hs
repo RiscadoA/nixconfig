@@ -63,6 +63,7 @@ main = do
         , workspaces         = myWorkspaces
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_l), spawn "slock")
+        , ((mod4Mask .|. shiftMask, xK_d), spawn "/home/riscadoa/nixos/bin/switch-display.sh")
         , ((mod4Mask .|. controlMask, xK_Left), spawn "playerctl previous")
         , ((mod4Mask .|. controlMask, xK_Right), spawn "playerctl next")
         , ((mod4Mask .|. controlMask, xK_Up), spawn "playerctl play")
