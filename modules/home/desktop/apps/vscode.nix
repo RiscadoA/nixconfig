@@ -141,6 +141,14 @@ in
             sha256 = "sha256-Jt188cui5bOk89u1Fd4v64ASxBf7/6iUKjQfzfqNNoc=";
           })
 
+          # Dafny
+          (buildExtension {
+            name = "ide-vscode";
+            publisher = "dafny-lang";
+            version = "3.4.1";
+            sha256 = "sha256-IgQkp7g7YCOVLb59AkH/NCulGEWB/+ZYIYxjYPLg8WY=";
+          })
+
           # Shaders
           (buildExtension {
             name = "shader";
