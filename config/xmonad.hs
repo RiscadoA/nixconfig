@@ -8,6 +8,7 @@ import XMonad.Hooks.SetWMName
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Layout.NoBorders
+import XMonad.Layout.VoidBorders
 import XMonad.Layout.Spacing
 import XMonad.Layout.PerWorkspace
 import System.IO
@@ -30,7 +31,7 @@ myManageHook = composeAll . concat $
     ]
 myPlaceHook = placeHook (withGaps (16,0,16,0) (smart (0.5, 0.5)))
 
-layoutFull = (noBorders Full)
+layoutFull = (voidBorders Full)
 layoutSingle = (avoidStruts (noBorders Full))
 layoutTiled = (lessBorders OnlyFloat (avoidStruts (spacingRaw False (Border 5 5 5 5) True (Border 5 5 5 5) True $ Tall 1 (10/100) (50/100))))
 layoutAll = (layoutSingle ||| layoutFull ||| layoutTiled)
