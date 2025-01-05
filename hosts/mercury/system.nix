@@ -3,7 +3,7 @@
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
-# Alpha system configuration.
+# Mercury system configuration.
 
 { config, pkgs, options, inputs, lib, configDir, ... }:
 {

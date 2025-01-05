@@ -11,7 +11,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    impermanence.url = "github:nix-community/impermanence/master";
     home = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +22,6 @@
       inherit (builtins) readDir listToAttrs concatLists attrNames attrValues removeAttrs;
       inherit (inputs.nixpkgs) lib;
       inherit (inputs.home.nixosModules) home-manager;
-      inherit (inputs.impermanence.nixosModules) impermanence;
       inherit (lib) mapAttrs removeSuffix hasSuffix nixosSystem;
 
       pkgs = mkPkgs inputs.nixpkgs [ self.overlays.default ];
@@ -108,7 +106,6 @@
                       users);
                   };
                 }
-                impermanence
               ] ++ systemModules
               ++ (map
                 (user: args @ { pkgs, ... }: {
