@@ -59,6 +59,9 @@
     obsidian
     renderdoc
     godot_4
+    qbittorrent
+    vlc
+    lutris
   ];
 
   programs.readline.extraConfig = ''
