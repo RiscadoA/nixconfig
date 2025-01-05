@@ -72,11 +72,11 @@
     nameservers = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
   };
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
     extraPackages = [ pkgs.amdvlk ];
+
+    enable32Bit = true;
     extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
   };
 
@@ -101,7 +101,8 @@
   };
 
   i18n.inputMethod = {
-    enabled = "ibus";
+    enable = true;
+    type = "ibus";
     ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
   };
 

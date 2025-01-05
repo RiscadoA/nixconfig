@@ -19,10 +19,9 @@ in
 
   config = mkIf cfg.enable {
     hardware = {
-      opengl = {
+      graphics = {
         enable = true;
-        driSupport = true;
-        driSupport32Bit = true;
+        enable32Bit = true;
       };
 
       nvidia = {
