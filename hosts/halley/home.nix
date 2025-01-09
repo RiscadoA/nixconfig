@@ -61,6 +61,7 @@
     qbittorrent
     vlc
     lutris
+    goxel
   ];
 
   programs.readline.extraConfig = ''
