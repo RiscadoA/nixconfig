@@ -29,6 +29,7 @@
         picom.enable = true;
         wallpaper.enable = true;
         flameshot.enable = true;
+        low-battery-notifier.enable = true;
       };
 
       apps = {
