@@ -18,7 +18,7 @@ in
   };
 
   # Every host shares the same time zone.
-  time.timeZone = "Europe/Stockholm";
+  time.timeZone = "Europe/Lisbon";
 
   # Essential packages.
   environment.systemPackages = with pkgs; [
