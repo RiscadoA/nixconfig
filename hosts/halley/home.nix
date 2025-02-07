@@ -63,6 +63,7 @@
     vlc
     lutris
     goxel
+    czkawka-full
   ];
 
   programs.readline.extraConfig = ''
