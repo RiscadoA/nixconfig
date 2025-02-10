@@ -139,6 +139,7 @@ in
         # Rust
         rust-lang.rust-analyzer
         tamasfe.even-better-toml
+        vadimcn.vscode-lldb
 
         # Python
         ms-python.python
