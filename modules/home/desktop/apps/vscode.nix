@@ -210,13 +210,8 @@ in
           sha256 = "sha256-49sxhmMVKUw+++7wGeK0G5rXNBBynf9SPU2at7TJ4tM=";
         })
 
-        # Luau
-        (buildMarketplaceExtension {
-          name = "luau-lsp";
-          publisher = "JohnnyMorganz";
-          version = "1.39.1";
-          sha256 = "sha256-Ri1YmrFRxrHg0deWlB0hPS+FQHaxIPEY1fYKoq/uJkE=";
-        })
+        # Lua
+        sumneko.lua
       ]);
     };
 
