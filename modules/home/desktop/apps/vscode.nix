@@ -212,6 +212,14 @@ in
 
         # Lua
         sumneko.lua
+        
+        # CSV
+        (buildMarketplaceExtension {
+          name = "rainbow-csv";
+          publisher = "mechatroner";
+          version = "3.17.0";
+          sha256 = "sha256-qny0LU0+Q38H0BMC4Njk173KDuLjebxZN3Bg8vSDVLA=";
+        })
       ]);
     };
 
