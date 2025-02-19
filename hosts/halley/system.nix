@@ -160,6 +160,8 @@
     };
   };
 
+  programs.gamemode.enable = true;
+
   programs.virt-manager.enable = true;
 
   # Required for gtk.
