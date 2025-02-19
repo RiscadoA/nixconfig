@@ -14,11 +14,21 @@ in
   options.modules.desktop.games.steam.enable = mkEnableOption "steam";
 
   config = mkIf cfg.enable {
-    programs.steam.enable = true;
+    programs.steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+    };
 
     environment.systemPackages = with pkgs; [
       unstable.wineWowPackages.stable
       unstable.winetricks
     ];
+
+    programs.gamemode.enable = true;
+
+    programs.gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
   };
 }
