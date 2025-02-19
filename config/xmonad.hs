@@ -11,6 +11,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.VoidBorders
 import XMonad.Layout.Spacing
 import XMonad.Layout.PerWorkspace
+import XMonad.Util.Hacks(fixSteamFlicker)
 import System.IO
 import Data.List
 import Data.Maybe
@@ -53,7 +54,7 @@ main = do
                            , ppUrgent          = xmobarFont 1 . xmobarColor "red" "yellow" . workspaceIcon
                            , ppTitle           = xmobarFont 0 . xmobarColor "#e3a84e" "" . shorten 50
                            } >> setWMName "LG3D"
-	    , handleEventHook    = handleEventHook def
+	    , handleEventHook    = fixSteamFlicker <+> handleEventHook def
         , modMask            = mod4Mask
         , terminal           = "alacritty"
         , focusFollowsMouse  = False
