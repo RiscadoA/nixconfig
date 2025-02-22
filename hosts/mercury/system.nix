@@ -150,7 +150,10 @@
         };
       };
     };
-    pulseaudio.enable = true;
+    pulseaudio = {
+      enable = true;
+      support32Bit = true;
+    };
     cpu.intel.updateMicrocode = true;
   };
 
