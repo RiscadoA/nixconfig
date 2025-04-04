@@ -198,8 +198,8 @@ in
         (buildMarketplaceExtension {
           name = "class";
           publisher = "classlang";
-          version = "1.7.0";
-          sha256 = "sha256-CLtcdyl04uRQQhrFEZjKFvqm/NZL1eW3p5pmowy+ok0=";
+          version = "1.8.0";
+          sha256 = "sha256-T53xHiHVyYwSlrwxr3QQbwvx9n5nGS6mPuPZcjuVXhQ=";
         })
 
         # LATEX
