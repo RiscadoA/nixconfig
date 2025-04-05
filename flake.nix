@@ -33,7 +33,10 @@
       mkPkgs = pkgs: extraOverlays: system: import pkgs {
         inherit system;
         config.allowUnfree = true;
-        config.permittedInsecurePackages = [ "electron-25.9.0" ];
+        config.permittedInsecurePackages = [
+          "electron-25.9.0"
+          "dotnet-runtime-7.0.20" # Required for vintage story
+        ];
         overlays = extraOverlays ++ (attrValues self.overlays);
       };
 

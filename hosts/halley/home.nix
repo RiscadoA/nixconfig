@@ -45,6 +45,7 @@
       games = {
         anki.enable = true;
         minecraft.enable = true;
+        vintagestory.enable = true;
       };
     };
   };
