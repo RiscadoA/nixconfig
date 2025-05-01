@@ -122,6 +122,9 @@
       variant = "altgr-intl";
       options = "compose:ralt nodeadkeys";
     };
+    displayManager.setupCommands = ''
+      ${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --rate 240 --mode 1920x1080
+    '';
   };
 
   services.libinput = {
