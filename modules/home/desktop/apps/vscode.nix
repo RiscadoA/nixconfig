@@ -94,7 +94,6 @@ in
         ms-vscode.cpptools
         ms-vscode.cmake-tools
         ms-vscode.makefile-tools
-        twxs.cmake
         (buildMarketplaceExtension {
           name = "cpptools-themes";
           publisher = "ms-vscode";
