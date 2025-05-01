@@ -40,7 +40,6 @@
   # Extra packages.
   environment.systemPackages = [
     pkgs.pulsemixer
-    pkgs.unstable.grapejuice
     pkgs.wineWowPackages.stable
   ];
 
@@ -52,7 +51,6 @@
 
   boot = {
     kernelParams = [ "quiet" ];
-    kernelPackages = pkgs.linuxPackages_latest;
 
     loader = {
       grub = {
@@ -75,6 +73,8 @@
 
   hardware = {
     graphics.enable = true;
+    nvidia.open = false;
+    nvidia.nvidiaSettings = true;
     nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
@@ -150,14 +150,8 @@
         };
       };
     };
-    pulseaudio = {
-      enable = true;
-      support32Bit = true;
-    };
     cpu.intel.updateMicrocode = true;
   };
-
-  sound.enable = true;
 
   virtualisation.docker.enable = true;
 
