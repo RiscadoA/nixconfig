@@ -19,6 +19,8 @@ in
       gamescopeSession.enable = true;
     };
 
+    services.joycond.enable = true;
+
     environment.systemPackages = with pkgs; [
       unstable.wineWowPackages.stable
       unstable.winetricks
