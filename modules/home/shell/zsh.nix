@@ -26,6 +26,12 @@ in
       };
       initExtraFirst = ''
         DISABLE_MAGIC_FUNCTIONS=true
+
+        function convertqb {
+            local input=$1
+            local output=''${input%.qb}.grd
+            quadrados convert -v $input -g $output -w -p $PALETTE
+        }
       '';
     };
   };
