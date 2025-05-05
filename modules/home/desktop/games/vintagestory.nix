@@ -16,7 +16,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = [
-      pkgs.vintagestory
+      pkgs.unstable.vintagestory
     ];
   };
 }
