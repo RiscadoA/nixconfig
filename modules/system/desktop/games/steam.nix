@@ -16,6 +16,11 @@ in
   config = mkIf cfg.enable {
     programs.steam = {
       enable = true;
+      package = pkgs.steam.override {
+        extraPkgs = pkgs: with pkgs; [
+          pkgsi686Linux.libpulseaudio
+        ];
+      };
       gamescopeSession.enable = true;
     };
 
