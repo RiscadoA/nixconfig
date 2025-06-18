@@ -18,7 +18,7 @@ in
       enable = true;
       enableSshSupport = true;
       sshKeys = [ "9FE5C9E282E9ED1710A3FCBEA5DC9B43099FCE41" "" ];
-      pinentryPackage = pkgs.pinentry-gtk2;
+      pinentryPackage = pkgs.pinentry-gnome3;
     };
     programs.gpg = {
       enable = true;

@@ -18,9 +18,7 @@ in
   config = mkIf cfg.enable {
     programs.kitty = {
       enable = true;
-      settings = {
-
-      };
+      themeFile = "tokyo_night_night";
     };
   };
 }

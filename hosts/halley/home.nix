@@ -18,7 +18,7 @@
     desktop = {
       hyprland.enable = true;
       waybar.enable = true;
-      wofi.enable = true;
+      rofi.enable = true;
       gtk.enable = true;
       qt.enable = true;
 
@@ -64,6 +64,9 @@
     lutris
     goxel
     czkawka-full
+    gimp
+    zathura
+    imv
   ];
 
   xresources.properties = {
@@ -75,4 +78,15 @@
   '';
 
   services.syncthing.enable = true;
+
+  xdg.desktopEntries = {
+    pulsemixer = {
+      name = "PulseMixer";
+      genericName = "PulseAudio Mixer";
+      exec = "pulsemixer";
+      icon = "multimedia-equalizer-symbolic";
+      terminal = true;
+      categories = [ "Audio" "Mixer" ];
+    };
+  };
 }

@@ -105,6 +105,7 @@ in
             format = "{icon} {volume}%";
             format-icons = ["" "" ""];
             format-muted = " {volume}%";
+            on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           };
         };
       };
