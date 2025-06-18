@@ -7,14 +7,14 @@
     };
 
     desktop = {
-      slock.enable = true;
+      hyprland.enable = true;
+      sddm = {
+        enable = true;
+        users = [ "riscadoa" ];
+        auto = true;
+      };
       fonts.enable = true;
       games.steam.enable = true;
-      lightdm = {
-        enable = true;
-        auto = true;
-        users = [ "riscadoa" ];
-      };
     };
 
     services = {
@@ -90,27 +90,9 @@
     '';
   };
 
-  console.useXkbConfig = true;
+  console.keyMap = "pt-latin1";
 
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "amdgpu" ];
-    dpi = 140;
-
-    xkb.layout = "pt";
-  };
-
-  i18n.inputMethod = {
-    enable = true;
-    type = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
-  };
-
-  services.libinput = {
-    enable = true;
-    touchpad.naturalScrolling = true;
-  };
-
+  services.blueman.enable = true;
   hardware = {
     bluetooth = {
       enable = true;

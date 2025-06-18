@@ -16,13 +16,24 @@ in
   config = mkIf cfg.enable {
     gtk.enable = true;
     gtk.theme = {
-      package = pkgs.gruvbox-dark-gtk;
-      name = "gruvbox-dark";
+      package = pkgs.tokyonight-gtk-theme;
+      name = "Tokyonight-Dark"; 
     };
     gtk.iconTheme = {
-      package = pkgs.gruvbox-dark-icons-gtk;
-      name = "oomox-gruvbox-dark";
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+    gtk.cursorTheme = {
+      name = "Bibata-Original-Classic";
+      package = pkgs.bibata-cursors;
     };
     gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+    home.sessionVariables.GTK_THEME = "Tokyonight-Dark";
+  
+    home.pointerCursor = {
+      name = "Bibata-Original-Classic";
+      package = pkgs.bibata-cursors;
+      size = 24;
+    };
   };
 }

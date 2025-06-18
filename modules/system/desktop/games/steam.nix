@@ -16,12 +16,15 @@ in
   config = mkIf cfg.enable {
     programs.steam = {
       enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
       package = pkgs.steam.override {
         extraPkgs = pkgs: with pkgs; [
           pkgsi686Linux.libpulseaudio
         ];
+        extraArgs = "-forcedesktopscaling 1.6";
       };
-      gamescopeSession.enable = true;
     };
 
     services.joycond.enable = true;

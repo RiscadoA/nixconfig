@@ -39,11 +39,13 @@ in
         "window.dialogStyle" = "custom";
         "window.menuBarVisibility" = "compact";
         "window.titleBarStyle" = "custom";
+        "window.controlsStyle" = "hidden";
         "extensions.ignoreRecommendations" = "true";
         "files.associations" = {
           "*.cmake.in" = "cmake";
         };
         "cmake.configureOnOpen" = "true";
+        "workbench.colorTheme" = "Tokyo Night";
       };
 
       package = pkgs.unstable.vscode;
@@ -212,6 +214,14 @@ in
           publisher = "mechatroner";
           version = "3.17.0";
           sha256 = "sha256-qny0LU0+Q38H0BMC4Njk173KDuLjebxZN3Bg8vSDVLA=";
+        })
+
+        # Tokyo Night theme
+        (buildMarketplaceExtension {
+          name = "tokyo-night";
+          publisher = "enkia";
+          version = "1.1.2";
+          sha256 = "sha256-oW0bkLKimpcjzxTb/yjShagjyVTUFEg198oPbY5J2hM=";
         })
       ]);
     };

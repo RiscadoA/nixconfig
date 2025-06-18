@@ -5,7 +5,7 @@
 #
 # XDG home configuration.
 
-{ lib, config, ... }:
+{ pkgs, lib, config, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.xdg;
@@ -16,6 +16,7 @@ in
   config = mkIf cfg.enable {
     xdg = {
       enable = true;
+      autostart.enable = true;
       userDirs = {
         enable = true;
         desktop = "$HOME/desktop";

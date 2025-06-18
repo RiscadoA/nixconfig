@@ -26,7 +26,6 @@
 
       services = {
         picom.enable = true;
-        wallpaper.enable = true;
         flameshot.enable = true;
       };
 

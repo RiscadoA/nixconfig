@@ -18,8 +18,6 @@
     ];
   });
 
-  headsetcontrol = prev.callPackage "${packageDir}/headsetcontrol" { };
-
   haskellPackages = prev.haskellPackages.override {
     overrides = self: super: {
       xmonad-contrib = super.xmonad-contrib_0_18_1;

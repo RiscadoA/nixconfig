@@ -16,30 +16,29 @@
     };
 
     desktop = {
-      xmonad.enable = true;
-      xmobar = {
-        enable = true;
-        type = "laptop-hidpi";
-      };
-
+      hyprland.enable = true;
+      waybar.enable = true;
+      wofi.enable = true;
       gtk.enable = true;
       qt.enable = true;
 
       services = {
-        picom.enable = true;
-        wallpaper.enable = true;
-        flameshot.enable = true;
+        flameshot = {
+          enable = true;
+          wayland = true;
+          scaleFactor = 0.5;
+        };
         low-battery-notifier.enable = true;
       };
 
       apps = {
-        alacritty.enable = true;
-        dmenu.enable = true;
-        dunst.enable = true;
+        kitty.enable = true;
+        mako.enable = true;
         discord.enable = true;
         firefox.enable = true;
         spotify.enable = true;
         vscode.enable = true;
+        dolphin.enable = true;
       };
 
       games = {
@@ -66,6 +65,10 @@
     goxel
     czkawka-full
   ];
+
+  xresources.properties = {
+    "Xft.dpi" = 144;
+  };
 
   programs.readline.extraConfig = ''
     set bell-style none
