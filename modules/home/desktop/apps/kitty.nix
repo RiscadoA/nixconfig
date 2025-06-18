@@ -19,9 +19,6 @@ in
     programs.kitty = {
       enable = true;
       themeFile = "tokyo_night_night";
-      settings = {
-        background_opacity = 0.9;
-      };
     };
   };
 }

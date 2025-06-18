@@ -147,6 +147,13 @@ in
           "float,class:(flameshot)"
           "opaque,class:(flameshot)"
           "noanim,class:(flameshot)"
+
+          # Make some apps transparent
+          "opacity 0.9, class:kitty"
+          "opacity 0.975 0.975 1.0, class:firefox"
+          "opacity 0.975, class:spotify"
+          "opacity 0.975, class:code"
+          "opacity 0.975, class:discord"
         ];
         windowrulev2 = [
           "workspace 4, class:^(discord)$"
