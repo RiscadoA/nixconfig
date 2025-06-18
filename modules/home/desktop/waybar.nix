@@ -32,7 +32,7 @@ in
           spacing = 0;
           modules-left = [ "hyprland/workspaces" "tray" ];
           modules-center = [ "hyprland/window" ];
-          modules-right = [ "wireplumber" "backlight" "temperature" "network" "battery" "clock" ];
+          modules-right = [ "custom/mail" "wireplumber" "backlight" "temperature" "network" "battery" "clock" ];
 
           "hyprland/workspaces" = {
             disable-scroll = false;
@@ -107,6 +107,12 @@ in
             format-muted = " {volume}%";
             on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           };
+
+          "custom/mail" = {
+            exec = "/home/riscadoa/nixos/bin/sb-gmail.sh";
+            interval = 30;
+            tooltip = false;
+          };
         };
       };
       style = ''
@@ -122,6 +128,7 @@ in
         #workspaces,
         #tray,
         #window,
+        #custom-mail,
         #wireplumber,
         #network,
         #battery,
@@ -133,7 +140,7 @@ in
           margin: 4px 4px;
         }
 
-
+        #custom-mail,
         #wireplumber,
         #network,
         #battery,
