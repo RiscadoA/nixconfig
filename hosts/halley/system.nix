@@ -74,10 +74,7 @@
 
   hardware.graphics = {
     enable = true;
-    extraPackages = [ pkgs.amdvlk ];
-
     enable32Bit = true;
-    extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
   };
 
   services.resolved = {

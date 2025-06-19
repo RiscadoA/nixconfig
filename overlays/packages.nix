@@ -30,4 +30,13 @@
       hash = "sha256-V8JAai4gZ1nzia4kmQVeBwidQ+Sx5A5on3SJGSevrUU=";
     };
   });
+
+  gamescope = prev.gamescope.overrideAttrs (oldAttrs: {
+    patches = oldAttrs.patches ++ [
+      (final.fetchpatch {
+        url = "https://patch-diff.githubusercontent.com/raw/ValveSoftware/gamescope/pull/1867.patch";
+        hash = "sha256-L7E0MLZOuOCYmjZsjub8ua0SKO4T830pQL0/TMP/pOw=";
+      })
+    ];
+  });
 }
