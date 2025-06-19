@@ -81,8 +81,25 @@ in
           };
 
           clock = {
-            tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+            tooltip-format = "<tt><small>{calendar}</small></tt>";
             format-alt = "{:%d-%m-%Y}";
+            calendar = {
+              mode-mon-col = 3;
+              weeks-pos = "right";
+              on-scroll = 1;
+              format = {
+                months = "<b>{}</b>";
+                days = "{}";
+                weeks = "<b>W{}</b>";
+                weekdays = "<b>{}</b>";
+                today = "<b><u>{}</u></b>";
+              };
+            };
+            actions = {
+              on-click-right = "mode";
+              on-scroll-up = "shift_up";
+              on-scroll-down = "shift_down";
+            };
           };
 
           temperature = {
