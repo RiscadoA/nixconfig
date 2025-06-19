@@ -103,7 +103,7 @@ in
           };
 
           temperature = {
-            critical-threshold = 80;
+            critical-threshold = 95;
             format = "{icon} {temperatureC}°C";
             format-icons = ["" "" "" "" ""];
           };
