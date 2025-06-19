@@ -24,7 +24,7 @@ in
         plugins = [ "git" "systemd" ];
         theme = "robbyrussell";
       };
-      initExtraFirst = ''
+      initContent = lib.mkBefore ''
         DISABLE_MAGIC_FUNCTIONS=true
 
         function convertqb {
