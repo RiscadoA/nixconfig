@@ -26,7 +26,7 @@ in
       systemd.enable = true;
       settings = {
         mainBar = {
-          layer = "top";
+          layer = "bottom";
           position = "top";
           height = 34;
           spacing = 0;
