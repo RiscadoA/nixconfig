@@ -22,6 +22,16 @@ in
       package = pkgs.steam.override {
         extraPkgs = pkgs: with pkgs; [
           pkgsi686Linux.libpulseaudio
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXinerama
+          xorg.libXScrnSaver
+          libpng
+          libpulseaudio
+          libvorbis
+          stdenv.cc.cc.lib
+          libkrb5
+          keyutils
         ];
         extraArgs = "-forcedesktopscaling 1.6";
       };
@@ -38,7 +48,8 @@ in
 
     programs.gamescope = {
       enable = true;
-      capSysNice = true;
+      # https://github.com/NixOS/nixpkgs/issues/351516
+      # capSysNice = true;
     };
   };
 }
