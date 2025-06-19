@@ -10,26 +10,13 @@ let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.hyprland;
 
-  rofi-pass-script = pkgs.writeShellScript "rofi-pass" ''
+  rofi-pass = pkgs.writeShellScriptBin "rofi-pass" ''
     find $PASSWORD_STORE_DIR -type f -name '*.gpg' |
     sed "s|''${PASSWORD_STORE_DIR}/||; s|\.gpg$||" |
     rofi -i -dmenu -p pass |
-    xargs -n 1 pass show -c &> /dev/null
+    xargs -n 1 pass show &2> /dev/null |
+    wl-copy --sensitive
   '';
-
-  rofi-pass = pkgs.stdenv.mkDerivation {
-    name = "rofi-pass";
-    dontUnpack = true;
-    buildInputs = [ pkgs.makeWrapper ];
-    propagatedBuildInputs = [
-      pkgs.wl-clipboard
-    ];
-    installPhase = ''
-      mkdir -p $out/bin
-      install -m755 ${rofi-pass-script} $out/bin/rofi-pass
-      wrapProgram $out/bin/rofi-pass --prefix PATH : ${pkgs.wl-clipboard}/bin
-    '';
-  };
 in
 {
   options.modules.desktop.hyprland.enable = mkEnableOption "hyprland";
@@ -37,6 +24,8 @@ in
   config = mkIf cfg.enable {
     home.packages = [
       pkgs.playerctl
+      pkgs.cliphist
+      pkgs.wl-clipboard
     ];
 
     wayland.windowManager.hyprland = {
@@ -64,6 +53,7 @@ in
           "[workspace 3 silent] firefox"
           "[workspace 4 silent] discord"
           "[workspace 6 silent] spotify"
+          "wl-paste --watch cliphist store"
         ];
         monitor = ", highrr, auto, auto";
         bind = [
@@ -71,10 +61,10 @@ in
           "$mod, P, exec, ${rofi-pass}/bin/rofi-pass"
           "$mod, D, exec, rofi -show drun -show-icons"
           "$mod SHIFT, D, exec, rofi -show run"
+          "$mod, C, exec, rofi -modi clipboard:${pkgs.cliphist}/bin/cliphist-rofi-img -show clipboard -show-icons"
           "$mod SHIFT, Q, killactive,"
           "$mod, W, fullscreen, 1"
           "$mod SHIFT, W, fullscreen, 0"
-          "$mod SHIFT, M, exit,"
           "$mod SHIFT, L, exec, hyprlock"
           "$mod, F, togglefloating,"
           "$mod, O, pseudo,"

@@ -14,7 +14,7 @@ in
   nix = {
     package = pkgs.nixVersions.latest;
     extraOptions = "experimental-features = nix-command flakes";
-    settings.trusted-users = [ "root" "@wheel" ];
+    settings.trusted-users = [ "root" ];
   };
 
   # Every host shares the same time zone.

@@ -88,5 +88,13 @@
       terminal = true;
       categories = [ "Audio" "Mixer" ];
     };
+
+    wipe-cliphist = {
+      name = "Cliphist Wipe";
+      genericName = "Wipe Clipboard History";
+      exec = "cliphist wipe";
+      icon = "edit-clear-history";
+      categories = [ "Utility" ];
+    };
   };
 }
