@@ -59,8 +59,8 @@ in
         bind = [
           "$mod, S, exec, rofi -show window -show-icons"
           "$mod, P, exec, ${rofi-pass}/bin/rofi-pass"
-          "$mod, D, exec, rofi -show drun -show-icons"
-          "$mod SHIFT, D, exec, rofi -show run"
+          "$mod, D, exec, rofi -show drun -show-icons -sort"
+          "$mod SHIFT, D, exec, rofi -show run -sort"
           "$mod, C, exec, rofi -modi clipboard:${pkgs.cliphist}/bin/cliphist-rofi-img -show clipboard -show-icons"
           "$mod SHIFT, Q, killactive,"
           "$mod, W, fullscreen, 1"
