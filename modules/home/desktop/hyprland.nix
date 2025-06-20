@@ -14,7 +14,8 @@ let
     find $PASSWORD_STORE_DIR -type f -name '*.gpg' |
     sed "s|''${PASSWORD_STORE_DIR}/||; s|\.gpg$||" |
     rofi -i -dmenu -p pass |
-    xargs -n 1 pass show &2> /dev/null |
+    xargs -n 1 pass show 2> /dev/null |
+    head -n 1 |
     wl-copy --sensitive
   '';
 in
