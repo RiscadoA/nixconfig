@@ -19,6 +19,7 @@
       hyprland.enable = true;
       hyprpaper.enable = true;
       hyprlock.enable = true;
+      hyprsunset.enable = true;
       waybar.enable = true;
       rofi.enable = true;
       gtk.enable = true;
