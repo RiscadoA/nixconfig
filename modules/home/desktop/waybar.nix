@@ -81,8 +81,9 @@ in
           };
 
           clock = {
+            format = " {:%H:%M}";
+            format-alt = " {:%d-%m-%Y}";
             tooltip-format = "<tt><small>{calendar}</small></tt>";
-            format-alt = "{:%d-%m-%Y}";
             calendar = {
               mode-mon-col = 3;
               weeks-pos = "right";
