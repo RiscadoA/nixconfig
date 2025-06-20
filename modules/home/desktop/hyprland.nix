@@ -38,6 +38,9 @@ in
         "$mod" = "SUPER";
         general = {
           gaps_out = "2,4,4,4";
+          gaps_in = 3;
+          "col.active_border" = "rgba(ffffffee) rgba(ffffffee) 0deg";
+          "col.inactive_border" = "rgba(666666aa) rgba(666666aa) 0deg";
         };
         decoration = {
           rounding = 4;
@@ -142,9 +145,9 @@ in
           # Make some apps transparent
           "opacity 0.9, class:kitty"
           "opacity 0.975 0.975 1.0, class:firefox"
-          "opacity 0.975, class:spotify"
-          "opacity 0.975, class:code"
-          "opacity 0.975, class:discord"
+          "opacity 0.9, class:spotify"
+          "opacity 0.95, class:code"
+          "opacity 0.95, class:discord"
         ];
         windowrulev2 = [
           "workspace 4, class:^(discord)$"
@@ -168,111 +171,6 @@ in
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
         };
-      };
-    };
-
-    services.hyprpaper = {
-      enable = true;
-      settings = {
-        preload = "~/pictures/wallpapers/nier-replicant.png";
-        wallpaper = ", ~/pictures/wallpapers/nier-replicant.png";
-      };
-    };
-
-    programs.hyprlock = {
-      enable = true;
-      settings = {
-        "$font" = "Monospace";
-
-        general = {
-          hide_cursor = true;
-        };
-
-        animations = {
-          enabled = true;
-          bezier = "linear, 1, 1, 0, 0";
-          animation = [
-            "fadeIn, 1, 5, linear"
-            "fadeOut, 1, 5, linear"
-            "inputFieldDots, 1, 2, linear"
-          ];
-        };
-
-        background = {
-          monitor = "";
-          path = "~/pictures/wallpapers/nier-replicant.png";
-          blur_passes = 3;
-        };
-
-        input-field = {
-          monitor = "";
-          size = "20%, 5%";
-          outline_thickness = 2;
-          outer_color = "rgb(ffffff) rgb(ffffff)";
-          inner_color = "rgb(1a1b26)";
-          check_color = "rgb(7aa2f7) rgb(7aa2f7)";
-          fail_color = "rgb(f7768e) rgb(f7768eff)";
-
-          font_color = "rgb(cfc9c2)";
-          fade_on_empty = false;
-          rounding = 15;
-
-          font_family = "$font";
-          placeholder_text = "Input password...";
-          fail_text = "$PAMFAIL";
-
-          dots_spacing = 0.3;
-
-          position = "0, -20";
-          halign = "center";
-          valign = "center";
-        };
-
-        label = [
-          {
-            monitor = "";
-            text = "$TIME";
-            font_size = 90;
-            font_family = "$font";
-
-            position = "0, -450";
-            halign = "center";
-            valign = "top";
-          }
-          {
-            monitor = "";
-            text = "cmd[update:60000] date +\"%A, %d %B %Y\"";
-            font_size = 25;
-            font_family = "$font";
-
-            position = "0, -600";
-            halign = "center";
-            valign = "top";
-          }
-        ];
-      };
-    };
-    
-    services.hypridle = {
-      enable = true;
-      settings = {
-        general = {
-          after_sleep_cmd = "hyprctl dispatch dpms on";
-          ignore_dbus_inhibit = false;
-          lock_cmd = "hyprlock";
-        };
-
-        listener = [
-          {
-            timeout = 600;
-            on-timeout = "hyprlock";
-          }
-          {
-            timeout = 720;
-            on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on";
-          }
-        ];
       };
     };
 

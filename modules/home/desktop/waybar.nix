@@ -32,7 +32,7 @@ in
           spacing = 0;
           modules-left = [ "hyprland/workspaces" "tray" ];
           modules-center = [ "hyprland/window" ];
-          modules-right = [ "custom/mail" "wireplumber" "backlight" "temperature" "network" "battery" "clock" ];
+          modules-right = [ "custom/mail" "wireplumber" "network" "battery" "clock" ];
 
           "hyprland/workspaces" = {
             disable-scroll = false;
@@ -60,10 +60,6 @@ in
             icon-size = 17;
             spacing = 0;
             show-passive-items = true;
-          };
-
-          backlight = {
-            format = " {percent}%";
           };
 
           battery = {
@@ -101,12 +97,6 @@ in
               on-scroll-up = "shift_up";
               on-scroll-down = "shift_down";
             };
-          };
-
-          temperature = {
-            critical-threshold = 95;
-            format = "{icon} {temperatureC}°C";
-            format-icons = ["" "" "" "" ""];
           };
 
           network = {
@@ -150,20 +140,18 @@ in
         #wireplumber,
         #network,
         #battery,
-        #backlight,
-        #temperature,
         #clock {
           background-color: ${background-color};
           border-radius: 4px;
           margin: 4px 4px;
+          border: 1px solid rgba(102, 102, 102, 0.67);
+          box-shadow: 0em 0em 2px black;
         }
 
         #custom-mail,
         #wireplumber,
         #network,
         #battery,
-        #backlight,
-        #temperature,
         #clock {
           padding: 0px 5px;
         }
@@ -193,6 +181,11 @@ in
 
         #workspaces button:last-child {
           border-radius: 0 4px 4px 0;
+        }
+
+        #waybar.empty #window {
+          border: none;
+          box-shadow: none;
         }
 
         #waybar:not(.empty) #window {
@@ -261,11 +254,6 @@ in
           animation-timing-function: steps(12);
           animation-iteration-count: infinite;
           animation-direction: alternate;
-        }
-
-        #temperature.critical {
-          background-color: #cc241d;
-          color: #282828;
         }
       '';
     };
