@@ -24,6 +24,13 @@ in
   config = mkIf cfg.enable {
     programs.steam = {
       enable = true;
+      gamescopeSession = {
+        enable = true;
+        steamArgs = [
+          "-pipewire-dmabuf"
+          "-gamepadui"
+        ];
+      };
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
