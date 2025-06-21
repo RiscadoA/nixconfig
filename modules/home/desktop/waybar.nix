@@ -7,7 +7,7 @@
 
 { lib, config, pkgs, configDir, ... }:
 let
-  inherit (lib) mkEnableOption mkOption types mkIf;
+  inherit (lib) mkEnableOption mkOption types mkIf mkMerge;
   cfg = config.modules.desktop.waybar;
 
   text-color = "#cfc9c2";
@@ -16,9 +16,48 @@ let
   background-color = "#1a1b26";
   background-hovered-color = "#414868";
   background-active-color = "#7aa2f7";
+
+  string-dim = value: builtins.toString (value * cfg.sizeMultiplier);
+  float-dim = value: value * cfg.sizeMultiplier;
+  int-dim = value: builtins.ceil (value * cfg.sizeMultiplier);
+
+  base-clock-calendar = {
+    tooltip-format = "<tt><small>{calendar}</small></tt>";
+    calendar = {
+      mode-mon-col = 3;
+      weeks-pos = "right";
+      on-scroll = 1;
+      format = {
+        months = "<b>{}</b>";
+        days = "{}";
+        weeks = "<b>W{}</b>";
+        weekdays = "<b>{}</b>";
+        today = "<b><u>{}</u></b>";
+      };
+    };
+    actions = {
+      on-click-right = "mode";
+      on-scroll-up = "shift_up";
+      on-scroll-down = "shift_down";
+    };
+  };
 in
 {
-  options.modules.desktop.waybar.enable = mkEnableOption "waybar";
+  options.modules.desktop.waybar = {
+    enable = mkEnableOption "waybar";
+    sizeMultiplier = mkOption {
+      type = types.float;
+      default = 1.0;
+      description = "Multiplier for the size of the Waybar icons, fonts and other elements.";
+      example = 2.0;
+    };
+    compact = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether to use a compact layout for the Waybar.";
+      example = true;
+    };
+  };
 
   config = mkIf cfg.enable {
     programs.waybar = {
@@ -28,11 +67,25 @@ in
         mainBar = {
           layer = "bottom";
           position = "top";
-          height = 34;
+          height = int-dim 34;
           spacing = 0;
-          modules-left = [ "hyprland/workspaces" "tray" ];
+          modules-left = (if cfg.compact then [] else [ "custom/power" ]) ++
+            [ "hyprland/workspaces" "tray" ];
           modules-center = [ "hyprland/window" ];
-          modules-right = [ "custom/mail" "wireplumber" "network" "battery" "clock" ];
+          modules-right = [ "custom/mail" "wireplumber" "network" "battery" ]
+            ++ (if cfg.compact then [ "clock" ] else [ "clock#time" "clock#calendar" ]);
+
+          "custom/power" = {
+            format = "";
+            tooltip = false;
+            menu = "on-click";
+            menu-file = configDir + "/waybar/power.xml";
+            menu-actions = {
+              logout = "uwsm stop";
+              shutdown = "shutdown now";
+              reboot = "reboot";
+            };
+          };
 
           "hyprland/workspaces" = {
             disable-scroll = false;
@@ -53,11 +106,11 @@ in
 
           "hyprland/window" = {
             icon = true;
-            icon-size = 17;
+            icon-size = float-dim 17;
           };
 
           tray = {
-            icon-size = 17;
+            icon-size = int-dim 17;
             spacing = 0;
             show-passive-items = true;
           };
@@ -76,33 +129,30 @@ in
             format-icons = ["" "" "" "" ""];
           };
 
-          clock = {
-            format = " {:%H:%M}";
-            format-alt = " {:%d-%m-%Y}";
-            tooltip-format = "<tt><small>{calendar}</small></tt>";
-            calendar = {
-              mode-mon-col = 3;
-              weeks-pos = "right";
-              on-scroll = 1;
-              format = {
-                months = "<b>{}</b>";
-                days = "{}";
-                weeks = "<b>W{}</b>";
-                weekdays = "<b>{}</b>";
-                today = "<b><u>{}</u></b>";
-              };
-            };
-            actions = {
-              on-click-right = "mode";
-              on-scroll-up = "shift_up";
-              on-scroll-down = "shift_down";
-            };
+          clock = mkMerge [
+            base-clock-calendar
+            {
+              format = " {:%H:%M}";
+              format-alt =" {:%d-%m-%Y}";
+            }
+          ];
+
+          "clock#time" = {
+            interval = 1;
+            format = " {:%H:%M:%S}";
           };
+
+          "clock#calendar" = mkMerge [
+            base-clock-calendar
+            {
+              format = " {:%d-%m-%Y}";
+            }
+          ];
 
           network = {
             family = "ipv4";
-            format-ethernet = "";
-            format-wifi = "";
+            format-ethernet = if cfg.compact then "" else " {ipaddr}";
+            format-wifi = if cfg.compact then "" else " {essid}";
             format-disconnected = " Disconnected";
             format-disabled = " Disabled";
             tooltip-format-ethernet = "<big>{ifname}</big>\n<tt><small>{ipaddr}</small></tt>";
@@ -129,10 +179,11 @@ in
           border: none;
           box-shadow: none;
           font-family: "Noto Sans Mono", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
-          font-size: 14px;
+          font-size: ${string-dim 14}px;
           color: ${text-color};
         }
 
+        #custom-power,
         #workspaces,
         #tray,
         #window,
@@ -142,18 +193,19 @@ in
         #battery,
         #clock {
           background-color: ${background-color};
-          border-radius: 4px;
-          margin: 4px 4px;
-          border: 1px solid rgba(102, 102, 102, 0.67);
-          box-shadow: 0em 0em 2px black;
+          border-radius: ${string-dim 4}px;
+          margin: ${string-dim 4}px ${string-dim 4}px;
+          border: ${string-dim 1}px solid rgba(102, 102, 102, 0.67);
+          box-shadow: 0em 0em ${string-dim 2}px black;
         }
 
+        #custom-power,
         #custom-mail,
         #wireplumber,
         #network,
         #battery,
         #clock {
-          padding: 0px 5px;
+          padding: 0px ${string-dim 5}px;
         }
 
         #workspaces button:hover {
@@ -171,16 +223,16 @@ in
           background: transparent;
           border: none;
           margin: 0;
-          padding: 0px 5px;
+          padding: 0px ${string-dim 5}px;
           border-radius: 0;
         }
 
         #workspaces button:first-child {
-          border-radius: 4px 0 0 4px;
+          border-radius: ${string-dim 4}px 0 0 ${string-dim 4}px;
         }
 
         #workspaces button:last-child {
-          border-radius: 0 4px 4px 0;
+          border-radius: 0 ${string-dim 4}px ${string-dim 4}px 0;
         }
 
         #waybar.empty #window {
@@ -190,7 +242,7 @@ in
 
         #waybar:not(.empty) #window {
           color: ${text-color};
-          padding: 0px 5px;
+          padding: 0px ${string-dim 5}px;
         }
 
         #waybar.fullscreen #window {
@@ -205,20 +257,20 @@ in
 
         #tray * {
           margin: 0;
-          padding: 0px 5px;
+          padding: 0px ${string-dim 5}px;
           border-radius: 0;
         }
 
         #tray *:first-child:not(:only-child) {
-          border-radius: 4px 0 0 4px;
+          border-radius: ${string-dim 4}px 0 0 ${string-dim 4}px;
         }
 
         #tray *:last-child:not(:only-child) {
-          border-radius: 0 4px 4px 0;
+          border-radius: 0 ${string-dim 4}px ${string-dim 4}px 0;
         }
 
         #tray *:only-child {
-          border-radius: 4px;
+          border-radius: ${string-dim 4}px;
         }
 
         #tray .passive {

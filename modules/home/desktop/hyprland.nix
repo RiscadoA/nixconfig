@@ -46,7 +46,6 @@ in
           rounding = 4;
         };
         input = {
-          kb_layout = "pt";
           touchpad = {
             natural_scroll = true;
           };
@@ -75,6 +74,7 @@ in
           "$mod, L, swapsplit,"
           "$mod, Return, exec, kitty"
           ", Print, exec, flameshot gui"
+          "$mod SHIFT, P, exec, flameshot gui"
 
           # Move focus with arrow keys
           "$mod, left, movefocus, l"

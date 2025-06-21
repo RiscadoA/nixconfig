@@ -20,8 +20,10 @@
       hyprpaper.enable = true;
       hyprlock.enable = true;
       hyprsunset.enable = true;
-      waybar.enable = true;
-      rofi.enable = true;
+      waybar = {
+        enable = true;
+        compact = true;
+      };
       gtk.enable = true;
       qt.enable = true;
 
@@ -36,6 +38,7 @@
 
       apps = {
         kitty.enable = true;
+        rofi.enable = true;
         mako.enable = true;
         discord.enable = true;
         firefox.enable = true;
@@ -50,6 +53,10 @@
         vintagestory.enable = true;
       };
     };
+  };
+
+  wayland.windowManager.hyprland.settings.input = {
+    kb_layout = "pt";
   };
 
   home.packages = with pkgs; [

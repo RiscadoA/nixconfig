@@ -14,7 +14,10 @@
         auto = true;
       };
       fonts.enable = true;
-      games.steam.enable = true;
+      games.steam = {
+        enable = true;
+        desktopScaling = 1.6;
+      };
     };
 
     services = {

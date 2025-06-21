@@ -22,6 +22,7 @@ in
 
     systemd.services."cubos-discord-bot" = {
       description = "Cubos Discord Bot";
+      requires = [ "network-online.target" ];
       after = [ "syslog.target" "network.target" "nss-lookup.target" "network-online.target" ];
       path = [ pkgs.nodejs pkgs.bash ];
       serviceConfig = {

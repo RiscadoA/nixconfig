@@ -41,6 +41,12 @@ let
 
   wallpaperBashArray = "(\"${lib.strings.concatStrings (lib.strings.intersperse "\" \"" (map (wallpaper: "${wallpaper}") (lib.attrValues themedWallpapers)))}\")";
   wallpaperRandomizer = pkgs.writeShellScriptBin "wallpaperRandomizer" ''
+    # Wait for hyprpaper to be ready
+    for i in {1..20}; do
+        hyprctl hyprpaper listloaded &>/dev/null && break
+        sleep 0.25
+    done
+
     wallpapers=${wallpaperBashArray}
     rand=$[$RANDOM % ''${#wallpapers[@]}]
     wallpaper=''${wallpapers[$rand]}
@@ -73,13 +79,14 @@ in
     systemd.user = {
       services.wallpaperRandomizer = {
         Install = {
-          WantedBy = ["graphical-session.target"];
+          WantedBy = ["hyprpaper.service"];
         };
 
         Unit = {
           Description = "Set random desktop background using hyprpaper";
-          After = ["graphical-session-pre.target"];
-          PartOf = ["graphical-session.target"];
+          After = ["hyprpaper.service"];
+          Requires = ["hyprpaper.service"];
+          PartOf = ["hyprpaper.service"];
         };
 
         Service = {

@@ -12,9 +12,4 @@
     shell = pkgs.zsh;
     extraGroups = [ "steam" "nopasswdlogin" "libvirtd" ];
   };
-
-  # Modules configuration.
-  #modules = {
-  #xsession.windowManager.fluxbox.enable = true;
-  #};
 }

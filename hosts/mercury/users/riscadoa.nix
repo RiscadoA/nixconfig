@@ -22,26 +22,16 @@
       gdb.enable = true;
       gpg.enable = true;
       pass.enable = true;
-      direnv.enable = true;
     };
 
     desktop = {
-      xmonad.enable = true;
-      xmobar = {
-        enable = true;
-        type = "desktop";
-      };
-
       apps = {
         discord.enable = true;
         spotify.enable = true;
-        vscode.enable = true;
-        thunderbird.enable = true;
       };
 
       games = {
         anki.enable = true;
-        minecraft.enable = true;
       };
     };
   };
@@ -53,13 +43,5 @@
     openmsx
   ];
 
-  # Syncthing for vimwiki.
   services.syncthing.enable = true;
-
-  # Launch applications on startup. 
-  xsession.initExtra = ''
-    firefox &
-    discord &
-    spotify &
-  '';
 }

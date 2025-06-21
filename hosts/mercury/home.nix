@@ -17,28 +17,47 @@
       ssh.enable = true;
       zsh.enable = true;
       vim.enable = true;
+      direnv.enable = true;
     };
 
     desktop = {
-      xscreensaver.enable = true;
+      hyprland.enable = true;
+      hyprpaper.enable = true;
+      hyprlock.enable = true;
+      hyprsunset.enable = true;
+      waybar = {
+        enable = true;
+        sizeMultiplier = 1.2;
+      };
       gtk.enable = true;
       qt.enable = true;
 
       services = {
-        picom.enable = true;
-        flameshot.enable = true;
+        flameshot = {
+          enable = true;
+          wayland = true;
+        };
       };
 
       apps = {
-        alacritty = {
-          enable = true;
-          fontSize = 12;
-        };
-        dmenu.enable = true;
-        dunst.enable = true;
+        rofi.enable = true;
+        mako.enable = true;
+        kitty.enable = true;
         firefox.enable = true;
+        dolphin.enable = true;
+        vscode.enable = true;
+      };
+
+      games = {
+        minecraft.enable = true;
       };
     };
+  };
+
+  wayland.windowManager.hyprland.settings.input = {
+    kb_layout = "us";
+    kb_variant = "altgr-intl";
+    kb_options = "compose:ralt nodeadkeys";
   };
 
   # Extra packages.
@@ -47,7 +66,7 @@
     blender
     xournalpp
     libqalculate
-    kdenlive
+    kdePackages.kdenlive
     freecad
     ckan
     lutris
@@ -56,4 +75,23 @@
     ripgrep
     obsidian
   ];
+
+  xdg.desktopEntries = {
+    pulsemixer = {
+      name = "PulseMixer";
+      genericName = "PulseAudio Mixer";
+      exec = "pulsemixer";
+      icon = "multimedia-equalizer-symbolic";
+      terminal = true;
+      categories = [ "Audio" "Mixer" ];
+    };
+
+    wipe-cliphist = {
+      name = "Cliphist Wipe";
+      genericName = "Wipe Clipboard History";
+      exec = "cliphist wipe";
+      icon = "edit-clear-history";
+      categories = [ "Utility" ];
+    };
+  };
 }

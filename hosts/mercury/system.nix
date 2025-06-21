@@ -15,13 +15,10 @@
     };
 
     desktop = {
-      slock.enable = true;
+      hyprland.enable = true;
+      greetd.enable = true;
       fonts.enable = true;
       games.steam.enable = true;
-      lightdm = {
-        enable = true;
-        users = [ "riscadoa" ];
-      };
     };
 
     services.minecraft = {
@@ -31,10 +28,10 @@
 
     services.tailscale.enable = true;
 
-    vm.vfio = {
-      mode = "single";
-      devices = [ "10de:13c0" "10de:0fbb" ];
-    };
+    # vm.vfio = {
+    #   mode = "single";
+    #   devices = [ "10de:13c0" "10de:0fbb" ];
+    # };
   };
 
   # Extra packages.
@@ -78,6 +75,7 @@
     nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  # Required even though we're using Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
 
   # Supposedly better for the ssd
@@ -112,26 +110,6 @@
 
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  console.useXkbConfig = true;
-
-  services.xserver = {
-    enable = true;
-    dpi = 96;
-    xkb = {
-      layout = "us";
-      variant = "altgr-intl";
-      options = "compose:ralt nodeadkeys";
-    };
-    displayManager.setupCommands = ''
-      ${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --rate 240 --mode 1920x1080
-    '';
-  };
-
-  services.libinput = {
-    enable = true;
-    touchpad.naturalScrolling = true;
-  };
-
   services.openssh = {
     enable = true;
     startWhenNeeded = true;
@@ -144,6 +122,7 @@
     };
   };
 
+  services.blueman.enable = true;
   hardware = {
     bluetooth = {
       enable = true;
@@ -154,6 +133,15 @@
       };
     };
     cpu.intel.updateMicrocode = true;
+  };
+
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse.enable = true;
   };
 
   virtualisation.docker.enable = true;

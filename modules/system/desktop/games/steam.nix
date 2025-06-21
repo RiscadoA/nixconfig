@@ -11,7 +11,15 @@ let
   cfg = config.modules.desktop.games.steam;
 in
 {
-  options.modules.desktop.games.steam.enable = mkEnableOption "steam";
+  options.modules.desktop.games.steam = {
+    enable = mkEnableOption "steam";
+    desktopScaling = mkOption {
+      type = types.float;
+      default = 1.0;
+      description = "Desktop scaling factor for Steam. This is useful for high DPI displays.";
+      example = 1.6;
+    };
+  };
 
   config = mkIf cfg.enable {
     programs.steam = {
@@ -33,7 +41,7 @@ in
           libkrb5
           keyutils
         ];
-        extraArgs = "-forcedesktopscaling 1.6";
+        extraArgs = "-forcedesktopscaling ${toString cfg.desktopScaling}";
       };
     };
 

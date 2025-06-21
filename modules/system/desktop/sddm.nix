@@ -3,7 +3,7 @@
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
-# LightDM system configuration.
+# SDDM system configuration.
 
 { lib, config, ... }:
 

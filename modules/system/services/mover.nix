@@ -27,6 +27,7 @@ in
 
     services.postgresql = {
       enable = true;
+      package = pkgs.postgresql_13;
       ensureDatabases = [ "mover" ];
       ensureUsers = [
         {
@@ -38,6 +39,7 @@ in
 
     systemd.services."mover" = {
       description = "Mover";
+      requires = [ "network-online.target" ];
       after = [ "syslog.target" "network.target" "nss-lookup.target" "network-online.target" ];
       serviceConfig = {
         WorkingDirectory = "/srv/mover/Mover/Server";
