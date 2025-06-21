@@ -38,6 +38,7 @@
   environment.systemPackages = [
     pkgs.pulsemixer
     pkgs.wineWowPackages.stable
+    pkgs.bindfs
   ];
 
   services.thermald.enable = true;
@@ -106,6 +107,16 @@
         }];
       };
     };
+  };
+
+  # Share the steam library
+  fileSystems."/srv/steam" = {
+    device = "/srv/steam";
+    fsType = "fuse.bindfs";
+    options = [
+      "perms=0660:+X"
+      "mirror-only=riscadoa\\,guest"
+    ];
   };
 
   systemd.services.NetworkManager-wait-online.enable = false;
