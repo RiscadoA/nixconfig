@@ -1,0 +1,20 @@
+Useful Keybinds:
+----------------
+Option + Shift + Q : Close window
+Option + D         : Open program launcher
+Option + Return    : Open terminal
+Option + W         : Maximize focused window
+Option + Shift + W : Fullscreen focused window
+Option + J         : Cycle focus between windows in workspace
+Option + 1         : Switch to workspace 1 (terminal)
+Option + 2         : Switch to workspace 2 (coding)
+Option + 3         : Switch to workspace 3 (browser)
+Option + 4         : Switch to workspace 4 (chatting)
+Option + 5         : Switch to workspace 5 (misc)
+Option + 6         : Switch to workspace 6 (music)
+Option + Shift + 1 : Move focused window to workspace 1
+Option + Shift + 2 : Move focused window to workspace 2
+Option + Shift + 3 : Move focused window to workspace 3
+Option + Shift + 4 : Move focused window to workspace 4
+Option + Shift + 5 : Move focused window to workspace 5
+Option + Shift + 6 : Move focused window to workspace 6

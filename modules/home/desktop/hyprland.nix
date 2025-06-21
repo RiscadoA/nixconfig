@@ -52,10 +52,6 @@ in
           follow_mouse = 2;
         };
         exec-once = [
-          "[workspace 1 silent] kitty"
-          "[workspace 3 silent] firefox"
-          "[workspace 4 silent] discord"
-          "[workspace 6 silent] spotify"
           "wl-paste --watch cliphist store"
         ];
         monitor = ", highrr, auto, auto";
