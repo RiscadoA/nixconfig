@@ -19,6 +19,7 @@
     ];
     windowrule = [
       "float, title:^(Keybinds)$"
+      "size 400 400, title:^(Keybinds)$"
       "center, title:^(Keybinds)$"
     ];
   };
