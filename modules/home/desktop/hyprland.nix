@@ -171,5 +171,13 @@ in
     };
 
     home.pointerCursor.hyprcursor.enable = true;
+
+    xdg.desktopEntries.wipe-cliphist = {
+      name = "Cliphist Wipe";
+      genericName = "Wipe Clipboard History";
+      exec = "cliphist wipe";
+      icon = "edit-clear-history";
+      categories = [ "Utility" ];
+    };
   };
 }

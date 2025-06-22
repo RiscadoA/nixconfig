@@ -13,6 +13,7 @@
       vim.enable = true;
       pass.enable = true;
       direnv.enable = true;
+      pulsemixer.enable = true;
     };
 
     desktop = {
@@ -88,23 +89,4 @@
   '';
 
   services.syncthing.enable = true;
-
-  xdg.desktopEntries = {
-    pulsemixer = {
-      name = "PulseMixer";
-      genericName = "PulseAudio Mixer";
-      exec = "pulsemixer";
-      icon = "multimedia-equalizer-symbolic";
-      terminal = true;
-      categories = [ "Audio" "Mixer" ];
-    };
-
-    wipe-cliphist = {
-      name = "Cliphist Wipe";
-      genericName = "Wipe Clipboard History";
-      exec = "cliphist wipe";
-      icon = "edit-clear-history";
-      categories = [ "Utility" ];
-    };
-  };
 }

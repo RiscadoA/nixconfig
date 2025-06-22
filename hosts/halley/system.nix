@@ -26,7 +26,6 @@
   };
 
   environment.systemPackages = [
-    pkgs.pulsemixer
     pkgs.wineWowPackages.stable
     pkgs.alsa-utils
   ];

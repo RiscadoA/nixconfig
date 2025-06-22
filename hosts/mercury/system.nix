@@ -36,7 +36,6 @@
 
   # Extra packages.
   environment.systemPackages = [
-    pkgs.pulsemixer
     pkgs.wineWowPackages.stable
     pkgs.bindfs
   ];

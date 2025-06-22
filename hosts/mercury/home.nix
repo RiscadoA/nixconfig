@@ -17,6 +17,7 @@
       ssh.enable = true;
       zsh.enable = true;
       vim.enable = true;
+      pulsemixer.enable = true;
       direnv.enable = true;
     };
 
@@ -75,23 +76,4 @@
     ripgrep
     obsidian
   ];
-
-  xdg.desktopEntries = {
-    pulsemixer = {
-      name = "PulseMixer";
-      genericName = "PulseAudio Mixer";
-      exec = "pulsemixer";
-      icon = "multimedia-equalizer-symbolic";
-      terminal = true;
-      categories = [ "Audio" "Mixer" ];
-    };
-
-    wipe-cliphist = {
-      name = "Cliphist Wipe";
-      genericName = "Wipe Clipboard History";
-      exec = "cliphist wipe";
-      icon = "edit-clear-history";
-      categories = [ "Utility" ];
-    };
-  };
 }
