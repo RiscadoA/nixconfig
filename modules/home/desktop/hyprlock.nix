@@ -70,9 +70,9 @@ in
             font_size = 90;
             font_family = "$font";
 
-            position = "0, -450";
+            position = "0, 200";
             halign = "center";
-            valign = "top";
+            valign = "center";
           }
           {
             monitor = "";
@@ -80,9 +80,9 @@ in
             font_size = 25;
             font_family = "$font";
 
-            position = "0, -600";
+            position = "0, 100";
             halign = "center";
-            valign = "top";
+            valign = "center";
           }
         ];
       };
