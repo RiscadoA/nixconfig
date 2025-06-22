@@ -164,6 +164,7 @@ in
         };
         misc = {
           new_window_takes_over_fullscreen = 1;
+          exit_window_retains_fullscreen = true;
           focus_on_activate = true;
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
