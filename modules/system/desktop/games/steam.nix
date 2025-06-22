@@ -29,6 +29,7 @@ in
         steamArgs = [
           "-pipewire-dmabuf"
           "-gamepadui"
+          "-steamos3"
         ];
       };
       remotePlay.openFirewall = true;
