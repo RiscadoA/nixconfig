@@ -61,6 +61,9 @@ in
         background = {
           path = "${themedWallpaper}";
         };
+        terminal = {
+          vt = 7;
+        };
       };
     };
   };
