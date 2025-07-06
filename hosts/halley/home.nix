@@ -78,6 +78,7 @@
     gimp
     zathura
     imv
+    the-powder-toy
   ];
 
   xresources.properties = {
