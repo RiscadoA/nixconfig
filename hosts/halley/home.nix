@@ -79,6 +79,7 @@
     zathura
     imv
     the-powder-toy
+    gnome-network-displays
   ];
 
   xresources.properties = {
