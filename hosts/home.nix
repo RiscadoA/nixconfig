@@ -51,5 +51,12 @@
       icon = "github";
       categories = [ "Development" ];
     };
+
+    mail = {
+      name = "Mail";
+      exec = "xdg-open https://mail.google.com";
+      icon = "gmail";
+      categories = [ "Network" ];
+    };
   };
 }
