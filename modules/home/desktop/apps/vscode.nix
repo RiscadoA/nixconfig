@@ -48,7 +48,7 @@ in
             "*.cmake.in" = "cmake";
           };
           "cmake.configureOnOpen" = "true";
-          "workbench.colorTheme" = "Tokyo Night";
+          "workbench.colorTheme" = "Dark Modern";
         };
 
         extensions = (with pkgs.unstable.vscode-extensions; [
@@ -216,14 +216,6 @@ in
             publisher = "mechatroner";
             version = "3.17.0";
             sha256 = "sha256-qny0LU0+Q38H0BMC4Njk173KDuLjebxZN3Bg8vSDVLA=";
-          })
-
-          # Tokyo Night theme
-          (buildMarketplaceExtension {
-            name = "tokyo-night";
-            publisher = "enkia";
-            version = "1.1.2";
-            sha256 = "sha256-oW0bkLKimpcjzxTb/yjShagjyVTUFEg198oPbY5J2hM=";
           })
 
           # Haskell
