@@ -225,6 +225,9 @@ in
             version = "1.1.2";
             sha256 = "sha256-oW0bkLKimpcjzxTb/yjShagjyVTUFEg198oPbY5J2hM=";
           })
+
+          # Haskell
+          haskell.haskell
         ]);
       };
     };
