@@ -228,6 +228,7 @@ in
 
           # Haskell
           haskell.haskell
+          justusadam.language-haskell
         ]);
       };
     };
