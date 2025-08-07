@@ -25,7 +25,6 @@
       hyprland.enable = true;
       hyprpaper.enable = true;
       hyprlock.enable = true;
-      hyprsunset.enable = true;
       waybar = {
         enable = true;
         sizeMultiplier = 1.2;
