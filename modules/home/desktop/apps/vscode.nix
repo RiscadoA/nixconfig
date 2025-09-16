@@ -58,12 +58,8 @@ in
           ms-vscode.hexeditor
 
           # Copilot
-          (buildMarketplaceExtension {
-            name = "copilot";
-            publisher = "github";
-            version = "1.194.885";
-            sha256 = "sha256-rBWCvOWT0M5CEy9+ndWEr9z+O70UncKyMYnNipEZePo=";
-          })
+          github.copilot
+          github.copilot-chat
 
           # Theme
           file-icons.file-icons
