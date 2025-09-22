@@ -199,8 +199,8 @@ in
           (buildMarketplaceExtension {
             name = "latex-workshop";
             publisher = "James-Yu";
-            version = "10.5.6";
-            sha256 = "sha256-49sxhmMVKUw+++7wGeK0G5rXNBBynf9SPU2at7TJ4tM=";
+            version = "10.5.0";
+            sha256 = "sha256-/WuUN5TFPW9C1xfwAja7zEg6HkuoqYhoIz64Vg6h3gA=";
           })
 
           # Lua
