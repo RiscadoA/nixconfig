@@ -58,7 +58,8 @@ in
           ms-vscode.hexeditor
 
           # Copilot
-          continue.continue
+          github.copilot
+          github.copilot-chat
 
           # Theme
           file-icons.file-icons

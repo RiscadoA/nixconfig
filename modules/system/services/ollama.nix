@@ -17,9 +17,6 @@ in
   config = mkIf cfg.enable {
     services.ollama = {
       enable = true;
-      environmentVariables = {
-        OLLAMA_NUM_THREADS = "6";
-      };
     };
   };
 }
