@@ -21,6 +21,8 @@
       games.steam.enable = true;
     };
 
+    services.ollama.enable = true;
+
     services.minecraft = {
       enable = true;
       servers = [ "create" "castro" ];
