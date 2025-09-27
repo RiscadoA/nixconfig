@@ -38,7 +38,7 @@ in
         enableExtensionUpdateCheck = false;
 
         userSettings = {
-          "window.customTitleBarVisibility" = "never";
+          "window.customTitleBarVisibility" = "windowed";
           "window.dialogStyle" = "custom";
           "window.menuBarVisibility" = "compact";
           "window.titleBarStyle" = "custom";
