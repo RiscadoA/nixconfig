@@ -10,9 +10,10 @@ let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.hyprland;
 
+  password-store-dir = config.programs.password-store.settings.PASSWORD_STORE_DIR;
   rofi-pass = pkgs.writeShellScriptBin "rofi-pass" ''
-    find $PASSWORD_STORE_DIR -type f -name '*.gpg' |
-    sed "s|''${PASSWORD_STORE_DIR}/||; s|\.gpg$||" |
+    find ${password-store-dir} -type f -name '*.gpg' |
+    sed "s|${password-store-dir}/||; s|.gpg$||" |
     rofi -i -dmenu -p pass |
     xargs -n 1 pass show 2> /dev/null |
     head -n 1 |
