@@ -10,7 +10,7 @@ let
   inherit (lib) mkEnableOption mkOption mkIf;
   cfg = config.modules.desktop.services.flameshot;
 
-  flameshot-wlr = pkgs.unstable.flameshot.override {
+  flameshot-wlr = pkgs.flameshot.override {
     enableWlrSupport = cfg.wayland;
   };
 
