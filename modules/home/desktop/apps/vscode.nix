@@ -49,6 +49,7 @@ in
           };
           "cmake.configureOnOpen" = "true";
           "workbench.colorTheme" = "Dark Modern";
+          "terminal.integrated.defaultProfile.linux" = "zsh";
         };
 
         extensions = (with pkgs.unstable.vscode-extensions; [
