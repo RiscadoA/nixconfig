@@ -31,6 +31,7 @@ in
     unzip
     neofetch
     man-pages
+    kitty
   ];
 
   programs.zsh.enable = true;
