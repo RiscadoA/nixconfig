@@ -60,7 +60,6 @@ in
 
           # Copilot
           github.copilot
-          github.copilot-chat
 
           # Theme
           file-icons.file-icons
