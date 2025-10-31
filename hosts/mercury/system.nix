@@ -47,7 +47,7 @@
   services.gnome.gnome-keyring.enable = true;
 
   boot = {
-    kernelPackages = pkgs.unstable.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "quiet" ];
 
     loader = {
