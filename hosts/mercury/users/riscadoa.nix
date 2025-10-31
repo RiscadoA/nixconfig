@@ -40,7 +40,6 @@
   home.packages = with pkgs; [
     timewarrior
     renderdoc
-    openmsx
   ];
 
   services.syncthing.enable = true;
