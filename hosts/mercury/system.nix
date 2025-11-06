@@ -89,23 +89,12 @@
     networkmanager = {
       enable = true;
       insertNameservers = [ "1.1.1.1" ];
-      unmanaged = [ "enp6s0" ];
     };
 
     interfaces.enp6s0 = {
       wakeOnLan = {
         enable = true;
         policy = [ "magic" ];
-      };
-      ipv4 = {
-        addresses = [{
-          address = "10.0.0.1";
-          prefixLength = 32;
-        }];
-        routes = [{
-          address = "10.0.0.2";
-          prefixLength = 32;
-        }];
       };
     };
   };
