@@ -79,6 +79,7 @@
     imv
     the-powder-toy
     gnome-network-displays
+    moonlight-qt
   ];
 
   xresources.properties = {
