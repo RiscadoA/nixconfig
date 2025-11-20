@@ -80,6 +80,7 @@
     the-powder-toy
     gnome-network-displays
     moonlight-qt
+    gemini-cli
   ];
 
   xresources.properties = {

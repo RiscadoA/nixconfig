@@ -74,5 +74,6 @@
     qbittorrent
     ripgrep
     obsidian
+    gemini-cli
   ];
 }
