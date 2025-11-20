@@ -58,8 +58,14 @@ in
           ms-vsliveshare.vsliveshare
           ms-vscode.hexeditor
 
-          # Copilot
+          # LLMs
           github.copilot
+          (buildMarketplaceExtension {
+            name = "geminicodeassist";
+            publisher = "Google";
+            version = "2.58.1";
+            sha256 = "sha256-DxqFACULXYJ+BKaQDsJzuIfBZ4h46L2cTCMbw1JK/Uk=";
+          })
 
           # Theme
           file-icons.file-icons
