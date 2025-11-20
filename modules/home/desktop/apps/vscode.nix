@@ -60,12 +60,7 @@ in
 
           # LLMs
           github.copilot
-          (buildMarketplaceExtension {
-            name = "geminicodeassist";
-            publisher = "Google";
-            version = "2.58.1";
-            sha256 = "sha256-DxqFACULXYJ+BKaQDsJzuIfBZ4h46L2cTCMbw1JK/Uk=";
-          })
+          github.copilot-chat
 
           # Theme
           file-icons.file-icons
