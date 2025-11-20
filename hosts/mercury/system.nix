@@ -145,6 +145,14 @@
     pulse.enable = true;
   };
 
+  services.sunshine = {
+    package = pkgs.unstable.sunshine;
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+  };
+
   virtualisation.docker.enable = true;
 
   # Required for gtk.

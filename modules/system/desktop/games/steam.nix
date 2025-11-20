@@ -51,6 +51,9 @@ in
         ];
         extraArgs = "-forcedesktopscaling ${toString cfg.desktopScaling}";
       };
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
     };
 
     services.joycond.enable = true;
