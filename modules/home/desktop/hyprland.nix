@@ -163,6 +163,9 @@ in
         xwayland = {
           force_zero_scaling = true;
         };
+        ecosystem = {
+          no_update_news = true;
+        };
         misc = {
           new_window_takes_over_fullscreen = 1;
           exit_window_retains_fullscreen = true;
