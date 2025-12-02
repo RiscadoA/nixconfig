@@ -9,10 +9,10 @@
   description = "Nix configuration for a multi user system.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -79,7 +79,6 @@
         (name: {
           inherit name;
           value = nixosSystem {
-            system = mkSystem name;
             pkgs = pkgs (mkSystem name);
             specialArgs = { configDir = ./config; };
             modules =
@@ -88,6 +87,7 @@
               in
               [
                 { networking.hostName = name; }
+                { nixpkgs.hostPlatform = mkSystem name; }
                 (import "${dir}/system.nix")
                 (import "${dir}/${name}/hardware.nix")
                 (import "${dir}/${name}/system.nix")

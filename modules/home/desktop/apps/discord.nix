@@ -11,7 +11,7 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.apps.discord;
-  tray-icons = pkgs.runCommandNoCC "discord-tray-icons" { } ''
+  tray-icons = pkgs.runCommand "discord-tray-icons" { } ''
     ICON_THEME="${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark"
     ICON_SVG_SIZE=16
     ICON_PNG_SIZE=128

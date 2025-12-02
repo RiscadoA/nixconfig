@@ -16,15 +16,17 @@ in
   config = mkIf cfg.enable {
     programs.git = {
       enable = true;
-      userName = "Ricardo Antunes";
-      userEmail = "me@riscadoa.com";
       signing = {
         key = null;
         signByDefault = true;
       };
-      extraConfig = {
+      settings = {
         init.defaultBranch = "main";
         url."git@github.com".pushinsteadOf = "https://github.com/";
+        user = {
+          name = "Ricardo Antunes";
+          email = "me@riscadoa.com";
+        };
       };
     };
   };
