@@ -178,7 +178,7 @@ in
           background: transparent;
           border: none;
           box-shadow: none;
-          font-family: "Noto Sans Mono", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
+          font-family: "Noto Sans Mono", "Font Awesome 7 Free", "Font Awesome 7 Free Solid";
           font-size: ${string-dim 14}px;
           color: ${text-color};
         }
