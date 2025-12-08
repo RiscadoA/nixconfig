@@ -39,10 +39,6 @@ in
           onShutdown = "shutdown";
           qemu = {
             package = pkgs.qemu_kvm;
-            ovmf = {
-              enable = true;
-              packages = [ pkgs.OVMFFull.fd ];
-            };
             runAsRoot = true;
             swtpm.enable = true;
           };

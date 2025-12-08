@@ -118,9 +118,9 @@
   services.tlp.enable = true;
   services.ntp.enable = true;
 
-  services.logind.extraConfig = ''
-    HandlePowerKey=suspend
-  '';
+  services.logind.settings.Login = {
+    HandlePowerKey = "suspend";
+  };
 
   users = {
     mutableUsers = true;
@@ -132,10 +132,6 @@
     libvirtd = {
       enable = true;
       qemu = {
-        ovmf = {
-          enable = true;
-          packages = [ pkgs.OVMFFull.fd ];
-        };
         swtpm.enable = true;
         runAsRoot = true;
       };
