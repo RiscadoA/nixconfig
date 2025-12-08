@@ -165,6 +165,7 @@ in
         };
         ecosystem = {
           no_update_news = true;
+          no_donation_nag = true;
         };
         misc = {
           new_window_takes_over_fullscreen = 1;
