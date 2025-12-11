@@ -101,7 +101,7 @@
 
   # Share the steam library
   fileSystems."/srv/steam" = {
-    device = "/srv/steam";
+    device = "/srv/steam-storage";
     fsType = "fuse.bindfs";
     options = [
       "perms=0660:+X"
