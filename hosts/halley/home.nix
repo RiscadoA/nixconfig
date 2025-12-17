@@ -81,6 +81,7 @@
     gnome-network-displays
     moonlight-qt
     gemini-cli
+    signal-desktop
   ];
 
   xresources.properties = {
