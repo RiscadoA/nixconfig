@@ -33,10 +33,7 @@
       qt.enable = true;
 
       services = {
-        flameshot = {
-          enable = true;
-          wayland = true;
-        };
+        flameshot.enable = true;
       };
 
       apps = {

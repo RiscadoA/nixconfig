@@ -30,7 +30,6 @@
       services = {
         flameshot = {
           enable = true;
-          wayland = true;
           scaleFactor = 0.5;
         };
         low-battery-notifier.enable = true;
