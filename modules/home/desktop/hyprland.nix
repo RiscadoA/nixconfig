@@ -131,13 +131,13 @@ in
           "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
 
           # Fix flameshot
-          "move 0 0,class:(flameshot)"
-          "pin,class:(flameshot)"
-          "noborder,class:(flameshot)"
-          "stayfocused,class:(flameshot)"
-          "float,class:(flameshot)"
-          "opaque,class:(flameshot)"
-          "noanim,class:(flameshot)"
+          "move 0 0,title:(flameshot)"
+          "pin,title:(flameshot)"
+          "noborder,title:(flameshot)"
+          "stayfocused,title:(flameshot)"
+          "float,title:(flameshot)"
+          "opaque,title:(flameshot)"
+          "noanim,title:(flameshot)"
 
           # Make some apps transparent
           "opacity 0.9, class:kitty"
