@@ -145,9 +145,11 @@ in
           "opacity 0.9, class:spotify"
           "opacity 0.95, class:code"
           "opacity 0.95, class:discord"
+          "opacity 0.95, class:signal"
         ];
         windowrulev2 = [
           "workspace 4, class:^(discord)$"
+          "workspace 4, class:^(signal)$"
         ];
         env = [
           "XDG_CURRENT_DESKTOP,Hyprland"
