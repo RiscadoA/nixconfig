@@ -72,5 +72,6 @@
     ripgrep
     obsidian
     gemini-cli
+    signal-desktop
   ];
 }
