@@ -48,7 +48,7 @@
     exec-once = [
       "[workspace 1 silent] kitty"
       "[workspace 3 silent] firefox"
-      "[workspace 4 silent] discord"
+      "[workspace 4 silent] signal-desktop"
       "[workspace 6 silent] spotify"
     ];
   };
