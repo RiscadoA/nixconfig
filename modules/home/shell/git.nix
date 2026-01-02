@@ -16,6 +16,7 @@ in
   config = mkIf cfg.enable {
     programs.git = {
       enable = true;
+      lfs.enable = true;
       signing = {
         key = null;
         signByDefault = true;
