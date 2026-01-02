@@ -73,5 +73,6 @@
     obsidian
     gemini-cli
     signal-desktop
+    goxel
   ];
 }
