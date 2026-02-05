@@ -10,16 +10,6 @@
         hostName = "grocy.riscadoa.com";
       };
 
-      taskserver = {
-        enable = true;
-        hostName = "pluto.riscadoa.com";
-      };
-
-      mover = {
-        enable = true;
-        hostName = "api.flyptmover.com";
-      };
-
       cubos-discord-bot.enable = true;
     };
   };
