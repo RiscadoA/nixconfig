@@ -42,6 +42,15 @@
     };
   };
 
-  services.cloudflared.enable = true;
+  services.cloudflared = {
+    enable = true;
+    tunnels."248c8d02-aa20-4b78-bd43-ff97dc766b78" = {
+      credentialsFile = "/home/riscadoa/.cloudflared/248c8d02-aa20-4b78-bd43-ff97dc766b78.json";
+      default = "http_status:404";
+      ingress = {
+        "pluto.riscadoa.com" = "http://localhost:8080";
+      };
+    };
+  };
 }
 
