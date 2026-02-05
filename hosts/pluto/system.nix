@@ -41,5 +41,7 @@
       RiscadoA = "572f7bed-9404-4250-bc7f-3f2d43bb1eb7";
     };
   };
+
+  services.cloudflared.enable = true;
 }
 
