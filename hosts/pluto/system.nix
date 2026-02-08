@@ -17,6 +17,11 @@
   services.openssh.enable = true;
   services.syncthing.enable = true;
 
+  services.actual = {
+    enable = true;
+    settings.port = 3000;
+  };
+
   services.cloudflared = {
     enable = true;
     tunnels."248c8d02-aa20-4b78-bd43-ff97dc766b78" = {
