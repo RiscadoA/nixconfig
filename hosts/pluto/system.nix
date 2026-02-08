@@ -18,6 +18,7 @@
   services.syncthing.enable = true;
 
   services.actual = {
+    package = pkgs.unstable.actual-server;
     enable = true;
     settings.port = 3000;
   };
