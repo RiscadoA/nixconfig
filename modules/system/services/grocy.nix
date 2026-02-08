@@ -24,10 +24,8 @@ in
     services.grocy = {
       enable = true;
       hostName = cfg.hostName;
-      settings.currency = "SEK";
+      settings.currency = "EUR";
     };
-
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
 
     security.acme = {
       acceptTerms = true;
