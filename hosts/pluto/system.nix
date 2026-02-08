@@ -4,12 +4,6 @@
   modules = {
     services = {
       tailscale.enable = true;
-
-      grocy = {
-        enable = true;
-        hostName = "grocy.riscadoa.com";
-      };
-
       cubos-discord-bot.enable = true;
     };
   };
