@@ -45,9 +45,8 @@
     settings = {
       APP_KEY_FILE = "/var/lib/firefly-iii/app-key";
       APP_URL = "http://localhost";
-	    DB_CONNECTION = "sqlite";
+	    DB_CONNECTION = "pgsql";
       DB_DATABASE = "firefly-iii";
-      DB_HOST = "localhost";
       DB_USERNAME = "firefly-iii";
       TZ = "Europe/Lisbon";
       TRUSTED_PROXIES = "**";
