@@ -50,6 +50,8 @@
       DB_USERNAME = "firefly-iii";
       TZ = "Europe/Lisbon";
       TRUSTED_PROXIES = "**";
+      AUTHENTICATION_GUARD = "remote_user_guard";
+      AUTHENTICATION_GUARD_HEADER = "Cf-Access-Authenticated-User-Email";
     };
   };
 
