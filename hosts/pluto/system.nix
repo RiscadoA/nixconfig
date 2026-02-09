@@ -17,6 +17,18 @@
   services.openssh.enable = true;
   services.syncthing.enable = true;
 
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_18;
+    ensureDatabases = [ "firefly-iii" ];
+    ensureUsers = [
+      {
+        name = "firefly-iii";
+        ensureDBOwnership = true;
+      }
+    ];
+  };
+
   services.actual = {
     package = pkgs.unstable.actual-server;
     enable = true;
@@ -34,7 +46,7 @@
       APP_KEY_FILE = "/home/riscadoa/.firefly-iii-app-key";
       APP_URL = "http://localhost";
 	    DB_CONNECTION = "sqlite";
-      DB_DATABASE = "firefly";
+      DB_DATABASE = "firefly-iii";
       DB_HOST = "localhost";
       DB_USERNAME = "firefly-iii";
       TZ = "Europe/Lisbon";
