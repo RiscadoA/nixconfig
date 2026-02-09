@@ -43,7 +43,7 @@
     enable = true;
     enableNginx = true;
     settings = {
-      APP_KEY_FILE = "/home/riscadoa/.firefly-iii-app-key";
+      APP_KEY_FILE = "/var/lib/firefly-iii/app-key";
       APP_URL = "http://localhost";
 	    DB_CONNECTION = "sqlite";
       DB_DATABASE = "firefly-iii";
