@@ -51,12 +51,15 @@
       TZ = "Europe/Lisbon";
       TRUSTED_PROXIES = "**";
       AUTHENTICATION_GUARD = "remote_user_guard";
-      AUTHENTICATION_GUARD_HEADER = "Cf-Access-Authenticated-User-Email";
+      AUTHENTICATION_GUARD_HEADER = "HTTP_X_EMAIL";
     };
   };
 
   services.nginx.virtualHosts.${config.services.firefly-iii.virtualHost} = {
     listen = [ { addr = "*"; port = 3001; } ];
+    locations."~ \\.php$".extraConfig = ''
+      fastcgi_param HTTP_X_EMAIL "firefly@riscadoa.com";
+    '';
   };
 
   services.cloudflared = {
