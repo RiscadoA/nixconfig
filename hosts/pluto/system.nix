@@ -26,6 +26,26 @@
     };
   };
 
+  services.firefly-iii = {
+    package = pkgs.unstable.firefly-iii;
+    enable = true;
+    enableNginx = true;
+    settings = {
+      APP_KEY_FILE = "/home/riscadoa/.firefly-iii-app-key";
+      APP_URL = "http://localhost";
+	    DB_CONNECTION = "sqlite";
+      DB_DATABASE = "firefly";
+      DB_HOST = "localhost";
+      DB_USERNAME = "firefly-iii";
+      TZ = "Europe/Lisbon";
+      TRUSTED_PROXIES = "**";
+    };
+  };
+
+  services.nginx.virtualHosts.${config.services.firefly-iii.virtualHost} = {
+    listen = [ { addr = "*"; port = 3001; } ];
+  };
+
   services.cloudflared = {
     enable = true;
     tunnels."248c8d02-aa20-4b78-bd43-ff97dc766b78" = {
