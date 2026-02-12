@@ -47,7 +47,6 @@
   services.gnome.gnome-keyring.enable = true;
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "quiet" "nvidia-drm.modeset=1" ];
 
     loader = {
