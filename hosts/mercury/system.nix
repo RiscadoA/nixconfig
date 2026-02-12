@@ -48,7 +48,7 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "quiet" ];
+    kernelParams = [ "quiet" "nvidia-drm.modeset=1" ];
 
     loader = {
       grub = {
