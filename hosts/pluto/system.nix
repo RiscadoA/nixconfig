@@ -17,6 +17,19 @@
   services.openssh.enable = true;
   services.syncthing.enable = true;
 
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      listen-address = "0.0.0.0";
+      bind-interfaces = true;
+      no-resolv = true;
+      server = [ "1.1.1.1" ];
+      cname = [
+        "firefly.home.riscadoa.com/pluto"
+      ];
+    };
+  };
+
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_18;
