@@ -85,7 +85,6 @@
     wireless.enable = false;
     networkmanager = {
       enable = true;
-      insertNameservers = [ "1.1.1.1" ];
     };
 
     interfaces.enp6s0 = {
