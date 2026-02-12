@@ -25,7 +25,7 @@
       no-resolv = true;
       server = [ "1.1.1.1" ];
       cname = [
-        "firefly.home.riscadoa.com,pluto"
+        "firefly.home.riscadoa.com,100.126.246.110"
       ];
     };
   };
