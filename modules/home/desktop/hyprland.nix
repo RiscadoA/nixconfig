@@ -125,31 +125,31 @@ in
         ];
         windowrule = [
           # Ignore maximize requests from apps.
-          "suppressevent maximize, class:.*"
+          "suppress_event maximize, match:class .*"
 
           # Fix some dragging issues with XWayland
-          "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+          "no_focus on, match:class ^$, match:title ^$, match:xwayland 1, match:float 1, match:fullscreen 0, match:pin 0"
 
           # Fix flameshot
-          "move 0 0,title:(flameshot)"
-          "pin,title:(flameshot)"
-          "noborder,title:(flameshot)"
-          "stayfocused,title:(flameshot)"
-          "float,title:(flameshot)"
-          "opaque,title:(flameshot)"
-          "noanim,title:(flameshot)"
+          "move 0 0, match:title (flameshot)"
+          "pin on, match:title (flameshot)"
+          "decorate off, match:title (flameshot)"
+          "stay_focused on, match:title (flameshot)"
+          "float on, match:title (flameshot)"
+          "opaque on, match:title (flameshot)"
+          "no_anim on, match:title (flameshot)"
 
           # Make some apps transparent
-          "opacity 0.9, class:kitty"
-          "opacity 0.975 0.975 1.0, class:firefox"
-          "opacity 0.9, class:spotify"
-          "opacity 0.95, class:code"
-          "opacity 0.95, class:discord"
-          "opacity 0.95, class:signal"
-        ];
-        windowrulev2 = [
-          "workspace 4, class:^(discord)$"
-          "workspace 4, class:^(signal)$"
+          "opacity 0.9, match:class kitty"
+          "opacity 0.975 0.975 1.0, match:class firefox"
+          "opacity 0.9, match:class spotify"
+          "opacity 0.95, match:class code"
+          "opacity 0.95, match:class discord"
+          "opacity 0.95, match:class signal"
+
+          # Workspace assignments
+          "workspace 4, match:class ^discord$"
+          "workspace 4, match:class ^signal$"
         ];
         env = [
           "XDG_CURRENT_DESKTOP,Hyprland"
@@ -170,8 +170,7 @@ in
           no_donation_nag = true;
         };
         misc = {
-          new_window_takes_over_fullscreen = 1;
-          exit_window_retains_fullscreen = true;
+          on_focus_under_fullscreen = true;
           focus_on_activate = true;
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
