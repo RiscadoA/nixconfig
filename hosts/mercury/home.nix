@@ -74,5 +74,6 @@
     gemini-cli
     signal-desktop
     goxel
+    opencode
   ];
 }
