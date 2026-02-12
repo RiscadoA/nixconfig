@@ -73,8 +73,6 @@
     graphics.enable = true;
     nvidia.open = false;
     nvidia.nvidiaSettings = true;
-    # need at least 575.57.08-5 to get gpu accel steam working https://github.com/ValveSoftware/steam-for-linux/issues/10537
-    nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   # Required even though we're using Wayland
