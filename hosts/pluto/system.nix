@@ -17,19 +17,6 @@
   services.openssh.enable = true;
   services.syncthing.enable = true;
 
-  services.dnsmasq = {
-    enable = true;
-    settings = {
-      listen-address = "0.0.0.0";
-      bind-interfaces = true;
-      no-resolv = true;
-      server = [ "1.1.1.1" ];
-      cname = [
-        "firefly.home.riscadoa.com,100.126.246.110"
-      ];
-    };
-  };
-
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_18;
@@ -55,6 +42,7 @@
     package = pkgs.unstable.firefly-iii;
     enable = true;
     enableNginx = true;
+    virtualHost = "firefly.home.riscadoa.com";
     settings = {
       APP_KEY_FILE = "/var/lib/firefly-iii/app-key";
       APP_URL = "http://localhost";
@@ -68,11 +56,24 @@
     };
   };
 
-  services.nginx.virtualHosts.${config.services.firefly-iii.virtualHost} = {
-    listen = [ { addr = "*"; port = 3001; } ];
-    locations."~ \\.php$".extraConfig = ''
-      fastcgi_param HTTP_X_EMAIL "firefly@riscadoa.com";
-    '';
+  services.nginx.virtualHosts."firefly.home.riscadoa.com".locations."~ \\.php$".extraConfig = ''
+    fastcgi_param HTTP_X_EMAIL "firefly@riscadoa.com";
+  '';
+
+  services.nginx.virtualHosts."actual" = {
+    enableACME = false;
+    forceSSL = false;
+    serverName = "actual.home.riscadoa.com";
+    locations."/" = {
+      proxyPass = "http://localhost:3000";
+      proxyWebsockets = true;
+      extraConfig = ''
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+      '';
+    };
   };
 
   services.cloudflared = {
