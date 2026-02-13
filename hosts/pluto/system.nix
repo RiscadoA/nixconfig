@@ -24,8 +24,8 @@
       bind-interfaces = true;
       no-resolv = true;
       server = [ "1.1.1.1" ];
-      address = [
-        "/firefly.home.riscadoa.com/100.126.246.110"
+      cname = [
+        "firefly.home.riscadoa.com,100.126.246.110"
       ];
     };
   };
@@ -64,28 +64,22 @@
       DB_USERNAME = "firefly-iii";
       TZ = "Europe/Lisbon";
       TRUSTED_PROXIES = "**";
-      AUTHENTICATION_GUARD = "remote_user_guard";
-      AUTHENTICATION_GUARD_HEADER = "HTTP_X_EMAIL";
     };
   };
 
-  services.nginx.virtualHosts."firefly.home.riscadoa.com".locations."~ \\.php$".extraConfig = ''
-    fastcgi_param HTTP_X_EMAIL "firefly@riscadoa.com";
-  '';
+  services.nginx.virtualHosts.${config.services.firefly-iii.virtualHost} = {
+    enableACME = true;
+    forceSSL = true;
+    listen = [ { addr = "*"; ssl = true; } ];
+  };
 
-  services.nginx.virtualHosts."actual" = {
-    enableACME = false;
-    forceSSL = false;
-    serverName = "actual.home.riscadoa.com";
-    locations."/" = {
-      proxyPass = "http://localhost:3000";
-      proxyWebsockets = true;
-      extraConfig = ''
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-      '';
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "me@riscadoa.com";
+    certs."firefly.home.riscadoa.com" = {
+      dnsProvider = "cloudflare";
+      environmentFile = "/var/lib/acme/cloudflare-credentials";
+      webroot = null;
     };
   };
 
