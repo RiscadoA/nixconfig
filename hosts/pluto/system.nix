@@ -52,10 +52,9 @@
     package = pkgs.unstable.firefly-iii;
     enable = true;
     enableNginx = true;
-    virtualHost = "firefly.home.riscadoa.com";
     settings = {
       APP_KEY_FILE = "/var/lib/firefly-iii/app-key";
-      APP_URL = "http://localhost";
+      APP_URL = "https://localhost";
 	    DB_CONNECTION = "pgsql";
       DB_DATABASE = "firefly-iii";
       DB_USERNAME = "firefly-iii";
@@ -64,15 +63,7 @@
     };
   };
 
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "me@riscadoa.com";
-    certs."firefly.home.riscadoa.com" = {
-      dnsProvider = "cloudflare";
-      environmentFile = "/var/lib/acme/cloudflare-credentials";
-      webroot = null;
-    };
-  };
+  services.nginx.virtualHosts.${config.services.firefly-iii.virtualHost}.listen = [ { addr = "*"; port = 3001; } ];
 
   services.cloudflared = {
     enable = true;
