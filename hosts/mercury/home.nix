@@ -43,6 +43,7 @@
         firefox.enable = true;
         dolphin.enable = true;
         vscode.enable = true;
+        opencode.enable = true;
       };
 
       games = {
@@ -74,6 +75,5 @@
     gemini-cli
     signal-desktop
     goxel
-    opencode
   ];
 }

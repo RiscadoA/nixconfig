@@ -44,6 +44,7 @@
         spotify.enable = true;
         vscode.enable = true;
         dolphin.enable = true;
+        opencode.enable = true;
       };
 
       games = {
