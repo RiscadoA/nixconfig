@@ -67,12 +67,6 @@
     };
   };
 
-  services.nginx.virtualHosts.${config.services.firefly-iii.virtualHost} = {
-    enableACME = true;
-    forceSSL = true;
-    listen = [ { addr = "*"; ssl = true; } ];
-  };
-
   security.acme = {
     acceptTerms = true;
     defaults.email = "me@riscadoa.com";
