@@ -17,16 +17,13 @@
   services.openssh.enable = true;
   services.syncthing.enable = true;
 
-  services.dnsmasq = {
+  services.tsnsrv = {
     enable = true;
-    settings = {
-      listen-address = "0.0.0.0";
-      bind-interfaces = true;
-      no-resolv = true;
-      server = [ "1.1.1.1" ];
-      cname = [
-        "firefly.home.riscadoa.com,100.126.246.110"
-      ];
+    defaults.authKeyPath = "/home/riscadoa/.tailscale-auth-key";
+    defaults.urlParts.host = "localhost";
+    services = {
+      "actual".urlParts.port = 3000;
+      "firefly".urlParts.port = 3001;
     };
   };
 
