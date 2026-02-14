@@ -35,6 +35,7 @@ in
       package = pkgs.hyprland;
       portalPackage = null;
       xwayland.enable = true;
+      systemd.enable = false;
       settings = {
         "$mod" = "SUPER";
         general = {
