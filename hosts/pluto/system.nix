@@ -20,7 +20,7 @@
   services.tsnsrv = {
     enable = true;
     defaults.authKeyPath = "/home/riscadoa/.tailscale-auth-key";
-    defaults.urlParts.host = "localhost";
+    defaults.urlParts.host = "127.0.0.1";
     services = {
       "actual".urlParts.port = 3000;
       "firefly".urlParts.port = 3001;
