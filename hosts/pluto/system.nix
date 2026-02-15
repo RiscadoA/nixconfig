@@ -105,6 +105,8 @@
       APP_URL = "https://importer.firefly.home.riscadoa.com";
       FIREFLY_III_URL = "https://firefly.home.riscadoa.com";
       FIREFLY_III_ACCESS_TOKEN_FILE = "/var/lib/firefly-iii/access-token";
+      ENABLE_BANKING_APP_ID_FILE = "/var/lib/firefly-iii/enable-banking-app-id";
+      ENABLE_BANKING_PRIVATE_KEY_FILE = "/var/lib/firefly-iii/enable-banking.pem";
     };
   };
   security.acme.certs."importer.firefly.home.riscadoa.com".domain = "importer.firefly.home.riscadoa.com";
