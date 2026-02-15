@@ -24,6 +24,7 @@
       home.riscadoa.com {
         bind 100.126.246.110
         
+        rewrite name importer.firefly.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name firefly.home.riscadoa.com pluto.home.riscadoa.com
         
         hosts {
