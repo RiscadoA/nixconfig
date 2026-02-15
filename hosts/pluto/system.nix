@@ -96,7 +96,7 @@
   };
 
   services.firefly-iii-data-importer = {
-    package = pkgs.unstable.firefly-iii-data-importer;
+    package = pkgs.firefly-iii-data-importer;
     enable = true;
     enableNginx = true;
     virtualHost = "importer.firefly.home.riscadoa.com";
