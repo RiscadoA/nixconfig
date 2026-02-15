@@ -14,18 +14,47 @@
 
   networking.domain = "";
 
-  services.openssh.enable = true;
-  services.syncthing.enable = true;
-
-  services.tsnsrv = {
+  services.coredns = {
     enable = true;
-    defaults.authKeyPath = "/home/riscadoa/.tailscale-auth-key";
-    defaults.urlParts.host = "127.0.0.1";
-    services = {
-      "actual".urlParts.port = 3000;
-      "firefly".urlParts.port = 3001;
+    config = ''
+      . {
+        forward . 1.1.1.1 8.8.8.8
+        cache
+      }
+      home.riscadoa.com {
+        bind 100.126.246.110
+        
+        rewrite name firefly.home.riscadoa.com pluto.home.riscadoa.com
+        
+        hosts {
+          100.126.246.110 pluto.home.riscadoa.com
+          fallthrough
+        }
+      }
+    '';
+  };
+
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
+
+  security.acme = {
+    acceptTerms = true;
+    defaults = {
+      email = "acme@riscadoa.com";
+      dnsProvider = "cloudflare";
+      dnsResolver = "1.1.1.1:53";
+      credentialFiles = {
+        "CLOUDFLARE_DNS_API_TOKEN_FILE" = "/var/lib/acme/cloudflare-credentials";
+      };
+      group = "nginx";
+    };
+
+    certs."firefly.home.riscadoa.com" = {
+      domain = "firefly.home.riscadoa.com";
     };
   };
+
+  services.openssh.enable = true;
+  services.syncthing.enable = true;
 
   services.postgresql = {
     enable = true;
@@ -52,9 +81,10 @@
     package = pkgs.unstable.firefly-iii;
     enable = true;
     enableNginx = true;
+    virtualHost = "firefly.home.riscadoa.com";
     settings = {
       APP_KEY_FILE = "/var/lib/firefly-iii/app-key";
-      APP_URL = "https://localhost";
+      APP_URL = "https://firefly.home.riscadoa.com";
 	    DB_CONNECTION = "pgsql";
       DB_DATABASE = "firefly-iii";
       DB_USERNAME = "firefly-iii";
@@ -63,7 +93,10 @@
     };
   };
 
-  services.nginx.virtualHosts.${config.services.firefly-iii.virtualHost}.listen = [ { addr = "*"; port = 3001; } ];
+  services.nginx.virtualHosts."firefly.home.riscadoa.com" = {
+    useACMEHost = "firefly.home.riscadoa.com";
+    forceSSL = true;
+  };
 
   services.cloudflared = {
     enable = true;
