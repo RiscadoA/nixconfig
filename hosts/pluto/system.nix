@@ -47,10 +47,6 @@
       };
       group = "nginx";
     };
-
-    certs."firefly.home.riscadoa.com" = {
-      domain = "firefly.home.riscadoa.com";
-    };
   };
 
   services.openssh.enable = true;
@@ -92,9 +88,27 @@
       TRUSTED_PROXIES = "**";
     };
   };
-
+  security.acme.certs."firefly.home.riscadoa.com".domain = "firefly.home.riscadoa.com";
   services.nginx.virtualHosts."firefly.home.riscadoa.com" = {
     useACMEHost = "firefly.home.riscadoa.com";
+    forceSSL = true;
+  };
+
+  services.firefly-iii-data-importer = {
+    package = pkgs.unstable.firefly-iii-data-importer;
+    enable = true;
+    enableNginx = true;
+    virtualHost = "importer.firefly.home.riscadoa.com";
+    user = "firefly-iii";
+    settings = {
+      APP_URL = "https://importer.firefly.home.riscadoa.com";
+      FIREFLY_III_URL = "https://firefly.home.riscadoa.com";
+      FIREFLY_III_ACCESS_TOKEN_FILE = "/var/lib/firefly-iii/access-token";
+    };
+  };
+  security.acme.certs."importer.firefly.home.riscadoa.com".domain = "importer.firefly.home.riscadoa.com";
+  services.nginx.virtualHosts."importer.firefly.home.riscadoa.com" = {
+    useACMEHost = "importer.firefly.home.riscadoa.com";
     forceSSL = true;
   };
 
