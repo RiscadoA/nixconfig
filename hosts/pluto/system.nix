@@ -113,6 +113,46 @@
     forceSSL = true;
   };
 
+  systemd.tmpfiles.settings."10-firefly-iii-data-importer" =
+    let
+      dataDir = "/var/lib/${config.systemd.services.firefly-iii-data-importer-setup.serviceConfig.StateDirectory}";
+      inherit (config.services.firefly-iii-data-importer) user group;
+    in
+    lib.attrsets.genAttrs
+      [
+        "${dataDir}/storage"
+        "${dataDir}/storage/app"
+        "${dataDir}/storage/app/public"
+        "${dataDir}/storage/configurations"
+        "${dataDir}/storage/conversion-routines"
+        "${dataDir}/storage/debugbar"
+        "${dataDir}/storage/framework"
+        "${dataDir}/storage/framework/cache"
+        "${dataDir}/storage/framework/sessions"
+        "${dataDir}/storage/framework/testing"
+        "${dataDir}/storage/framework/views"
+        "${dataDir}/storage/import-jobs"
+        "${dataDir}/storage/jobs"
+        "${dataDir}/storage/logs"
+        "${dataDir}/storage/submission-routines"
+        "${dataDir}/storage/uploads"
+        "${dataDir}/cache"
+      ]
+      (_n: {
+        d = {
+          group = group;
+          mode = "0710";
+          user = user;
+        };
+      })
+    // {
+      "${dataDir}".d = {
+        group = group;
+        mode = "0700";
+        user = user;
+      };
+    };
+
   services.cloudflared = {
     enable = true;
     tunnels."248c8d02-aa20-4b78-bd43-ff97dc766b78" = {
