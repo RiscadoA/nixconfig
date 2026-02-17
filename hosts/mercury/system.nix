@@ -112,13 +112,6 @@
     startWhenNeeded = true;
   };
 
-  services.openvpn.servers = {
-    tecnicoVPN = {
-      config = '' config ${configDir}/tecnico.ovpn '';
-      autoStart = false;
-    };
-  };
-
   services.blueman.enable = true;
   hardware = {
     bluetooth = {

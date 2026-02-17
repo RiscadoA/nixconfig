@@ -12,8 +12,7 @@ I use [Home Manager](https://github.com/nix-community/home-manager).
 |                |                                                          |
 |----------------|----------------------------------------------------------|
 | **Shell:**     | zsh                                                      |
-| **DM:**        | lightdm                                                  |
-| **WM:**        | xmonad + xmobar                                          |
-| **Terminal:**  | alacritty                                                |
-| **Launcher:**  | dmenu                                                    |
+| **WM:**        | hyprland + waybar                                        |
+| **Terminal:**  | kitty                                                    |
+| **Launcher:**  | rofi                                                     |
 | **Browser:**   | firefox                                                  |

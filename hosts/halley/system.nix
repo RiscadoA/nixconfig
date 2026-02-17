@@ -30,13 +30,6 @@
     pkgs.alsa-utils
   ];
 
-  services.openvpn.servers = {
-    tecnicoVPN = {
-      config = '' config ${configDir}/tecnico.ovpn '';
-      autoStart = false;
-    };
-  };
-
   # Required by vscode
   services.gnome.gnome-keyring.enable = true;
 
