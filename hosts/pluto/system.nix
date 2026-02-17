@@ -96,15 +96,6 @@
     ];
   };
 
-  services.actual = {
-    package = pkgs.unstable.actual-server;
-    enable = true;
-    settings = {
-      port = 3000;
-      loginMethod = "header";
-    };
-  };
-
   services.firefly-iii = {
     package = pkgs.unstable.firefly-iii;
     enable = true;
