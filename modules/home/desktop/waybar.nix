@@ -5,7 +5,7 @@
 #
 # waybar home configuration.
 
-{ lib, config, pkgs, configDir, ... }:
+{ lib, config, pkgs, configDir, secrets, ... }:
 let
   inherit (lib) mkEnableOption mkOption types mkIf mkMerge;
   cfg = config.modules.desktop.waybar;
@@ -60,6 +60,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    age.secrets = {
+      gmail-username.file = "${secrets}/gmail-username.age";
+      gmail-password.file = "${secrets}/gmail-password.age";
+    };
+
     programs.waybar = {
       enable = true;
       systemd.enable = true;
@@ -167,7 +172,7 @@ in
           };
 
           "custom/mail" = {
-            exec = "/home/riscadoa/nixos/bin/sb-gmail.sh";
+            exec = "GMAIL_USERNAME_FILE=${config.age.secrets.gmail-username.path} GMAIL_PASSWORD_FILE=${config.age.secrets.gmail-password.path} /home/riscadoa/nixos/bin/sb-gmail.sh";
             interval = 30;
             tooltip = false;
           };

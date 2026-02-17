@@ -101,8 +101,12 @@
                   home-manager = {
                     useGlobalPkgs = true;
                     useUserPackages = true;
-                    extraSpecialArgs.configDir = ./config;
+                    extraSpecialArgs = {
+                      configDir = ./config;
+                      secrets = ./secrets;
+                    };
                     sharedModules = homeModules ++ [
+                      inputs.agenix.homeManagerModules.default
                       (import "${dir}/home.nix")
                       (import "${dir}/${name}/home.nix")
                     ];
