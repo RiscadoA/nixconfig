@@ -1,4 +1,4 @@
-{ config, pkgs, options, inputs, lib, configDir, ... }:
+{ config, pkgs, options, inputs, lib, configDir, secrets, ... }:
 {
   # Modules configuration.
   modules = {
@@ -6,6 +6,37 @@
       tailscale.enable = true;
       cubos-discord-bot.enable = true;
     };
+  };
+
+  age.secrets = {
+    cloudflare-dns-api-token = {
+      file = "${secrets}/pluto/cloudflare-dns-api-token.age";
+      owner = "firefly-iii";
+      group = "nginx";
+    };
+
+    firefly-iii-app-key = {
+      file = "${secrets}/pluto/firefly-iii-app-key.age";
+      owner = "firefly-iii";
+      group = "nginx";
+    };
+    firefly-iii-access-token = {
+      file = "${secrets}/pluto/firefly-iii-access-token.age";
+      owner = "firefly-iii";
+      group = "nginx";
+    };
+    firefly-iii-enable-banking-app-id = {
+      file = "${secrets}/pluto/firefly-iii-enable-banking-app-id.age";
+      owner = "firefly-iii";
+      group = "nginx";
+    };
+    firefly-iii-enable-banking-private-key = {
+      file = "${secrets}/pluto/firefly-iii-enable-banking.pem.age";
+      owner = "firefly-iii";
+      group = "nginx";
+    };
+
+    cloudflared-credentials.file = "${secrets}/pluto/cloudflared-credentials.json.age";
   };
 
   boot.tmp.cleanOnBoot = true;
@@ -44,7 +75,7 @@
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
       credentialFiles = {
-        "CLOUDFLARE_DNS_API_TOKEN_FILE" = "/var/lib/acme/cloudflare-credentials";
+        "CLOUDFLARE_DNS_API_TOKEN_FILE" = config.age.secrets.cloudflare-dns-api-token.path;
       };
       group = "nginx";
     };
@@ -80,7 +111,7 @@
     enableNginx = true;
     virtualHost = "firefly.home.riscadoa.com";
     settings = {
-      APP_KEY_FILE = "/var/lib/firefly-iii/app-key";
+      APP_KEY_FILE = config.age.secrets.firefly-iii-app-key.path;
       APP_URL = "https://firefly.home.riscadoa.com";
 	    DB_CONNECTION = "pgsql";
       DB_DATABASE = "firefly-iii";
@@ -104,9 +135,9 @@
     settings = {
       APP_URL = "https://importer.firefly.home.riscadoa.com";
       FIREFLY_III_URL = "https://firefly.home.riscadoa.com";
-      FIREFLY_III_ACCESS_TOKEN_FILE = "/var/lib/firefly-iii/access-token";
-      ENABLE_BANKING_APP_ID_FILE = "/var/lib/firefly-iii/enable-banking-app-id";
-      ENABLE_BANKING_PRIVATE_KEY_FILE = "/var/lib/firefly-iii/enable-banking.pem";
+      FIREFLY_III_ACCESS_TOKEN_FILE = config.age.secrets.firefly-iii-access-token.path;
+      ENABLE_BANKING_APP_ID_FILE = config.age.secrets.firefly-iii-enable-banking-app-id.path;
+      ENABLE_BANKING_PRIVATE_KEY_FILE = config.age.secrets.firefly-iii-enable-banking-private-key.path;
     };
   };
   security.acme.certs."importer.firefly.home.riscadoa.com".domain = "importer.firefly.home.riscadoa.com";
@@ -158,7 +189,7 @@
   services.cloudflared = {
     enable = true;
     tunnels."248c8d02-aa20-4b78-bd43-ff97dc766b78" = {
-      credentialsFile = "/home/riscadoa/.cloudflared/248c8d02-aa20-4b78-bd43-ff97dc766b78.json";
+      credentialsFile = config.age.secrets.cloudflared-credentials.path;
       default = "http_status:404";
     };
   };

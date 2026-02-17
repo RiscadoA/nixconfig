@@ -12,4 +12,10 @@ let
 in {
   "gmail-username.age".publicKeys = users ++ personalSystems;
   "gmail-password.age".publicKeys = users ++ personalSystems;
+  "pluto/cloudflare-dns-api-token.age".publicKeys = users ++ [ plutoSystem ];
+  "pluto/firefly-iii-app-key.age".publicKeys = users ++ [ plutoSystem ];
+  "pluto/firefly-iii-access-token.age".publicKeys = users ++ [ plutoSystem ];
+  "pluto/firefly-iii-enable-banking-app-id.age".publicKeys = users ++ [ plutoSystem ];
+  "pluto/firefly-iii-enable-banking.pem.age".publicKeys = users ++ [ plutoSystem ];
+  "pluto/cloudflared-credentials.json.age".publicKeys = users ++ [ plutoSystem ];
 }

@@ -84,7 +84,10 @@
           inherit name;
           value = nixosSystem {
             pkgs = pkgs (mkSystem name);
-            specialArgs = { configDir = ./config; };
+            specialArgs = { 
+              configDir = ./config;
+              secrets = ./secrets;
+            };
             modules =
               let
                 users = mkUsers "${dir}/${name}/users";
