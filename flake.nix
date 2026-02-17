@@ -15,10 +15,6 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    tsnsrv = {
-      url = "github:boinkor-net/tsnsrv/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ { self, ... }:
@@ -27,8 +23,6 @@
       inherit (inputs.nixpkgs) lib;
       inherit (inputs.home.nixosModules) home-manager;
       inherit (lib) mapAttrs removeSuffix hasSuffix nixosSystem;
-
-      tsnsrv = inputs.tsnsrv.nixosModules.default;
 
       pkgs = mkPkgs inputs.nixpkgs [ self.overlays.default ];
       pkgs' = mkPkgs inputs.nixpkgs-unstable [ ];
@@ -98,7 +92,6 @@
                 (import "${dir}/${name}/hardware.nix")
                 (import "${dir}/${name}/system.nix")
                 home-manager
-                tsnsrv
                 {
                   home-manager = {
                     useGlobalPkgs = true;
