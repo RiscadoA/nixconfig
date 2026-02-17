@@ -5,7 +5,7 @@
 # 
 # Default/common configuration for all host systems.
 
-{ inputs, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 let
   inherit (builtins) toString;
   inherit (lib.my) mapModules;

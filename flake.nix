@@ -15,6 +15,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { self, ... }:
@@ -92,6 +96,7 @@
                 (import "${dir}/${name}/hardware.nix")
                 (import "${dir}/${name}/system.nix")
                 home-manager
+                inputs.agenix.nixosModules.default
                 {
                   home-manager = {
                     useGlobalPkgs = true;
@@ -122,5 +127,10 @@
     {
       overlays = mkOverlays ./overlays;
       nixosConfigurations = mkHosts ./hosts;
+      devShells.x86_64-linux.default = (pkgs "x86_64-linux").mkShell {
+        packages = [
+          inputs.agenix.packages.x86_64-linux.default
+        ];
+      };
     };
 }
