@@ -8,6 +8,16 @@
     };
   };
 
+  boot.kernelModules = [ "fuse" ];
+
+  programs.fuse.userAllowOther = true;
+
+  environment.systemPackages = with pkgs; [
+    nfs-utils
+    gocryptfs
+    fuse
+  ];
+
   age.secrets = {
     cloudflare-dns-api-token = {
       file = "${secrets}/pluto/cloudflare-dns-api-token.age";
@@ -36,6 +46,12 @@
       group = "nginx";
     };
 
+    immich-gocryptfs-password = {
+      file = "${secrets}/pluto/immich-gocryptfs-password.age";
+      owner = "root";
+      group = "root";
+    };
+
     cloudflared-credentials.file = "${secrets}/pluto/cloudflared-credentials.json.age";
   };
 
@@ -57,8 +73,10 @@
         
         rewrite name importer.firefly.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name firefly.home.riscadoa.com pluto.home.riscadoa.com
+        rewrite name immich.home.riscadoa.com pluto.home.riscadoa.com
         
         hosts {
+          100.121.196.112 synology.home.riscadoa.com
           100.126.246.110 pluto.home.riscadoa.com
           fallthrough
         }
@@ -87,10 +105,14 @@
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_18;
-    ensureDatabases = [ "firefly-iii" ];
+    ensureDatabases = [ "firefly-iii" "immich" ];
     ensureUsers = [
       {
         name = "firefly-iii";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "immich";
         ensureDBOwnership = true;
       }
     ];
@@ -176,6 +198,61 @@
         user = user;
       };
     };
+
+  fileSystems."/mnt/synology-immich" = {
+    device = "synology.home.riscadoa.com:/volume1/Immich";
+    fsType = "nfs";
+    options = [ "defaults" "x-systemd.requires=network.target" ];
+  };
+
+  systemd.services.immich-gocryptfs = {
+    description = "Mount gocryptfs for Immich";
+    after = [ "mnt-synology-immich.mount" "network.target" ];
+    wants = [ "mnt-synology-immich.mount" ];
+    requiredBy = [ "immich-server.service" "immich-machine-learning.service" ];
+    serviceConfig = {
+      Type = "forking";
+      ExecStartPre = [
+        "+${pkgs.coreutils}/bin/mkdir -p /var/lib/immich"
+        "+${pkgs.bash}/bin/bash -c 'if [ ! -f /mnt/synology-immich/gocryptfs.conf ]; then ${pkgs.gocryptfs}/bin/gocryptfs -init -passfile ${config.age.secrets.immich-gocryptfs-password.path} /mnt/synology-immich; fi'"
+      ];
+      ExecStart = "+${pkgs.bash}/bin/bash -c '${pkgs.gocryptfs}/bin/gocryptfs -allow_other -passfile ${config.age.secrets.immich-gocryptfs-password.path} /mnt/synology-immich /var/lib/immich'";
+      ExecStop = "+${pkgs.fuse}/bin/fusermount -u /var/lib/immich";
+    };
+  };
+
+  services.immich = {
+    enable = true;
+    mediaLocation = "/var/lib/immich";
+    database = {
+      enable = true;
+      createDB = true;
+      enableVectors = false;
+    };
+    settings = {
+      IMMICH_TRUSTED_PROXIES = "**";
+    };
+    port = 2283;
+  };
+  
+  security.acme.certs."immich.home.riscadoa.com".domain = "immich.home.riscadoa.com";
+  services.nginx.virtualHosts."immich.home.riscadoa.com" = {
+    useACMEHost = "immich.home.riscadoa.com";
+    forceSSL = true;
+    extraConfig = ''
+      client_max_body_size 50000M;
+    '';
+    locations."/" = {
+      proxyPass = "http://[::1]:2283";
+      proxyWebsockets = true;
+      recommendedProxySettings = true;
+      extraConfig = ''
+        proxy_read_timeout 600s;
+        proxy_send_timeout 600s;
+        send_timeout 600s;
+      '';
+    };
+  };
 
   services.cloudflared = {
     enable = true;

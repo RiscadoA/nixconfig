@@ -18,4 +18,5 @@ in {
   "pluto/firefly-iii-enable-banking-app-id.age".publicKeys = users ++ [ plutoSystem ];
   "pluto/firefly-iii-enable-banking.pem.age".publicKeys = users ++ [ plutoSystem ];
   "pluto/cloudflared-credentials.json.age".publicKeys = users ++ [ plutoSystem ];
+  "pluto/immich-gocryptfs-password.age".publicKeys = users ++ [ plutoSystem ];
 }
