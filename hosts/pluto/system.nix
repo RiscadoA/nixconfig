@@ -216,7 +216,7 @@
         "+${pkgs.coreutils}/bin/mkdir -p /var/lib/immich"
         "+${pkgs.bash}/bin/bash -c 'if [ ! -f /mnt/synology-immich/gocryptfs.conf ]; then ${pkgs.gocryptfs}/bin/gocryptfs -init -passfile ${config.age.secrets.immich-gocryptfs-password.path} /mnt/synology-immich; fi'"
       ];
-      ExecStart = "+${pkgs.bash}/bin/bash -c '${pkgs.gocryptfs}/bin/gocryptfs -allow_other -passfile ${config.age.secrets.immich-gocryptfs-password.path} /mnt/synology-immich /var/lib/immich'";
+      ExecStart = "+${pkgs.bash}/bin/bash -c '${pkgs.gocryptfs}/bin/gocryptfs -allow_other -sharedstorage -passfile ${config.age.secrets.immich-gocryptfs-password.path} /mnt/synology-immich /var/lib/immich'";
       ExecStop = "+${pkgs.fuse}/bin/fusermount -u /var/lib/immich";
     };
   };
