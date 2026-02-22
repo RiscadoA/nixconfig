@@ -199,6 +199,18 @@
       };
     };
 
+  services.actual = {
+    package = pkgs.unstable.actual-server;
+    enable = true;
+    settings.port = 3000;
+  };
+  security.acme.certs."actual.home.riscadoa.com".domain = "actual.home.riscadoa.com";
+  services.nginx.virtualHosts."actual.home.riscadoa.com" = {
+    useACMEHost = "actual.home.riscadoa.com";
+    forceSSL = true;
+    locations."/".proxyPass = "http://localhost:3000";
+  };
+
   fileSystems."/mnt/synology-immich" = {
     device = "synology.home.riscadoa.com:/volume1/Immich";
     fsType = "nfs";
@@ -234,7 +246,7 @@
     };
     port = 2283;
   };
-  
+
   security.acme.certs."immich.home.riscadoa.com".domain = "immich.home.riscadoa.com";
   services.nginx.virtualHosts."immich.home.riscadoa.com" = {
     useACMEHost = "immich.home.riscadoa.com";
