@@ -73,6 +73,7 @@
         
         rewrite name importer.firefly.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name firefly.home.riscadoa.com pluto.home.riscadoa.com
+        rewrite name actual.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name immich.home.riscadoa.com pluto.home.riscadoa.com
         
         hosts {
