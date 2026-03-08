@@ -74,6 +74,7 @@
         rewrite name importer.firefly.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name firefly.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name actual.home.riscadoa.com pluto.home.riscadoa.com
+        rewrite name mealie.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name immich.home.riscadoa.com pluto.home.riscadoa.com
         
         hosts {
@@ -210,6 +211,18 @@
     useACMEHost = "actual.home.riscadoa.com";
     forceSSL = true;
     locations."/".proxyPass = "http://localhost:3000";
+  };
+
+  services.mealie = {
+    enable = true;
+    port = 3001;
+    database.createLocally = true;
+  };
+  security.acme.certs."mealie.home.riscadoa.com".domain = "mealie.home.riscadoa.com";
+  services.nginx.virtualHosts."mealie.home.riscadoa.com" = {
+    useACMEHost = "mealie.home.riscadoa.com";
+    forceSSL = true;
+    locations."/".proxyPass = "http://localhost:3001";
   };
 
   fileSystems."/mnt/synology-immich" = {
