@@ -76,6 +76,7 @@
         rewrite name actual.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name mealie.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name immich.home.riscadoa.com pluto.home.riscadoa.com
+        rewrite name droby.home.riscadoa.com pluto.home.riscadoa.com
         
         hosts {
           100.121.196.112 synology.home.riscadoa.com
@@ -278,6 +279,18 @@
         send_timeout 600s;
       '';
     };
+  };
+
+  services.droby = {
+    enable = true;
+    port = 3002;
+    database.createLocally = true;
+  };
+  security.acme.certs."droby.home.riscadoa.com".domain = "droby.home.riscadoa.com";
+  services.nginx.virtualHosts."droby.home.riscadoa.com" = {
+    useACMEHost = "droby.home.riscadoa.com";
+    forceSSL = true;
+    locations."/".proxyPass = "http://localhost:3002";
   };
 
   services.cloudflared = {

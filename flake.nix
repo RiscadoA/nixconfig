@@ -19,6 +19,10 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    droby = {
+      url = "git+ssh://git@github.com/riscadoa/droby";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { self, ... }:
@@ -122,6 +126,7 @@
                   };
                 }
               ] ++ systemModules
+              ++ [ inputs.droby.nixosModules.default ]
               ++ (map
                 (user: args @ { pkgs, ... }: {
                   users.users.${user.name} = (user.value args).user;
