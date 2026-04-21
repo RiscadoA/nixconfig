@@ -44,6 +44,20 @@
 
   services.syncthing.enable = true;
 
+  systemd.user.services.opencode-web = {
+    Unit = {
+      Description = "OpenCode Web UI";
+    };
+    Service = {
+      ExecStart = "${pkgs.opencode}/bin/opencode web --hostname 0.0.0.0 --port 42424";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
+
   wayland.windowManager.hyprland.settings = {
     exec-once = [
       "[workspace 1 silent] kitty"

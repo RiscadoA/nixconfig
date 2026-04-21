@@ -7,11 +7,18 @@
 
 { lib, config, pkgs, configDir, ... }:
 let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config.modules.desktop.hyprlock;
 in
 {
-  options.modules.desktop.hyprlock.enable = mkEnableOption "hyprlock";
+  options.modules.desktop.hyprlock = {
+    enable = mkEnableOption "hyprlock";
+    suspend = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Automatically suspend after 15 minutes of idle time";
+    };
+  };
 
   config = mkIf cfg.enable {
     programs.hyprlock = {
@@ -107,6 +114,7 @@ in
             on-timeout = "hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
           }
+        ] ++ lib.optionals cfg.suspend [
           {
             timeout = 900;
             on-timeout = "systemctl suspend";

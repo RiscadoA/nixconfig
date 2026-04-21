@@ -24,7 +24,10 @@
     desktop = {
       hyprland.enable = true;
       hyprpaper.enable = true;
-      hyprlock.enable = true;
+      hyprlock = {
+        enable = true;
+        suspend = false;
+      };
       waybar = {
         enable = true;
         sizeMultiplier = 1.2;
