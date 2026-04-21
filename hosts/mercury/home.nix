@@ -75,6 +75,5 @@
     gemini-cli
     signal-desktop
     goxel
-    unstable.spec-kit
   ];
 }
