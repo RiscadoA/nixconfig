@@ -77,10 +77,12 @@
         rewrite name mealie.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name immich.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name droby.home.riscadoa.com pluto.home.riscadoa.com
+        rewrite name opencode.home.riscadoa.com pluto.home.riscadoa.com
         
         hosts {
           100.121.196.112 synology.home.riscadoa.com
           100.126.246.110 pluto.home.riscadoa.com
+          100.124.202.87 mercury.home.riscadoa.com
           fallthrough
         }
       }
@@ -292,6 +294,13 @@
     forceSSL = true;
     locations."/".proxyPass = "http://localhost:3002";
   };
+
+  services.nginx.virtualHosts."opencode.home.riscadoa.com" = {
+    useACMEHost = "opencode.home.riscadoa.com";
+    forceSSL = true;
+    locations."/".proxyPass = "http://mercury.home.riscadoa.com:42424";
+  };
+  security.acme.certs."opencode.home.riscadoa.com".domain = "opencode.home.riscadoa.com";
 
   services.cloudflared = {
     enable = true;
