@@ -30,46 +30,4 @@
       hash = "sha256-V8JAai4gZ1nzia4kmQVeBwidQ+Sx5A5on3SJGSevrUU=";
     };
   });
-
-  firefly-iii = prev.firefly-iii.overrideAttrs (oldAttrs: rec {
-    version = "6.4.21";
-    src = oldAttrs.src.override {
-      tag = "v${version}";
-      hash = "sha256-A3KhXQP1CIgfBPyyZmOgYFg2NBqjkOUQo3QA7slEH/I=";
-    };
-    npmDeps = final.fetchNpmDeps {
-      inherit src;
-      name = "${oldAttrs.pname}-npm-deps";
-      hash = "sha256-aOJriwmn3wwGTSGOQ5YEJxi4BwviKnyCZR0n3g4sWhU=";
-    };
-    vendorHash = "sha256-Q0xNabSEESfz3gl9np0dNNOInUZFCZH5X9xYb5Z/5pk=";
-    composerVendor = final.php84.mkComposerVendor {
-      inherit (oldAttrs) pname;
-      inherit src vendorHash version;
-      composerStrictValidation = true;
-      strictDeps = true;
-    };
-  });
-
-  firefly-iii-data-importer = prev.firefly-iii-data-importer.overrideAttrs (oldAttrs: rec {
-    version = "2.1.0";
-    src = oldAttrs.src.override {
-      tag = "v${version}";
-      hash = "sha256-b5aOhTqYZqjdNl3WD69+EwqP/6u0t2FI3OgdZ2x5Suk=";
-    };
-    npmDeps = final.fetchNpmDeps {
-      inherit src;
-      name = "${oldAttrs.pname}-npm-deps";
-      hash = "sha256-5HUCF9LrQFFBLMcDx0h2DtRxO8pGMzR/WK11AeyrWRM=";
-    };
-    vendorHash = "sha256-7dKpBlpAcg3E3QrdEgrc3//73MWjlrw0PyISV/BriYQ=";
-    composerRepository = final.php84.mkComposerRepository {
-      inherit (oldAttrs) pname;
-      inherit src vendorHash version;
-      composerNoDev = true;
-      composerNoPlugins = true;
-      composerNoScripts = true;
-      composerStrictValidation = true;
-    };
-  });
 }
