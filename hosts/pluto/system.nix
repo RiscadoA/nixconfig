@@ -22,7 +22,7 @@
     cloudflare-dns-api-token = {
       file = "${secrets}/pluto/cloudflare-dns-api-token.age";
       owner = "root";
-      group = "nginx";
+      group = "root";
     };
 
     immich-gocryptfs-password = {
