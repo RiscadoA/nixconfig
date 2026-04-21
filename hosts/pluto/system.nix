@@ -21,8 +21,8 @@
   age.secrets = {
     cloudflare-dns-api-token = {
       file = "${secrets}/pluto/cloudflare-dns-api-token.age";
-      owner = "root";
-      group = "root";
+      owner = "nginx";
+      group = "nginx";
     };
 
     immich-gocryptfs-password = {
@@ -83,7 +83,7 @@
       credentialFiles = {
         "CLOUDFLARE_DNS_API_TOKEN_FILE" = config.age.secrets.cloudflare-dns-api-token.path;
       };
-      group = "root";
+      group = "nginx";
     };
   };
 
