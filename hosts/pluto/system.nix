@@ -283,17 +283,17 @@
     };
   };
 
-  services.droby = {
-    enable = true;
-    port = 3002;
-    database.createLocally = true;
-  };
-  security.acme.certs."droby.home.riscadoa.com".domain = "droby.home.riscadoa.com";
-  services.nginx.virtualHosts."droby.home.riscadoa.com" = {
-    useACMEHost = "droby.home.riscadoa.com";
-    forceSSL = true;
-    locations."/".proxyPass = "http://localhost:3002";
-  };
+  # services.droby = {
+  #   enable = true;
+  #   port = 3002;
+  #   database.createLocally = true;
+  # };
+  # security.acme.certs."droby.home.riscadoa.com".domain = "droby.home.riscadoa.com";
+  # services.nginx.virtualHosts."droby.home.riscadoa.com" = {
+  #   useACMEHost = "droby.home.riscadoa.com";
+  #   forceSSL = true;
+  #   locations."/".proxyPass = "http://localhost:3002";
+  # };
 
   services.nginx.virtualHosts."opencode.home.riscadoa.com" = {
     useACMEHost = "opencode.home.riscadoa.com";
