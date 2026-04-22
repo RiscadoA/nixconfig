@@ -6,6 +6,8 @@
 # Extra packages.
 
 { packageDir, ... }: final: prev: rec {
+  openchamber = final.callPackage "${packageDir}/openchamber" { };
+
   dmenu = prev.dmenu.overrideAttrs (oldAttrs: rec {
     patches = [
       "${packageDir}/dmenu/colors.patch"

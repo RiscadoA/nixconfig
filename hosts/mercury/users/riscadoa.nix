@@ -44,12 +44,12 @@
 
   services.syncthing.enable = true;
 
-  systemd.user.services.opencode-web = {
+  systemd.user.services.openchamber-web = {
     Unit = {
-      Description = "OpenCode Web UI";
+      Description = "OpenChamber Web UI";
     };
     Service = {
-      ExecStart = "${pkgs.opencode}/bin/opencode web --hostname 0.0.0.0 --port 42424";
+      ExecStart = "${pkgs.openchamber}/bin/openchamber serve --host 0.0.0.0 --port 42424 --foreground";
       Restart = "on-failure";
       RestartSec = 5;
     };
