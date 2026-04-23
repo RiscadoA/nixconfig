@@ -2,11 +2,11 @@
 
 buildNpmPackage rec {
   pname = "openchamber";
-  version = "1.9.7";
+  version = "1.9.8";
 
   src = fetchurl {
     url = "https://github.com/openchamber/openchamber/releases/download/v${version}/openchamber-web-${version}.tgz";
-    hash = "sha256-KqWSM0Dm8e4XQiUtQ63xVMYMxRBq31q19hXLVSud0Y4=";
+    hash = "sha256-zAcxXmj22lYZQvZaoXpIWz/1kalM8uKnfRHVv7ZMMu4=";
   };
 
   sourceRoot = "package";
