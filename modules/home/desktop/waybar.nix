@@ -75,7 +75,10 @@ in
       systemd.enable = true;
       settings = {
         mainBar = {
-          layer = "bottom";
+          # `top` keeps the bar visible across the niri overview as
+          # compositor chrome; `bottom` would render it inside each
+          # workspace preview, making it appear per-workspace.
+          layer = "top";
           position = "top";
           height = int-dim 34;
           spacing = 0;

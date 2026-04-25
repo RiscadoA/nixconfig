@@ -115,7 +115,7 @@ in
           "Mod+Return".action.spawn = "kitty";
           "Mod+D".action.spawn = "${pkgs.fuzzel}/bin/fuzzel";
           "Mod+Shift+D".action.spawn = [ "${pkgs.fuzzel}/bin/fuzzel" "--dmenu" ];
-          "Mod+C".action.spawn = "${pkgs.rofi}/bin/rofi -modi clipboard:cliphist-rofi-img -show clipboard -show-icons";
+          "Mod+C".action.spawn = [ "${pkgs.rofi}/bin/rofi" "-modi" "clipboard:cliphist-rofi-img" "-show" "clipboard" "-show-icons" ];
           "Mod+P".action.spawn = "rofi-pass";
           "Print".action.spawn = "flameshot gui";
           "Mod+Shift+P".action.spawn = "flameshot gui";
@@ -188,19 +188,20 @@ in
           "Mod+Shift+WheelScrollUp".action.move-workspace-up = [];
           "Mod+Shift+WheelScrollDown".action.move-workspace-down = [];
 
-          # Media
-          "XF86AudioRaiseVolume".action.spawn = "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+";
-          "XF86AudioLowerVolume".action.spawn = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
-          "XF86AudioMute".action.spawn = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-          "XF86AudioMicMute".action.spawn = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
-          "Mod+Ctrl+Left".action.spawn = "playerctl previous";
-          "Mod+Ctrl+Right".action.spawn = "playerctl next";
-          "Mod+Ctrl+Up".action.spawn = "playerctl play-pause";
-          "Mod+Ctrl+Down".action.spawn = "playerctl stop";
+          # Media — niri spawns via execvp, no shell. Multi-arg spawns
+          # MUST be lists; a string is treated as a single argv[0].
+          "XF86AudioRaiseVolume".action.spawn = [ "wpctl" "set-volume" "-l" "1" "@DEFAULT_AUDIO_SINK@" "5%+" ];
+          "XF86AudioLowerVolume".action.spawn = [ "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-" ];
+          "XF86AudioMute".action.spawn = [ "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle" ];
+          "XF86AudioMicMute".action.spawn = [ "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle" ];
+          "Mod+Ctrl+Left".action.spawn = [ "playerctl" "previous" ];
+          "Mod+Ctrl+Right".action.spawn = [ "playerctl" "next" ];
+          "Mod+Ctrl+Up".action.spawn = [ "playerctl" "play-pause" ];
+          "Mod+Ctrl+Down".action.spawn = [ "playerctl" "stop" ];
 
           # Brightness
-          "XF86MonBrightnessUp".action.spawn = "light -A 5";
-          "XF86MonBrightnessDown".action.spawn = "light -U 5";
+          "XF86MonBrightnessUp".action.spawn = [ "light" "-A" "5" ];
+          "XF86MonBrightnessDown".action.spawn = [ "light" "-U" "5" ];
         };
       };
     };
