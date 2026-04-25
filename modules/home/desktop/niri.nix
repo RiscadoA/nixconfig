@@ -38,16 +38,22 @@ in
           };
         };
 
-        # Note: previously had `place-within-backdrop = true` for the
-        # wallpaper namespaces, which makes the wallpaper layer render
-        # only inside niri's overview backdrop (not on regular
-        # workspaces). swaybg/hyprpaper already use the `background`
-        # layer-shell layer, which sits below all windows and is visible
-        # everywhere — so we don't need a custom rule.
-        layer-rules = [];
+        # Push the wallpaper layer into niri's backdrop so it shows up
+        # both on regular workspaces AND inside the overview / between
+        # workspaces. Requires layout.background-color = "transparent"
+        # (set below) so the per-workspace fill doesn't paint over it.
+        layer-rules = [
+          {
+            matches = [ { namespace = "^wallpaper$"; } ];
+            place-within-backdrop = true;
+          }
+        ];
 
         layout = {
           gaps = 8;
+          # Transparent so the wallpaper backdrop is visible behind
+          # tiled windows (paired with the layer-rule above).
+          background-color = "transparent";
           # Negative struts pull the working area slightly past the screen
           # edges so the per-column gaps look uniform (otherwise the outer
           # gap visually doubles up on top of the workspace edge).

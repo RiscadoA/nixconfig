@@ -92,13 +92,22 @@ in
           "custom/power" = {
             format = "󰐥";
             tooltip = false;
-            menu = "on-click";
-            menu-file = configDir + "/waybar/power.xml";
-            menu-actions = {
-              logout = "uwsm stop";
-              shutdown = "shutdown now";
-              reboot = "reboot";
-            };
+            on-click = let
+              logoutCmd =
+                if cfg.compositor == "niri"
+                then "niri msg action quit"
+                else "uwsm stop";
+            in ''
+              sh -c 'choice=$(printf "󰌾  Lock\n󰍃  Logout\n󰤄  Suspend\n󰐥  Shutdown\n󰑓  Reboot" \
+                | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt="  " --width=15 --lines=5) \
+                && case "$choice" in \
+                  *Lock*) hyprlock ;; \
+                  *Logout*) ${logoutCmd} ;; \
+                  *Suspend*) systemctl suspend ;; \
+                  *Shutdown*) systemctl poweroff ;; \
+                  *Reboot*) systemctl reboot ;; \
+                esac'
+            '';
           };
 
           "hyprland/workspaces" = mkIf (cfg.compositor == "hyprland") {
@@ -240,6 +249,12 @@ in
         #workspaces,
         #tray {
           padding: 0;
+        }
+
+        /* The power glyph (U+F0425) sits slightly left of its em-box
+           center; nudge with asymmetric padding so it looks centered. */
+        #custom-power {
+          padding: 0 ${string-dim 8}px 0 ${string-dim 11}px;
         }
 
         #custom-power:hover,
