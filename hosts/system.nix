@@ -32,6 +32,7 @@ in
     neofetch
     man-pages
     kitty
+    nix-output-monitor
   ];
 
   programs.zsh.enable = true;

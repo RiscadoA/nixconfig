@@ -12,7 +12,7 @@
     stateVersion = "21.11";
 
     shellAliases = {
-      "rebuild" = "sudo nixos-rebuild switch --flake $HOME/nixos";
+      "rebuild" = "sudo nixos-rebuild switch --flake $HOME/nixos |& nom";
     };
   };
 
