@@ -251,10 +251,10 @@ in
           padding: 0;
         }
 
-        /* The power glyph (U+F0425) sits slightly left of its em-box
+        /* The power glyph (U+F0425) sits slightly right of its em-box
            center; nudge with asymmetric padding so it looks centered. */
         #custom-power {
-          padding: 0 ${string-dim 8}px 0 ${string-dim 11}px;
+          padding: 0 ${string-dim 11}px 0 ${string-dim 8}px;
         }
 
         #custom-power:hover,
