@@ -30,7 +30,7 @@
       };
       waybar = {
         enable = true;
-        sizeMultiplier = 1.2;
+        sizeMultiplier = 1.1;
         compositor = "niri";
       };
       gtk.enable = true;
