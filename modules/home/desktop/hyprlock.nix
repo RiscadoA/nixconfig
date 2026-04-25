@@ -42,7 +42,7 @@ in
 
         background = {
           monitor = "";
-          path = "/home/riscadoa/pictures/wallpapers/current";
+          path = "${config.home.homeDirectory}/pictures/wallpapers/current";
           blur_passes = 3;
         };
 

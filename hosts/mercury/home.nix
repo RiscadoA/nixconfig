@@ -24,7 +24,6 @@
     desktop = {
       wayland.enable = true;
       niri.enable = true;
-      hyprpaper.enable = true;
       hyprlock = {
         enable = true;
         suspend = false;
@@ -39,10 +38,12 @@
 
       services = {
         flameshot.enable = true;
+        wallpaper.enable = true;
       };
 
       apps = {
         rofi.enable = true;
+        fuzzel.enable = true;
         mako.enable = true;
         kitty.enable = true;
         firefox.enable = true;

@@ -36,11 +36,12 @@
           scaleFactor = 0.5;
         };
         low-battery-notifier.enable = true;
+        wallpaper.enable = true;
       };
 
       apps = {
         kitty.enable = true;
-        rofi.enable = true;
+        fuzzel.enable = true;
         mako.enable = true;
         discord.enable = true;
         firefox.enable = true;

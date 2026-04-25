@@ -13,9 +13,10 @@ let
   text-color = "#cfc9c2";
   text-hovered-color = "#ffffff";
   text-active-color = "#ffffff";
-  background-color = "#1a1b26";
-  background-hovered-color = "#414868";
+  background-color = "#1f2335";
+  background-hovered-color = "#292e42";
   background-active-color = "#7aa2f7";
+  border-color = "#414868";
 
   string-dim = value: builtins.toString (value * cfg.sizeMultiplier);
   float-dim = value: value * cfg.sizeMultiplier;
@@ -78,6 +79,10 @@ in
           position = "top";
           height = int-dim 34;
           spacing = 0;
+          margin-left = int-dim 2;
+          margin-right = int-dim 2;
+          margin-top = int-dim 2;
+          margin-bottom = -4;
           modules-left = (if cfg.compact then [] else [ "custom/power" ]) ++
             [ "${cfg.compositor}/workspaces" "tray" ];
           modules-center = [ "${cfg.compositor}/window" ];
@@ -203,15 +208,19 @@ in
         };
       };
       style = ''
+        /* Tokyo Night — rounded pills */
+
         #waybar {
           background: transparent;
           border: none;
           box-shadow: none;
           font-family: "JetBrainsMono Nerd Font", "Noto Sans Mono";
+          font-weight: 900;
           font-size: ${string-dim 14}px;
           color: ${text-color};
         }
 
+        /* Rounded pill modules */
         #custom-power,
         #workspaces,
         #tray,
@@ -222,29 +231,44 @@ in
         #battery,
         #clock {
           background-color: ${background-color};
-          border-radius: ${string-dim 4}px;
-          margin: ${string-dim 4}px ${string-dim 4}px;
-          border: ${string-dim 1}px solid rgba(102, 102, 102, 0.67);
-          box-shadow: 0em 0em ${string-dim 2}px black;
+          border: ${string-dim 2}px solid ${border-color};
+          border-radius: ${string-dim 12}px;
+          margin: ${string-dim 2}px ${string-dim 3}px;
+          padding: 0 ${string-dim 10}px;
         }
 
-        #custom-power,
-        #custom-mail,
-        #wireplumber,
-        #network,
-        #battery,
-        #clock {
-          padding: 0px ${string-dim 5}px;
+        #workspaces,
+        #tray {
+          padding: 0;
+        }
+
+        #custom-power:hover,
+        #custom-mail:hover,
+        #wireplumber:hover,
+        #network:hover,
+        #battery:hover,
+        #clock:hover {
+          color: ${text-hovered-color};
+          background-color: ${background-hovered-color};
         }
 
         #workspaces button:hover {
           color: ${text-hovered-color};
           background-color: ${background-hovered-color};
+          border-radius: ${string-dim 10}px;
         }
 
+        /* niri uses .focused; hyprland uses .active — cover both */
+        #workspaces button.focused,
         #workspaces button.active {
           color: ${text-active-color};
           background-color: ${background-active-color};
+          border-radius: ${string-dim 10}px;
+        }
+
+        #workspaces button.urgent {
+          color: #f7768e;
+          border-radius: ${string-dim 10}px;
         }
 
         #workspaces button {
@@ -252,26 +276,21 @@ in
           background: transparent;
           border: none;
           margin: 0;
-          padding: 0px ${string-dim 5}px;
-          border-radius: 0;
-        }
-
-        #workspaces button:first-child {
-          border-radius: ${string-dim 4}px 0 0 ${string-dim 4}px;
-        }
-
-        #workspaces button:last-child {
-          border-radius: 0 ${string-dim 4}px ${string-dim 4}px 0;
+          padding: ${string-dim 2}px ${string-dim 6}px;
+          border-radius: ${string-dim 10}px;
+          font-family: "JetBrainsMono Nerd Font Propo";
+          font-size: ${string-dim 16}px;
+          min-height: 0;
+          min-width: 0;
         }
 
         #waybar.empty #window {
+          background: transparent;
           border: none;
-          box-shadow: none;
         }
 
         #waybar:not(.empty) #window {
           color: ${text-color};
-          padding: 0px ${string-dim 5}px;
         }
 
         #waybar.fullscreen #window {
@@ -282,24 +301,13 @@ in
         #tray *:hover {
           color: ${text-hovered-color};
           background-color: ${background-hovered-color};
+          border-radius: ${string-dim 12}px;
         }
 
         #tray * {
           margin: 0;
-          padding: 0px ${string-dim 5}px;
-          border-radius: 0;
-        }
-
-        #tray *:first-child:not(:only-child) {
-          border-radius: ${string-dim 4}px 0 0 ${string-dim 4}px;
-        }
-
-        #tray *:last-child:not(:only-child) {
-          border-radius: 0 ${string-dim 4}px ${string-dim 4}px 0;
-        }
-
-        #tray *:only-child {
-          border-radius: ${string-dim 4}px;
+          padding: 0 ${string-dim 4}px;
+          border-radius: ${string-dim 12}px;
         }
 
         #tray .passive {
@@ -310,9 +318,55 @@ in
           -gtk-icon-effect: highlight;
         }
 
+        /* Popup menus (clock calendar, custom/power XML menu, etc.) */
+        decoration {
+          box-shadow: none;
+          border: ${string-dim 2}px solid ${border-color};
+          border-radius: 0;
+          margin: 0;
+          padding: 0;
+          background-color: ${background-color};
+        }
+
+        decoration-overlay {
+          box-shadow: none;
+          border-radius: 0;
+          margin: 0;
+          padding: 0;
+        }
+
+        menu {
+          background-color: ${background-color};
+          border: none;
+          border-radius: 0;
+          padding: 4px 0;
+          margin: 0;
+          box-shadow: none;
+        }
+
+        menuitem {
+          background-color: ${background-color};
+          color: ${text-color};
+          border-radius: 0;
+          padding: 4px 8px;
+          margin: 0;
+        }
+
+        menuitem:hover {
+          background-color: ${border-color};
+          color: ${text-color};
+        }
+
+        separator {
+          background-color: #565f89;
+          min-height: 1px;
+          padding: 0;
+          margin: 4px 8px;
+        }
+
         #battery.charging, #battery.plugged {
-            background-color: #9ece6a;
-            color: #282828;
+          background-color: #9ece6a;
+          color: #282828;
         }
 
         #battery.warning:not(.charging) {
@@ -321,10 +375,10 @@ in
         }
 
         @keyframes blink {
-            to {
-                background-color: #282828;
-                color: ${text-color};
-            }
+          to {
+            background-color: #282828;
+            color: ${text-color};
+          }
         }
 
         #battery.critical:not(.charging) {

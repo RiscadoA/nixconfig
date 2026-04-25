@@ -40,7 +40,11 @@ in
 
         layer-rules = [
           {
-            matches = [ { namespace = "^hyprpaper$"; } ];
+            # Matches both hyprpaper (hyprland) and swaybg (niri/sway).
+            matches = [
+              { namespace = "^hyprpaper$"; }
+              { namespace = "^wallpaper$"; }
+            ];
             place-within-backdrop = true;
           }
         ];
@@ -86,8 +90,8 @@ in
         binds = {
           # Launchers
           "Mod+Return".action.spawn = "kitty";
-          "Mod+D".action.spawn = "${pkgs.rofi}/bin/rofi -show drun -show-icons -sort";
-          "Mod+Shift+D".action.spawn = "${pkgs.rofi}/bin/rofi -show run -sort";
+          "Mod+D".action.spawn = "${pkgs.fuzzel}/bin/fuzzel";
+          "Mod+Shift+D".action.spawn = [ "${pkgs.fuzzel}/bin/fuzzel" "--dmenu" ];
           "Mod+C".action.spawn = "${pkgs.rofi}/bin/rofi -modi clipboard:cliphist-rofi-img -show clipboard -show-icons";
           "Mod+P".action.spawn = "rofi-pass";
           "Print".action.spawn = "flameshot gui";
