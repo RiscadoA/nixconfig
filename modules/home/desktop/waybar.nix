@@ -47,7 +47,6 @@ in
     enable = mkEnableOption "waybar";
     compositor = mkOption {
       type = types.enum [ "hyprland" "niri" ];
-      default = "hyprland";
       description = "Which compositor to configure Waybar for.";
     };
     sizeMultiplier = mkOption {
@@ -117,6 +116,21 @@ in
           "niri/workspaces" = mkIf (cfg.compositor == "niri") {
             disable-scroll = false;
             all-outputs = true;
+            hide-empty = true;
+            format = "{icon}";
+            format-icons = {
+              "home" = "󰋜";
+              "1" = "";
+              "2" = "󰲢";
+              "3" = "󰲤";
+              "4" = "󰲦";
+              "5" = "󰲨";
+              "6" = "󰲪";
+              "7" = "󰲬";
+              "8" = "󰲮";
+              "9" = "󰲰";
+              "default" = "";
+            };
           };
 
           "${cfg.compositor}/window" = {
@@ -193,7 +207,7 @@ in
           background: transparent;
           border: none;
           box-shadow: none;
-          font-family: "Noto Sans Mono", "Font Awesome 7 Free", "Font Awesome 7 Free Solid";
+          font-family: "JetBrainsMono Nerd Font", "Noto Sans Mono";
           font-size: ${string-dim 14}px;
           color: ${text-color};
         }

@@ -19,10 +19,7 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    droby = {
-      url = "git+ssh://git@github.com/riscadoa/droby";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    niri-flake.url = "github:sodiboo/niri-flake";
   };
 
   outputs = inputs @ { self, ... }:
@@ -114,6 +111,7 @@
                     };
                     sharedModules = homeModules ++ [
                       inputs.agenix.homeManagerModules.default
+                      inputs.niri-flake.homeModules.niri
                       (import "${dir}/home.nix")
                       (import "${dir}/${name}/home.nix")
                     ];
@@ -126,7 +124,6 @@
                   };
                 }
               ] ++ systemModules
-              ++ [ inputs.droby.nixosModules.default ]
               ++ (map
                 (user: args @ { pkgs, ... }: {
                   users.users.${user.name} = (user.value args).user;

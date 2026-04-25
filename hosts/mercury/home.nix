@@ -32,6 +32,7 @@
       waybar = {
         enable = true;
         sizeMultiplier = 1.2;
+        compositor = "niri";
       };
       gtk.enable = true;
       qt.enable = true;

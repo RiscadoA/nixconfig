@@ -19,7 +19,7 @@ in
       packages = with pkgs; [
         noto-fonts
         noto-fonts-cjk-sans
-        font-awesome
+        nerd-fonts.jetbrains-mono
       ];
 
       fontconfig.defaultFonts = {

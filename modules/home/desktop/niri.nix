@@ -21,143 +21,162 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.file.".config/niri/config.kdl".text = ''
-      input {
-        keyboard {
-          xkb {
-            layout "${cfg.keyboardLayout}"
+    programs.niri = {
+      enable = true;
+      package = pkgs.niri;
+
+      settings = {
+        spawn-at-startup = [
+          { command = [ "wl-paste" "--watch" "cliphist" "store" ]; }
+        ];
+
+        input = {
+          keyboard.xkb.layout = cfg.keyboardLayout;
+          touchpad = {
+            tap = true;
+            natural-scroll = true;
+          };
+        };
+
+        layer-rules = [
+          {
+            matches = [ { namespace = "^hyprpaper$"; } ];
+            place-within-backdrop = true;
           }
-        }
-        touchpad {
-          natural-scroll
-        }
-      }
+        ];
 
-      layout {
-        gaps 8
-        center-focused-column "never"
+        layout = {
+          gaps = 8;
+          preset-column-widths = [
+            { proportion = 0.33333; }
+            { proportion = 0.5; }
+            { proportion = 0.66667; }
+          ];
+          border = {
+            enable = true;
+            width = 2;
+            active.color = "#7aa2f7";
+            inactive.color = "#414868";
+          };
+          focus-ring.enable = false;
+          center-focused-column = "never";
+        };
 
-        preset-column-widths {
-          proportion 0.33333
-          proportion 0.5
-          proportion 0.66667
-        }
+        window-rules = [
+          {
+            geometry-corner-radius = {
+              top-left = 12.0;
+              top-right = 12.0;
+              bottom-left = 12.0;
+              bottom-right = 12.0;
+            };
+            clip-to-geometry = true;
+          }
+        ];
 
-        focus-ring {
-          width 2
-          active-color "#ffffffee"
-          inactive-color "#666666aa"
-        }
+        workspaces = {
+          "home" = {};
+        };
 
-        border {
-          off
-        }
-      }
+        gestures.hot-corners.enable = false;
+        overview.workspace-shadow.enable = false;
+        prefer-no-csd = true;
+        hotkey-overlay.skip-at-startup = true;
 
-      spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+        binds = {
+          # Launchers
+          "Mod+Return".action.spawn = "kitty";
+          "Mod+D".action.spawn = "${pkgs.rofi}/bin/rofi -show drun -show-icons -sort";
+          "Mod+Shift+D".action.spawn = "${pkgs.rofi}/bin/rofi -show run -sort";
+          "Mod+C".action.spawn = "${pkgs.rofi}/bin/rofi -modi clipboard:cliphist-rofi-img -show clipboard -show-icons";
+          "Mod+P".action.spawn = "rofi-pass";
+          "Print".action.spawn = "flameshot gui";
+          "Mod+Shift+P".action.spawn = "flameshot gui";
 
-      environment {
-        XDG_CURRENT_DESKTOP "niri"
-        XDG_SESSION_DESKTOP "niri"
-      }
+          # Meta 
+          "Mod+Shift+Slash".action.show-hotkey-overlay = [];
+          "Mod+Tab".action.toggle-overview = [];
+          "Mod+Shift+Q".action.close-window = [];
+          "Mod+Shift+E".action.quit = [];
+          "Mod+Shift+L".action.spawn = "hyprlock";
 
-      window-rule {
-        match app-id="firefox"
-        opacity 0.975
-      }
+          # Focus
+          "Mod+Left".action.focus-column-left = [];
+          "Mod+Right".action.focus-column-right = [];
+          "Mod+Up".action.focus-window-or-workspace-up = [];
+          "Mod+Down".action.focus-window-or-workspace-down = [];
 
-      window-rule {
-        match app-id="kitty"
-        opacity 0.9
-      }
+          # Moving
+          "Mod+Shift+Left".action.move-column-left = [];
+          "Mod+Shift+Right".action.move-column-right = [];
+          "Mod+Shift+Up".action.move-window-up-or-to-workspace-up = [];
+          "Mod+Shift+Down".action.move-window-down-or-to-workspace-down = [];
 
-      window-rule {
-        match app-id="spotify"
-        opacity 0.9
-      }
+          # Sizing
+          "Mod+F".action.maximize-column = [];
+          "Mod+Shift+F".action.fullscreen-window = [];
+          "Mod+V".action.toggle-window-floating = [];
+          "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = [];
+          "Mod+Minus".action.set-column-width = "-10%";
+          "Mod+Equal".action.set-column-width = "+10%";
+          "Mod+R".action.switch-preset-column-width = [];
 
-      window-rule {
-        match app-id="code"
-        opacity 0.95
-      }
+          # Columns
+          "Mod+Comma".action.consume-window-into-column = [];
+          "Mod+Period".action.expel-window-from-column = [];
 
-      window-rule {
-        match app-id="discord"
-        opacity 0.95
-      }
+          # Monitors
+          "Mod+Alt+Left".action.focus-monitor-left = [];
+          "Mod+Alt+Right".action.focus-monitor-right = [];
 
-      window-rule {
-        match app-id="signal"
-        opacity 0.95
-      }
+          # Focus workspaces
+          "Mod+1".action.focus-workspace = 1;
+          "Mod+2".action.focus-workspace = 2;
+          "Mod+3".action.focus-workspace = 3;
+          "Mod+4".action.focus-workspace = 4;
+          "Mod+5".action.focus-workspace = 5;
+          "Mod+6".action.focus-workspace = 6;
+          "Mod+7".action.focus-workspace = 7;
+          "Mod+8".action.focus-workspace = 8;
+          "Mod+9".action.focus-workspace = 9;
+          "Mod+0".action.focus-workspace = 10;
+          "Mod+Shift+1".action.move-column-to-workspace = 1;
+          "Mod+Shift+2".action.move-column-to-workspace = 2;
+          "Mod+Shift+3".action.move-column-to-workspace = 3;
+          "Mod+Shift+4".action.move-column-to-workspace = 4;
+          "Mod+Shift+5".action.move-column-to-workspace = 5;
+          "Mod+Shift+6".action.move-column-to-workspace = 6;
+          "Mod+Shift+7".action.move-column-to-workspace = 7;
+          "Mod+Shift+8".action.move-column-to-workspace = 8;
+          "Mod+Shift+9".action.move-column-to-workspace = 9;
+          "Mod+Shift+0".action.move-column-to-workspace = 10;
+          "Mod+WheelScrollUp".action.focus-workspace-up = [];
+          "Mod+WheelScrollDown".action.focus-workspace-down = [];
 
-      window-rule {
-        match app-id="^discord$"
-        open-on-workspace "4"
-      }
+          # Move workspaces
+          "Mod+Shift+Ctrl+Left".action.move-workspace-to-monitor-left = [];
+          "Mod+Shift+Ctrl+Right".action.move-workspace-to-monitor-right = [];
+          "Mod+Shift+Ctrl+Up".action.move-workspace-up = [];
+          "Mod+Shift+Ctrl+Down".action.move-workspace-down = [];
+          "Mod+Shift+WheelScrollUp".action.move-workspace-up = [];
+          "Mod+Shift+WheelScrollDown".action.move-workspace-down = [];
 
-      window-rule {
-        match app-id="^signal$"
-        open-on-workspace "4"
-      }
+          # Media
+          "XF86AudioRaiseVolume".action.spawn = "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+";
+          "XF86AudioLowerVolume".action.spawn = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+          "XF86AudioMute".action.spawn = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          "XF86AudioMicMute".action.spawn = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+          "Mod+Ctrl+Left".action.spawn = "playerctl previous";
+          "Mod+Ctrl+Right".action.spawn = "playerctl next";
+          "Mod+Ctrl+Up".action.spawn = "playerctl play-pause";
+          "Mod+Ctrl+Down".action.spawn = "playerctl stop";
 
-      window-rule {
-        match title="flameshot"
-        open-floating true
-      }
-
-      binds {
-        Mod+S { spawn "rofi" "-show" "window" "-show-icons"; }
-        Mod+P { spawn "rofi-pass"; }
-        Mod+D { spawn "rofi" "-show" "drun" "-show-icons" "-sort"; }
-        Mod+Shift+D { spawn "rofi" "-show" "run" "-sort"; }
-        Mod+C { spawn "rofi" "-modi" "clipboard:${pkgs.cliphist}/bin/cliphist-rofi-img" "-show" "clipboard" "-show-icons"; }
-        Mod+Shift+Q { close-window; }
-        Mod+W { fullscreen-window; }
-        Mod+Shift+W { maximize-column; }
-        Mod+Shift+L { spawn "hyprlock"; }
-        Mod+F { toggle-window-floating; }
-        Mod+Return { spawn "kitty"; }
-        Print { spawn "flameshot" "gui"; }
-        Mod+Shift+P { spawn "flameshot" "gui"; }
-
-        Mod+Left { focus-column-left; }
-        Mod+Right { focus-column-right; }
-        Mod+Up { focus-window-up; }
-        Mod+Down { focus-window-down; }
-
-        Mod+J { focus-window-down; }
-
-        Mod+1 { focus-workspace 1; }
-        Mod+2 { focus-workspace 2; }
-        Mod+3 { focus-workspace 3; }
-        Mod+4 { focus-workspace 4; }
-        Mod+5 { focus-workspace 5; }
-        Mod+6 { focus-workspace 6; }
-
-        Mod+Shift+1 { move-column-to-workspace 1; }
-        Mod+Shift+2 { move-column-to-workspace 2; }
-        Mod+Shift+3 { move-column-to-workspace 3; }
-        Mod+Shift+4 { move-column-to-workspace 4; }
-        Mod+Shift+5 { move-column-to-workspace 5; }
-        Mod+Shift+6 { move-column-to-workspace 6; }
-
-        Mod+WheelScrollUp { focus-workspace-up; }
-        Mod+WheelScrollDown { focus-workspace-down; }
-
-        XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "-l" "1" "@DEFAULT_AUDIO_SINK@" "5%+"; }
-        XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
-        XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-        XF86AudioMicMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
-        XF86MonBrightnessUp { spawn "light" "-A" "5"; }
-        XF86MonBrightnessDown { spawn "light" "-U" "5"; }
-
-        Mod+Ctrl+Left { spawn "playerctl" "previous"; }
-        Mod+Ctrl+Right { spawn "playerctl" "next"; }
-        Mod+Ctrl+Up { spawn "playerctl" "play-pause"; }
-        Mod+Ctrl+Down { spawn "playerctl" "stop"; }
-      }
-    '';
+          # Brightness
+          "XF86MonBrightnessUp".action.spawn = "light -A 5";
+          "XF86MonBrightnessDown".action.spawn = "light -U 5";
+        };
+      };
+    };
 
     home.pointerCursor.hyprcursor.enable = true;
   };
