@@ -18,11 +18,13 @@
 
     desktop = {
       wayland.enable = true;
-      hyprland.enable = true;
-      hyprpaper.enable = true;
-      hyprlock.enable = true;
+      niri = {
+        enable = true;
+        keyboardLayout = "pt";
+      };
       waybar = {
         enable = true;
+        compositor = "niri";
         compact = true;
       };
       gtk.enable = true;
@@ -54,10 +56,6 @@
         vintagestory.enable = true;
       };
     };
-  };
-
-  wayland.windowManager.hyprland.settings.input = {
-    kb_layout = "pt";
   };
 
   home.packages = with pkgs; [

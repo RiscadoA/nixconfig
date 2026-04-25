@@ -8,7 +8,7 @@
 
     desktop = {
       wayland.enable = true;
-      hyprland.enable = true;
+      niri.enable = true;
       sddm = {
         enable = true;
         users = [ "riscadoa" ];

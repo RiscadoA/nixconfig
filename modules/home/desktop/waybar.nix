@@ -45,6 +45,11 @@ in
 {
   options.modules.desktop.waybar = {
     enable = mkEnableOption "waybar";
+    compositor = mkOption {
+      type = types.enum [ "hyprland" "niri" ];
+      default = "hyprland";
+      description = "Which compositor to configure Waybar for.";
+    };
     sizeMultiplier = mkOption {
       type = types.float;
       default = 1.0;
@@ -75,8 +80,8 @@ in
           height = int-dim 34;
           spacing = 0;
           modules-left = (if cfg.compact then [] else [ "custom/power" ]) ++
-            [ "hyprland/workspaces" "tray" ];
-          modules-center = [ "hyprland/window" ];
+            [ "${cfg.compositor}/workspaces" "tray" ];
+          modules-center = [ "${cfg.compositor}/window" ];
           modules-right = [ "custom/mail" "wireplumber" "network" "battery" ]
             ++ (if cfg.compact then [ "clock" ] else [ "clock#time" "clock#calendar" ]);
 
@@ -92,7 +97,7 @@ in
             };
           };
 
-          "hyprland/workspaces" = {
+          "${cfg.compositor}/workspaces" = {
             disable-scroll = false;
             all-outputs = true;
             format = "{icon}";
@@ -109,7 +114,7 @@ in
             };
           };
 
-          "hyprland/window" = {
+          "${cfg.compositor}/window" = {
             icon = true;
             icon-size = float-dim 17;
           };
