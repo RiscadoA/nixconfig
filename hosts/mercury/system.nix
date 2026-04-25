@@ -15,6 +15,7 @@
     };
 
     desktop = {
+      wayland.enable = true;
       hyprland.enable = true;
       greetd.enable = true;
       fonts.enable = true;

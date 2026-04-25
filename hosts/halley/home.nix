@@ -17,6 +17,7 @@
     };
 
     desktop = {
+      wayland.enable = true;
       hyprland.enable = true;
       hyprpaper.enable = true;
       hyprlock.enable = true;

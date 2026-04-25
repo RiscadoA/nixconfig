@@ -27,16 +27,6 @@ in
 
     security.pam.services.hyprlock = {};
 
-    xdg.portal = {
-        enable = true;
-        xdgOpenUsePortal= true;
-        config = {
-            hyprland.default = ["hyprland"];
-        };
-        extraPortals = [
-            pkgs.xdg-desktop-portal
-            pkgs.xdg-desktop-portal-wlr
-        ];
-    };
+
   };
 }

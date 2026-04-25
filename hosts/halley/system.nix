@@ -7,6 +7,7 @@
     };
 
     desktop = {
+      wayland.enable = true;
       hyprland.enable = true;
       sddm = {
         enable = true;

@@ -5,30 +5,15 @@
 #
 # hyprland home configuration.
 
-{ lib, config, pkgs, configDir, ... }:
+{ lib, config, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.hyprland;
-
-  password-store-dir = config.programs.password-store.settings.PASSWORD_STORE_DIR;
-  rofi-pass = pkgs.writeShellScriptBin "rofi-pass" ''
-    find ${password-store-dir} -type f -name '*.gpg' |
-    sed "s|${password-store-dir}/||; s|.gpg$||" |
-    rofi -i -dmenu -p pass |
-    xargs -n 1 pass show 2> /dev/null |
-    head -n 1 |
-    wl-copy --sensitive
-  '';
 in
 {
   options.modules.desktop.hyprland.enable = mkEnableOption "hyprland";
 
   config = mkIf cfg.enable {
-    home.packages = [
-      pkgs.playerctl
-      pkgs.cliphist
-      pkgs.wl-clipboard
-    ];
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -59,7 +44,7 @@ in
         monitor = ", highrr, auto, auto";
         bind = [
           "$mod, S, exec, rofi -show window -show-icons"
-          "$mod, P, exec, ${rofi-pass}/bin/rofi-pass"
+          "$mod, P, exec, rofi-pass"
           "$mod, D, exec, rofi -show drun -show-icons -sort"
           "$mod SHIFT, D, exec, rofi -show run -sort"
           "$mod, C, exec, rofi -modi clipboard:${pkgs.cliphist}/bin/cliphist-rofi-img -show clipboard -show-icons"
@@ -155,13 +140,6 @@ in
         env = [
           "XDG_CURRENT_DESKTOP,Hyprland"
           "XDG_SESSION_DESKTOP,Hyprland"
-          "XDG_SESSION_TYPE,wayland"
-          "GDK_BACKEND,wayland,x11,*"
-          "NIXOS_OZONE_WL,1"
-          "QT_QPA_PLATFORM,wayland"
-          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-          "QT_AUTO_SCREEN_SCALE_FACTOR,1"
-          "MOZ_ENABLE_WAYLAND,1"
         ];
         xwayland = {
           force_zero_scaling = true;
@@ -180,13 +158,5 @@ in
     };
 
     home.pointerCursor.hyprcursor.enable = true;
-
-    xdg.desktopEntries.wipe-cliphist = {
-      name = "Cliphist Wipe";
-      genericName = "Wipe Clipboard History";
-      exec = "cliphist wipe";
-      icon = "edit-clear-history";
-      categories = [ "Utility" ];
-    };
   };
 }
