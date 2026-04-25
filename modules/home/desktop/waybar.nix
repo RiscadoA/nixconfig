@@ -97,7 +97,7 @@ in
             };
           };
 
-          "${cfg.compositor}/workspaces" = {
+          "hyprland/workspaces" = mkIf (cfg.compositor == "hyprland") {
             disable-scroll = false;
             all-outputs = true;
             format = "{icon}";
@@ -112,6 +112,11 @@ in
               "5" = "";
               "6" = "";
             };
+          };
+
+          "niri/workspaces" = mkIf (cfg.compositor == "niri") {
+            disable-scroll = false;
+            all-outputs = true;
           };
 
           "${cfg.compositor}/window" = {

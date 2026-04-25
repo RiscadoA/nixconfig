@@ -16,7 +16,7 @@
 
     desktop = {
       wayland.enable = true;
-      hyprland.enable = true;
+      niri.enable = true;
       greetd.enable = true;
       fonts.enable = true;
       games.steam.enable = true;
@@ -63,10 +63,6 @@
     binfmt.emulatedSystems = [ "aarch64-linux" ];
 
     consoleLogLevel = 3;
-    #plymouth = {
-    #  enable = true;
-    #  theme = "breeze";
-    #};
   };
 
   hardware = {
