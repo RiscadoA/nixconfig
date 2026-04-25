@@ -90,7 +90,7 @@ in
             ++ (if cfg.compact then [ "clock" ] else [ "clock#time" "clock#calendar" ]);
 
           "custom/power" = {
-            format = "";
+            format = "󰐥";
             tooltip = false;
             menu = "on-click";
             menu-file = configDir + "/waybar/power.xml";
@@ -109,12 +109,12 @@ in
               "*" = [1 2 3 4 5 6];
             };
             format-icons = {
-              "1" = "";
-              "2" = "";
-              "3" = "";
-              "4" = "";
-              "5" = "";
-              "6" = "";
+              "1" = "󰲠";
+              "2" = "󰲢";
+              "3" = "󰲤";
+              "4" = "󰲦";
+              "5" = "󰲨";
+              "6" = "󰲪";
             };
           };
 
@@ -125,7 +125,7 @@ in
             format = "{icon}";
             format-icons = {
               "home" = "󰋜";
-              "1" = "";
+              "1" = "󰲠";
               "2" = "󰲢";
               "3" = "󰲤";
               "4" = "󰲦";
@@ -134,7 +134,7 @@ in
               "7" = "󰲬";
               "8" = "󰲮";
               "9" = "󰲰";
-              "default" = "";
+              "default" = "●";
             };
           };
 
@@ -157,46 +157,46 @@ in
             };
             format = "{icon} {capacity}%";
             format-full = "{icon} {capacity}%";
-            format-charging = " {capacity}%";
-            format-plugged = " {capacity}%";
+            format-charging = "󰂄 {capacity}%";
+            format-plugged = "󰂄 {capacity}%";
             format-alt = "{icon} {time}";
-            format-icons = ["" "" "" "" ""];
+            format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
           };
 
           clock = mkMerge [
             base-clock-calendar
             {
-              format = " {:%H:%M}";
-              format-alt =" {:%d-%m-%Y}";
+              format = "󰥔 {:%H:%M}";
+              format-alt = "󰃭 {:%d-%m-%Y}";
             }
           ];
 
           "clock#time" = {
             interval = 1;
-            format = " {:%H:%M:%S}";
+            format = "󰥔 {:%H:%M:%S}";
           };
 
           "clock#calendar" = mkMerge [
             base-clock-calendar
             {
-              format = " {:%d-%m-%Y}";
+              format = "󰃭 {:%d-%m-%Y}";
             }
           ];
 
           network = {
             family = "ipv4";
-            format-ethernet = if cfg.compact then "" else " {ipaddr}";
-            format-wifi = if cfg.compact then "" else " {essid}";
-            format-disconnected = " Disconnected";
-            format-disabled = " Disabled";
+            format-ethernet = if cfg.compact then "󰈀" else "󰈀 {ipaddr}";
+            format-wifi = if cfg.compact then "󰖩" else "󰖩 {essid}";
+            format-disconnected = "󰖪 Disconnected";
+            format-disabled = "󰖪 Disabled";
             tooltip-format-ethernet = "<big>{ifname}</big>\n<tt><small>{ipaddr}</small></tt>";
             tooltip-format-wifi = "<big>{essid}</big>\n<tt><small>{ipaddr}</small></tt>\n<small>Signal: {signalStrength}%</small>";
           };
 
           wireplumber = {
             format = "{icon} {volume}%";
-            format-icons = ["" "" ""];
-            format-muted = " {volume}%";
+            format-icons = [ "󰕿" "󰖀" "󰕾" ];
+            format-muted = "󰖁 {volume}%";
             on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           };
 

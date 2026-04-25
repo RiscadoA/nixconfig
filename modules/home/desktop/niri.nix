@@ -51,6 +51,14 @@ in
 
         layout = {
           gaps = 8;
+          # Negative struts pull the working area slightly past the screen
+          # edges so the per-column gaps look uniform (otherwise the outer
+          # gap visually doubles up on top of the workspace edge).
+          struts = {
+            left = -1;
+            right = -1;
+            bottom = -1;
+          };
           preset-column-widths = [
             { proportion = 0.33333; }
             { proportion = 0.5; }
@@ -75,6 +83,18 @@ in
               bottom-right = 12.0;
             };
             clip-to-geometry = true;
+          }
+          # Firefox and Spotify request maximize/fullscreen on launch which
+          # makes them cover the whole workspace edge-to-edge with no gap or
+          # border. Force them into the normal tiled state.
+          {
+            matches = [
+              { app-id = "^firefox$"; }
+              { app-id = "^Spotify$"; }
+              { app-id = "^spotify$"; }
+            ];
+            open-maximized = false;
+            open-fullscreen = false;
           }
         ];
 

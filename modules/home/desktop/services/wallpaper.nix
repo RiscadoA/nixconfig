@@ -15,6 +15,14 @@
 #   - everything else (niri, sway) → swaybg (works on any wlroots compositor)
 #
 # Override with `backend = "hyprpaper" | "swaybg"`.
+#
+# Architecture (swaybg backend):
+#   - swaybg.service (Type=simple): long-lived, displays ~/pictures/wallpapers/current
+#   - wallpaper.service (oneshot): rolls a new image, then `systemctl restart`s swaybg
+#   - wallpaper.timer: hourly trigger
+# Splitting these is necessary because oneshot units kill any backgrounded
+# children when they exit (cgroup teardown), so swaybg can't be launched
+# from inside the roller.
 
 { lib, config, pkgs, configDir, ... }:
 let
@@ -28,6 +36,7 @@ let
     else cfg.backend;
 
   pictures = "${config.home.homeDirectory}/pictures/wallpapers";
+  current = "${pictures}/current";
 
   theme = {
     name = "tokyo-night-dark";
@@ -63,18 +72,17 @@ let
   }\")";
 
   # Picks a random themed wallpaper, points ~/pictures/wallpapers/current
-  # at it, then either restarts swaybg or pushes it through hyprpaper IPC.
+  # at it, then nudges the backend to display it.
   setWallpaper = pkgs.writeShellScriptBin "setWallpaper" ''
     set -eu
 
     mkdir -p ${pictures}
-    CURRENT="${pictures}/current"
 
     wallpapers=${wallpaperBashArray}
     rand=$(( RANDOM % ''${#wallpapers[@]} ))
     wallpaper=''${wallpapers[$rand]}
 
-    ln -sfn "$wallpaper" "$CURRENT"
+    ln -sfn "$wallpaper" "${current}"
 
     ${if backend == "hyprpaper" then ''
       # Wait for hyprpaper to be ready
@@ -90,10 +98,10 @@ let
         ${pkgs.hyprland}/bin/hyprctl hyprpaper wallpaper "$m,$wallpaper"
       done
     '' else ''
-      # swaybg has no IPC — restart it.
-      ${pkgs.procps}/bin/pkill -x swaybg || true
-      ${pkgs.swaybg}/bin/swaybg -m ${cfg.mode} -i "$CURRENT" >/dev/null 2>&1 &
-      disown || true
+      # Restart the long-lived swaybg.service so it picks up the new symlink
+      # target. swaybg has no IPC. If swaybg.service isn't started yet
+      # (first boot), `restart` will start it.
+      ${pkgs.systemd}/bin/systemctl --user restart swaybg.service
     ''}
   '';
 in
@@ -119,25 +127,23 @@ in
     {
       home.packages = [ setWallpaper ];
 
+      # Roll a new wallpaper. Oneshot — exits after updating the symlink
+      # and (for swaybg) restarting the display service.
       systemd.user.services.wallpaper = {
         Unit = {
-          Description = "Set random desktop wallpaper (${backend})";
+          Description = "Roll a random desktop wallpaper (${backend})";
           After = [ "graphical-session.target" ]
-            ++ lib.optional (backend == "hyprpaper") "hyprpaper.service";
-          Requires = lib.optional (backend == "hyprpaper") "hyprpaper.service";
-          PartOf = if backend == "hyprpaper"
-            then [ "hyprpaper.service" ]
-            else [ "graphical-session.target" ];
+            ++ lib.optional (backend == "hyprpaper") "hyprpaper.service"
+            ++ lib.optional (backend == "swaybg") "swaybg.service";
+          Wants = lib.optional (backend == "swaybg") "swaybg.service";
+          PartOf = [ "graphical-session.target" ];
         };
         Service = {
           Type = "oneshot";
           ExecStart = "${setWallpaper}/bin/setWallpaper";
           IOSchedulingClass = "idle";
         };
-        Install.WantedBy =
-          if backend == "hyprpaper"
-          then [ "hyprpaper.service" ]
-          else [ "graphical-session.target" ];
+        Install.WantedBy = [ "graphical-session.target" ];
       };
 
       systemd.user.timers.wallpaper = {
@@ -152,6 +158,26 @@ in
 
     (mkIf (backend == "swaybg") {
       home.packages = [ pkgs.swaybg ];
+
+      # Long-lived swaybg pinned to the stable symlink. Restart this unit
+      # to pick up a new wallpaper (the roller above does that for us).
+      # If the symlink doesn't exist yet (first start), the roller will
+      # create it and restart this service.
+      systemd.user.services.swaybg = {
+        Unit = {
+          Description = "swaybg — Wayland desktop wallpaper";
+          After = [ "graphical-session.target" ];
+          PartOf = [ "graphical-session.target" ];
+          ConditionPathExists = current;
+        };
+        Service = {
+          Type = "simple";
+          ExecStart = "${pkgs.swaybg}/bin/swaybg -m ${cfg.mode} -i ${current}";
+          Restart = "on-failure";
+          RestartSec = 2;
+        };
+        Install.WantedBy = [ "graphical-session.target" ];
+      };
     })
 
     (mkIf (backend == "hyprpaper") {
