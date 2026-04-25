@@ -38,16 +38,13 @@ in
           };
         };
 
-        layer-rules = [
-          {
-            # Matches both hyprpaper (hyprland) and swaybg (niri/sway).
-            matches = [
-              { namespace = "^hyprpaper$"; }
-              { namespace = "^wallpaper$"; }
-            ];
-            place-within-backdrop = true;
-          }
-        ];
+        # Note: previously had `place-within-backdrop = true` for the
+        # wallpaper namespaces, which makes the wallpaper layer render
+        # only inside niri's overview backdrop (not on regular
+        # workspaces). swaybg/hyprpaper already use the `background`
+        # layer-shell layer, which sits below all windows and is visible
+        # everywhere — so we don't need a custom rule.
+        layer-rules = [];
 
         layout = {
           gaps = 8;
