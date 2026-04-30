@@ -145,6 +145,7 @@ in
           "Mod+V".action.toggle-window-floating = [];
           "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = [];
           "Mod+Minus".action.set-column-width = "-10%";
+          "Mod+Plus".action.set-column-width = "+10%";
           "Mod+Equal".action.set-column-width = "+10%";
           "Mod+R".action.switch-preset-column-width = [];
 
