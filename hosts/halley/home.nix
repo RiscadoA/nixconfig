@@ -22,6 +22,10 @@
         enable = true;
         keyboardLayout = "pt";
       };
+      hyprlock = {
+        enable = true;
+        suspend = true;
+      };
       waybar = {
         enable = true;
         compositor = "niri";
