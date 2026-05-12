@@ -35,7 +35,10 @@ in
     nix-output-monitor
   ];
 
-  programs.zsh.enable = true;
+  programs = {
+    zsh.enable = true;
+    nix-ld.enable = true;
+  };
 
   system.stateVersion = "21.11";
 }
