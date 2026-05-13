@@ -49,7 +49,7 @@ in
           libkrb5
           keyutils
         ];
-        extraArgs = "-forcedesktopscaling ${toString cfg.desktopScaling}";
+        extraArgs = "-cef-disable-gpu-compositing -forcedesktopscaling ${toString cfg.desktopScaling}";
       };
       extraCompatPackages = with pkgs; [
         proton-ge-bin
