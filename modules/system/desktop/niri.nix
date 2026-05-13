@@ -20,6 +20,10 @@ in
       package = pkgs.unstable.niri;
     };
 
+    environment.systemPackages = with pkgs; [ 
+      xwayland-satellite
+    ];
+
     security.pam.services.hyprlock = {};
   };
 }
