@@ -54,6 +54,7 @@
 
       games = {
         minecraft.enable = true;
+        vintagestory.enable = true;
       };
     };
   };
