@@ -23,7 +23,11 @@
 
     desktop = {
       wayland.enable = true;
-      niri.enable = true;
+      niri = {
+        enable = true;
+        keyboardLayout = "us";
+        keyboardVariant = "altgr-intl";
+      };
       hyprlock = {
         enable = true;
         suspend = false;

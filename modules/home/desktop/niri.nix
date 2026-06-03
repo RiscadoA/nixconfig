@@ -18,6 +18,11 @@ in
       default = "us";
       description = "Keyboard layout to use in niri.";
     };
+    keyboardVariant = mkOption {
+      type = types.str;
+      default = "";
+      description = "Keyboard variant to use in niri.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -32,6 +37,7 @@ in
 
         input = {
           keyboard.xkb.layout = cfg.keyboardLayout;
+          keyboard.xkb.variant = cfg.keyboardVariant;
           touchpad = {
             tap = true;
             natural-scroll = true;
