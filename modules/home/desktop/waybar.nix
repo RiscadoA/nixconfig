@@ -132,7 +132,7 @@ in
 
           "niri/workspaces" = mkIf (cfg.compositor == "niri") {
             disable-scroll = false;
-            all-outputs = true;
+            all-outputs = false;
             hide-empty = true;
             format = "{icon}";
             format-icons = {
