@@ -29,7 +29,7 @@ in
     gnumake
     zip
     unzip
-    neofetch
+    fastfetch
     man-pages
     kitty
     nix-output-monitor

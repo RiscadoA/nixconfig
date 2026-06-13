@@ -19,6 +19,7 @@ in
       package = pkgs.tokyonight-gtk-theme;
       name = "Tokyonight-Dark"; 
     };
+    gtk.gtk4.theme = config.gtk.theme;
     gtk.iconTheme = {
       package = pkgs.papirus-icon-theme;
       name = "Papirus-Dark";

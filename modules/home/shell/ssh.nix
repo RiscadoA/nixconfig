@@ -14,6 +14,9 @@ in
   options.modules.shell.ssh.enable = mkEnableOption "ssh";
 
   config = mkIf cfg.enable {
-    programs.ssh.enable = true;
+    programs.ssh = {
+      enable = true;
+      enableDefaultConfig = false;
+    };
   };
 }

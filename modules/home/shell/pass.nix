@@ -14,6 +14,9 @@ in
   options.modules.shell.pass.enable = mkEnableOption "pass";
 
   config = mkIf cfg.enable {
-    programs.password-store.enable = true;
+    programs.password-store = {
+      enable = true;
+      settings = { PASSWORD_STORE_DIR = "$XDG_DATA_HOME/password-store"; };
+    };
   };
 }

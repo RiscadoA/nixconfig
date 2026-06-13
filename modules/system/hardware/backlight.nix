@@ -14,6 +14,6 @@ in
   options.modules.hardware.backlight.enable = mkEnableOption "backlight";
 
   config = mkIf cfg.enable {
-    programs.light.enable = true;
+    environment.systemPackages = [ pkgs.brightnessctl ];
   };
 }

@@ -38,9 +38,9 @@ let
     shopt -s nullglob
     patch_asar_file() {
       unpacked="$(mktemp -d)"
-      ${pkgs.nodePackages.asar}/bin/asar extract "$1" "$unpacked"
+      ${pkgs.asar}/bin/asar extract "$1" "$unpacked"
       cp ${tray-icons}/* "$unpacked/app/images/systemtray/linux/"
-      ${pkgs.nodePackages.asar}/bin/asar pack "$unpacked" "$1"
+      ${pkgs.asar}/bin/asar pack "$unpacked" "$1"
       rm -r "$unpacked"
     }
     config_dir="''${XDG_CONFIG_HOME:-$HOME/.config}"/''${1//-/}

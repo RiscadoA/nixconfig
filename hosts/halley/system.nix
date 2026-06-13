@@ -62,7 +62,6 @@
 
   networking = {
     firewall.enable = false;
-    wireless.enable = false;
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";

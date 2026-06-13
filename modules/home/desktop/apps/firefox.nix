@@ -14,7 +14,10 @@ in
   options.modules.desktop.apps.firefox.enable = mkEnableOption "firefox";
 
   config = mkIf cfg.enable {
-    programs.firefox.enable = true;
+    programs.firefox = {
+      enable = true;
+      configPath = ".mozilla/firefox";
+    };
     programs.browserpass.enable = true;
   };
 }

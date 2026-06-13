@@ -153,7 +153,6 @@
     database = {
       enable = true;
       createDB = true;
-      enableVectors = false;
     };
     settings = {
       IMMICH_TRUSTED_PROXIES = "**";

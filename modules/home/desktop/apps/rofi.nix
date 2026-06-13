@@ -9,22 +9,22 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.modules.desktop.apps.rofi;
-
-  password-store-dir = config.programs.password-store.settings.PASSWORD_STORE_DIR;
-  rofi-pass = pkgs.writeShellScriptBin "rofi-pass" ''
-    find ${password-store-dir} -type f -name '*.gpg' |
-    sed "s|${password-store-dir}/||; s|.gpg$||" |
-    rofi -i -dmenu -p pass |
-    xargs -n 1 pass show 2> /dev/null |
-    head -n 1 |
-    wl-copy --sensitive
-  '';
+  password-store-dir = config.programs.password-store.settings.PASSWORD_STORE_DIR or "${config.home.homeDirectory}/.password-store";
 in
 {
   options.modules.desktop.apps.rofi.enable = mkEnableOption "rofi";
 
   config = mkIf cfg.enable {
-    home.packages = [ rofi-pass ];
+    home.packages = lib.optionals config.programs.password-store.enable [
+      (pkgs.writeShellScriptBin "rofi-pass" ''
+        find ${password-store-dir} -type f -name '*.gpg' |
+        sed "s|${password-store-dir}/||; s|.gpg$||" |
+        rofi -i -dmenu -p pass |
+        xargs -n 1 pass show 2> /dev/null |
+        head -n 1 |
+        wl-copy --sensitive
+      '')
+    ];
 
     programs.rofi = {
       enable = true;

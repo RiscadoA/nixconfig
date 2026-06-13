@@ -79,10 +79,7 @@
 
   networking = {
     firewall.enable = false;
-    wireless.enable = false;
-    networkmanager = {
-      enable = true;
-    };
+    networkmanager.enable = true;
 
     interfaces.enp6s0 = {
       wakeOnLan = {

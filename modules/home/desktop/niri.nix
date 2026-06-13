@@ -207,8 +207,8 @@ in
           "Mod+Ctrl+Down".action.spawn = [ "playerctl" "stop" ];
 
           # Brightness
-          "XF86MonBrightnessUp".action.spawn = [ "light" "-A" "5" ];
-          "XF86MonBrightnessDown".action.spawn = [ "light" "-U" "5" ];
+          "XF86MonBrightnessUp".action.spawn = [ "brightnessctl" "set" "5%+" ];
+          "XF86MonBrightnessDown".action.spawn = [ "brightnessctl" "set" "5%-" ];
         };
       };
     };
