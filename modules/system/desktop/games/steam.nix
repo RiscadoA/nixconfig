@@ -59,7 +59,7 @@ in
     services.joycond.enable = true;
 
     environment.systemPackages = with pkgs; [
-      unstable.wineWowPackages.stable
+      wineWowPackages.stable
       unstable.winetricks
     ];
 
