@@ -53,6 +53,7 @@
         firefox.enable = true;
         dolphin.enable = true;
         vscode.enable = true;
+        zed.enable = true;
         opencode.enable = true;
       };
 
