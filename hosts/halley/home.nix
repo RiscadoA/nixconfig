@@ -51,6 +51,7 @@
         firefox.enable = true;
         spotify.enable = true;
         vscode.enable = true;
+        zed.enable = true;
         dolphin.enable = true;
         opencode.enable = true;
       };
