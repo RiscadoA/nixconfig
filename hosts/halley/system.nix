@@ -27,7 +27,7 @@
   };
 
   environment.systemPackages = [
-    pkgs.wineWowPackages.stable
+    pkgs.wineWow64Packages.stable
     pkgs.alsa-utils
   ];
 
