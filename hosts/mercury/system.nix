@@ -67,8 +67,11 @@
 
   hardware = {
     graphics.enable = true;
-    nvidia.open = false;
-    nvidia.nvidiaSettings = true;
+    nvidia = {
+      open = false;
+      package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+      nvidiaSettings = true;
+    };
   };
 
   # Required even though we're using Wayland

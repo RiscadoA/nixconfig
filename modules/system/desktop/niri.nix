@@ -17,7 +17,7 @@ in
   config = mkIf cfg.enable {
     programs.niri = {
       enable = true;
-      package = pkgs.unstable.niri;
+      package = pkgs.niri;
     };
 
     environment.systemPackages = with pkgs; [ 
