@@ -36,21 +36,13 @@ let
   fix-tray-icons = pkgs.writers.writeBash "fix-discord-tray-icons" ''
     set -euo pipefail
     shopt -s nullglob
-    patch_asar_file() {
-      unpacked="$(mktemp -d)"
-      ${pkgs.asar}/bin/asar extract "$1" "$unpacked"
-      cp ${tray-icons}/* "$unpacked/app/images/systemtray/linux/"
-      ${pkgs.asar}/bin/asar pack "$unpacked" "$1"
-      rm -r "$unpacked"
-    }
     config_dir="''${XDG_CONFIG_HOME:-$HOME/.config}"/''${1//-/}
     [ -d "$config_dir" ] || exit 0
     for module_dir in "$config_dir"/*/modules/discord_desktop_core; do
-      cd "$module_dir"
-      ! sha256sum --status --check core.asar.sha256 2> /dev/null || continue
-      echo "(fix-tray-icons) Patching tray icons in '$module_dir/core.asar'..."
-      patch_asar_file core.asar
-      sha256sum core.asar > core.asar.sha256
+      target="$module_dir/app/images/systemtray/linux"
+      [ -d "$target" ] || continue
+      echo "(fix-tray-icons) Patching tray icons in '$target'..."
+      cp ${tray-icons}/* "$target"
     done
   '';
 
