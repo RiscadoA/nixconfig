@@ -23,8 +23,10 @@ let
     fi
 
     if [[ "$class" == "kitty" && -n "$pid" ]]; then
-      children=$(</proc/$pid/children 2>/dev/null || true)
+      children=$(${pkgs.procps}/bin/ps -o pid --ppid "$pid" --no-headers 2>/dev/null || true)
       for child in $children; do
+        stdin=$(readlink "/proc/$child/fd/0" 2>/dev/null || true)
+        [[ "$stdin" == /dev/pts/* ]] || continue
         cwd=$(readlink "/proc/$child/cwd" 2>/dev/null || true)
         if [[ -d "$cwd" ]]; then
           exec ${pkgs.kitty}/bin/kitty --directory "$cwd"
