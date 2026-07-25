@@ -132,7 +132,7 @@ in
 
         binds = {
           # Launchers
-          "Mod+Return".action.spawn = "kitty";
+          "Mod+Return".action.spawn = "kitty-cwd";
           "Mod+D".action.spawn = "${pkgs.fuzzel}/bin/fuzzel";
           "Mod+Shift+D".action.spawn = "${fuzzel-run}/bin/fuzzel-run";
           "Mod+C".action.spawn = [ "${pkgs.rofi}/bin/rofi" "-modi" "clipboard:cliphist-rofi-img" "-show" "clipboard" "-show-icons" ];
