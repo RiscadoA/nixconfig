@@ -16,7 +16,7 @@ in
   config = mkIf cfg.enable {
     programs.password-store = {
       enable = true;
-      settings = { PASSWORD_STORE_DIR = "$XDG_DATA_HOME/password-store"; };
+      settings = { PASSWORD_STORE_DIR = "${config.xdg.dataHome}/password-store"; };
     };
   };
 }
