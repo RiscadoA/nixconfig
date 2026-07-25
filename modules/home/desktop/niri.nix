@@ -9,6 +9,20 @@
 let
   inherit (lib) mkEnableOption mkOption types mkIf;
   cfg = config.modules.desktop.niri;
+
+  fuzzel-run = pkgs.writeShellScriptBin "fuzzel-run" ''
+    history_file="$HOME/.cache/fuzzel-run-history"
+    mkdir -p "$(dirname "$history_file")"
+    [ -f "$history_file" ] || touch "$history_file"
+
+    cmd=$(${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt='Run: ' --lines=15 < "$history_file")
+
+    if [ -n "$cmd" ]; then
+      { echo "$cmd"; grep -Fxve "$cmd" "$history_file" || true; } > "$history_file.tmp"
+      mv "$history_file.tmp" "$history_file"
+      eval "$cmd"
+    fi
+  '';
 in
 {
   options.modules.desktop.niri = {
@@ -120,7 +134,7 @@ in
           # Launchers
           "Mod+Return".action.spawn = "kitty";
           "Mod+D".action.spawn = "${pkgs.fuzzel}/bin/fuzzel";
-          "Mod+Shift+D".action.spawn = "${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt='Run: ' | ${pkgs.bash}/bin/bash";
+          "Mod+Shift+D".action.spawn = "${fuzzel-run}/bin/fuzzel-run";
           "Mod+C".action.spawn = [ "${pkgs.rofi}/bin/rofi" "-modi" "clipboard:cliphist-rofi-img" "-show" "clipboard" "-show-icons" ];
           "Mod+P".action.spawn = "rofi-pass";
           "Print".action.spawn = "flameshot gui";
@@ -213,6 +227,7 @@ in
       };
     };
 
+    home.packages = [ fuzzel-run ];
     home.pointerCursor.hyprcursor.enable = true;
   };
 }
