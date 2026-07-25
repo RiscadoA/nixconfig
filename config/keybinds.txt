@@ -2,6 +2,7 @@ Useful Keybinds:
 ----------------
 Option + Shift + Q : Close window
 Option + D         : Open program launcher
+Option + Shift + D : Open command runner
 Option + Return    : Open terminal
 Option + W         : Maximize focused window
 Option + Shift + W : Fullscreen focused window

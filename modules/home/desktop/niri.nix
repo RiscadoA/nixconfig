@@ -120,7 +120,7 @@ in
           # Launchers
           "Mod+Return".action.spawn = "kitty";
           "Mod+D".action.spawn = "${pkgs.fuzzel}/bin/fuzzel";
-          "Mod+Shift+D".action.spawn = [ "${pkgs.fuzzel}/bin/fuzzel" "--dmenu" ];
+          "Mod+Shift+D".action.spawn = "${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt='Run: ' | ${pkgs.bash}/bin/bash";
           "Mod+C".action.spawn = [ "${pkgs.rofi}/bin/rofi" "-modi" "clipboard:cliphist-rofi-img" "-show" "clipboard" "-show-icons" ];
           "Mod+P".action.spawn = "rofi-pass";
           "Print".action.spawn = "flameshot gui";
