@@ -44,18 +44,9 @@
 
   services.syncthing.enable = true;
 
-  systemd.user.services.openchamber-web = {
-    Unit = {
-      Description = "OpenChamber Web UI";
-    };
-    Service = {
-      ExecStart = "${pkgs.openchamber}/bin/openchamber serve --host 0.0.0.0 --port 42424 --foreground";
-      Restart = "on-failure";
-      RestartSec = 5;
-    };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
+  programs.opencode.web = {
+    enable = true;
+    extraArgs = [ "--hostname" "0.0.0.0" "--port" "42424" ];
   };
 
   wayland.windowManager.hyprland.settings = {
