@@ -29,6 +29,7 @@ in
     gnumake
     zip
     unzip
+    jq
     fastfetch
     man-pages
     kitty
