@@ -25,6 +25,10 @@
   "filesystem": {
     "allow": [
       "$HOME/.pi",
+      "$HOME/.config/jj",
+      "$HOME/.cache/jj",
+      "$HOME/.local/share/jj",
+      "$HOME/.local/state/jj",
       "$NONO_CONFIG/profile-drafts",
       "$TMPDIR"
     ],
