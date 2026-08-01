@@ -57,7 +57,10 @@
         zed.enable = true;
         opencode.enable = true;
         pi.enable = true;
-        nono.enable = true;
+        nono = {
+          enable = true;
+          piProfile.enable = true;
+        };
       };
 
       games = {
