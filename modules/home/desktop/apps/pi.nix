@@ -36,7 +36,38 @@ let
       ++ (nonoSettings.skills or [ ]);
     extensions = (cfg.settings.extensions or [ ])
       ++ (nonoSettings.extensions or [ ])
-      ++ [ "${configDir}/pi/extensions/usage-footer.ts" ];
+      ++ [
+        "${configDir}/pi/extensions/usage-footer.ts"
+        # pi-web-access is built at Nix time (deps vendored in the store), so
+        # pi never runs npm at runtime. See piWebAccess below.
+        "${piWebAccess}/lib/node_modules/pi-web-access/index.ts"
+      ];
+  };
+
+  # pi-web-access: web search, URL fetching, GitHub cloning, YouTube/video
+  # analysis, PDF extraction (https://pi.dev/packages/pi-web-access). Built as
+  # a Nix derivation with its npm dependencies vendored into the store, then
+  # loaded as a local path extension — no runtime `npm install`, matching how
+  # pi.nix (lukasl-dev) ships extensions. Version bumps: update the fetchurl
+  # hash, regenerate config/pi/web-access/package-lock.json, and re-run
+  # `nix run nixpkgs#prefetch-npm-deps -- config/pi/web-access/package-lock.json`.
+  piWebAccess = pkgs.buildNpmPackage {
+    pname = "pi-web-access";
+    version = "0.17.1";
+    src = pkgs.runCommand "pi-web-access-src" { } ''
+      mkdir -p $out
+      tar -xzf ${pkgs.fetchurl {
+        url = "https://registry.npmjs.org/pi-web-access/-/pi-web-access-0.17.1.tgz";
+        hash = "sha256-yu4ST4iwUMNhz+1y1tpB2uzua7AKc8ULqOxAHIsmznE=";
+      }} -C $out --strip-components=1
+      cp ${configDir}/pi/web-access/package-lock.json $out/package-lock.json
+    '';
+    npmDepsHash = "sha256-+l8jdhl84rIs97uwSlVtAq3XoxiOMWbGotC/ryPnOzI=";
+    dontNpmBuild = true;
+    # npm prune would try to fetch the unmet @earendil-works/pi-* peer deps;
+    # pi provides those itself at runtime via loader aliases.
+    dontNpmPrune = true;
+    npmInstallFlags = [ "--legacy-peer-deps" ];
   };
 in
 {
@@ -69,7 +100,6 @@ in
           "opencode-go/deepseek-v4-flash"
           "opencode-go/deepseek-v4-pro"
         ];
-        packages = [ "pi-skills" ];
       };
       description = ''
         Global settings written to {file}`~/.pi/agent/settings.json`.
