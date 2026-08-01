@@ -1,0 +1,62 @@
+{
+  "extends": "default",
+  "meta": {
+    "name": "pi",
+    "version": "1.0.0",
+    "description": "Pi Coding Agent profile (registry-managed)",
+    "author": "nolabs-ai"
+  },
+  "groups": {
+    "include": [
+      "node_runtime",
+      "rust_runtime",
+      "python_runtime",
+      { "name": "user_caches_linux", "when": "linux" },
+      { "name": "linux_sysfs_read", "when": "linux" },
+      "nix_runtime",
+      "git_config",
+      "unlink_protection"
+    ]
+  },
+  "security": {
+    "signal_mode": "isolated",
+    "capability_elevation": false
+  },
+  "filesystem": {
+    "allow": [
+      "$HOME/.pi",
+      "$NONO_CONFIG/profile-drafts"
+    ],
+    "read": [
+      "$HOME/.nvm/",
+      "$HOME/.agents/skills",
+      "$NONO_CONFIG/profiles"
+    ]
+  },
+  "network": {
+    "block": false,
+    "allow_domain": [],
+    "credentials": [],
+    "open_port": [],
+    "listen_port": []
+  },
+  "env_credentials": {
+    "OPENCODE_API_KEY": "OPENCODE_API_KEY"
+  },
+  "workdir": { "access": "readwrite" },
+  "open_urls": {
+    "allow_localhost": true
+  },
+  "allow_launch_services": true,
+  "undo": {
+    "exclude_patterns": [
+      "node_modules",
+      ".next",
+      "__pycache__",
+      "target",
+      ".pi"
+    ],
+    "exclude_globs": ["*.tmp.[0-9]*.[0-9]*"]
+  },
+  "interactive": true
+}
