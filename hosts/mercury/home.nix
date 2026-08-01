@@ -14,6 +14,7 @@
     shell = {
       lf.enable = true;
       git.enable = true;
+      jj.enable = true;
       ssh.enable = true;
       zsh.enable = true;
       vim.enable = true;
