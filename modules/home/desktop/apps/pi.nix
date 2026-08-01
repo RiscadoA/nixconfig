@@ -4,6 +4,12 @@
 # URL:    https://github.com/RiscadoA/nixconfig
 #
 # Pi (pi.dev) home configuration.
+#
+# Also provides piusage, an aggregate pi token usage and cost tool, as a
+# builtin: it reads pi's session JSONL files under ~/.pi/agent/sessions and
+# reports today / this week / this month / last 30 days / all time usage,
+# plus a daily breakdown and per-project totals. Data comes from the
+# per-message usage records pi writes into each session file.
 
 { lib, config, pkgs, configDir, ... }:
 let
@@ -22,12 +28,15 @@ let
 
   # Settings written to ~/.pi/agent/settings.json: the declarative `settings`
   # option plus always-registered skill/extension paths. Lists are merged (not
-  # replaced) so the pi config skill and the nono sandbox skill coexist.
+  # replaced) so the pi config skill, the nono sandbox skill, and the piusage
+  # usage-footer extension coexist.
   effectiveSettings = cfg.settings // {
     skills = (cfg.settings.skills or [ ])
       ++ [ "${configDir}/pi/skills/pi-configuration" ]
       ++ (nonoSettings.skills or [ ]);
-    extensions = (cfg.settings.extensions or [ ]) ++ (nonoSettings.extensions or [ ]);
+    extensions = (cfg.settings.extensions or [ ])
+      ++ (nonoSettings.extensions or [ ])
+      ++ [ "${configDir}/pi/extensions/usage-footer.ts" ];
   };
 in
 {
@@ -104,7 +113,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.unstable.pi-coding-agent ];
+    home.packages = [
+      pkgs.unstable.pi-coding-agent
+      # `piusage [days]` - prints aggregate usage across all pi sessions.
+      (pkgs.writeScriptBin "piusage" (builtins.readFile "${configDir}/bin/piusage.pl"))
+      pkgs.perl
+    ];
 
     # Pi is configured declaratively through NixOS and the settings file is
     # intentionally read-only: pi must not persist runtime changes (e.g.

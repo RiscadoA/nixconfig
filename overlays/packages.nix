@@ -18,6 +18,8 @@
     ];
   });
 
+  pi-web = final.callPackage "${packageDir}/pi-web" { };
+
   haskellPackages = prev.haskellPackages.override {
     overrides = self: super: {
       xmonad-contrib = super.xmonad-contrib_0_18_1;

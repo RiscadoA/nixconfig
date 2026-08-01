@@ -44,11 +44,6 @@
 
   services.syncthing.enable = true;
 
-  programs.opencode.web = {
-    enable = true;
-    extraArgs = [ "--hostname" "0.0.0.0" "--port" "42424" ];
-  };
-
   wayland.windowManager.hyprland.settings = {
     exec-once = [
       "[workspace 1 silent] kitty"

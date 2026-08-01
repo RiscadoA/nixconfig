@@ -53,7 +53,7 @@
         rewrite name actual.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name mealie.home.riscadoa.com pluto.home.riscadoa.com
         rewrite name immich.home.riscadoa.com pluto.home.riscadoa.com
-        rewrite name opencode.home.riscadoa.com pluto.home.riscadoa.com
+        rewrite name pi.home.riscadoa.com pluto.home.riscadoa.com
         
         hosts {
           100.121.196.112 synology.home.riscadoa.com
@@ -179,12 +179,24 @@
     };
   };
 
-  services.nginx.virtualHosts."opencode.home.riscadoa.com" = {
-    useACMEHost = "opencode.home.riscadoa.com";
+  # pi-web (web UI for Pi Coding Agent) running on mercury. WebSockets are
+  # required for agent sessions/terminals; proxy_read_timeout follows the
+  # pi-web reverse-proxy guidance (long-lived session streams).
+  services.nginx.virtualHosts."pi.home.riscadoa.com" = {
+    useACMEHost = "pi.home.riscadoa.com";
     forceSSL = true;
-    locations."/".proxyPass = "http://mercury.home.riscadoa.com:42424";
+    locations."/" = {
+      proxyPass = "http://mercury.home.riscadoa.com:8504";
+      proxyWebsockets = true;
+      recommendedProxySettings = true;
+      extraConfig = ''
+        proxy_read_timeout 1h;
+        proxy_send_timeout 1h;
+        send_timeout 1h;
+      '';
+    };
   };
-  security.acme.certs."opencode.home.riscadoa.com".domain = "opencode.home.riscadoa.com";
+  security.acme.certs."pi.home.riscadoa.com".domain = "pi.home.riscadoa.com";
 
   services.cloudflared = {
     enable = true;
