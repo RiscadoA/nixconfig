@@ -17,6 +17,10 @@
       jj.enable = true;
       ssh.enable = true;
       zsh.enable = true;
+      tmux = {
+        enable = true;
+        enableExtendedKeys = true;
+      };
       vim.enable = true;
       pulsemixer.enable = true;
       direnv.enable = true;
@@ -56,12 +60,6 @@
         vscode.enable = true;
         zed.enable = true;
         pi.enable = true;
-        pi-web = {
-          enable = true;
-          # Bind to the Tailscale IP so pluto's nginx can proxy to it; avoids
-          # exposing pi-web on 0.0.0.0.
-          host = "100.124.202.87";
-        };
         nono = {
           enable = true;
           piProfile.enable = true;

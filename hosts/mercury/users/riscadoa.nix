@@ -44,6 +44,9 @@
 
   services.syncthing.enable = true;
 
+  # Attach to (or create) the persistent tmux session used for remote pi work.
+  home.shellAliases.piwork = "tmux new -A -s work";
+
   wayland.windowManager.hyprland.settings = {
     exec-once = [
       "[workspace 1 silent] kitty"
