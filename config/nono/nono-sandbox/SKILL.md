@@ -87,7 +87,6 @@ Use `read_file`, `write_file`, or `allow_file` only for exact single-file grants
 - Pi state, package installs, sessions, auth data, and settings live under `~/.pi`. The base nono Pi profile grants this directory read/write because Pi needs its own state.
 - The nono Pi pack installs itself as a Pi package by adding the pack directory to `~/.pi/agent/settings.json`.
 - Prefer nono credential routes for API keys. Pi's `~/.pi/agent/auth.json` is inside the sandbox because Pi must read it, so real API keys stored there are visible to the sandboxed process.
-- The base Pi profile authenticates the opencode-go provider by injecting the `OPENCODE_API_KEY` environment variable from the nono keychain (account name `OPENCODE_API_KEY`). Store the key there with `secret-tool store` rather than in `~/.pi`.
 
 ## Do not do
 

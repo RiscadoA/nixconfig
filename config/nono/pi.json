@@ -40,9 +40,6 @@
     "open_port": [],
     "listen_port": []
   },
-  "env_credentials": {
-    "OPENCODE_API_KEY": "OPENCODE_API_KEY"
-  },
   "workdir": { "access": "readwrite" },
   "open_urls": {
     "allow_localhost": true

@@ -56,17 +56,14 @@ in
 
       envCredentials = mkOption {
         type = types.attrsOf types.str;
-        default = {
-          OPENCODE_API_KEY = "OPENCODE_API_KEY";
-        };
+        default = {};
         example = {
           OPENCODE_API_KEY = "OPENCODE_API_KEY";
         };
         description = ''
           Environment variables nono injects into the sandbox from the system
           keychain. Keys are keychain account names, values are the environment
-          variables pi reads. The default covers the opencode-go provider, which
-          pi authenticates with the OPENCODE_API_KEY environment variable.
+          variables pi reads.
 
           Store each key in the nono keychain under the account name:
 
