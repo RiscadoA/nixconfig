@@ -69,6 +69,7 @@ in
           mhutchie.git-graph
           waderyan.gitblame
           github.vscode-github-actions
+          jjk.jjk
 
           # Spell checker
           streetsidesoftware.code-spell-checker

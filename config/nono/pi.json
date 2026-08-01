@@ -25,7 +25,8 @@
   "filesystem": {
     "allow": [
       "$HOME/.pi",
-      "$NONO_CONFIG/profile-drafts"
+      "$NONO_CONFIG/profile-drafts",
+      "$TMPDIR"
     ],
     "read": [
       "$HOME/.nvm/",
