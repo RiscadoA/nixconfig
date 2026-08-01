@@ -56,6 +56,7 @@
         vscode.enable = true;
         zed.enable = true;
         opencode.enable = true;
+        pi.enable = true;
       };
 
       games = {

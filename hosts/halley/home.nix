@@ -55,6 +55,7 @@
         zed.enable = true;
         dolphin.enable = true;
         opencode.enable = true;
+        pi.enable = true;
       };
 
       games = {
