@@ -57,6 +57,7 @@
         zed.enable = true;
         opencode.enable = true;
         pi.enable = true;
+        nono.enable = true;
       };
 
       games = {
