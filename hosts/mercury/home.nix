@@ -60,6 +60,11 @@
         vscode.enable = true;
         zed.enable = true;
         pi.enable = true;
+        obsidian = {
+          enable = true;
+          personalVault = "/home/riscadoa/documents/Personal Notes";
+          sharedVault = "/home/riscadoa/documents/Shared Notes";
+        };
         nono = {
           enable = true;
           piProfile.enable = true;
@@ -92,7 +97,6 @@
     vlc
     qbittorrent
     ripgrep
-    obsidian
     gemini-cli
     signal-desktop
     goxel

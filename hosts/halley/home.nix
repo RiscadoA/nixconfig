@@ -56,6 +56,11 @@
         dolphin.enable = true;
         opencode.enable = true;
         pi.enable = true;
+        obsidian = {
+          enable = true;
+          personalVault = "/home/riscadoa/documents/Personal Notes";
+          sharedVault = "/home/riscadoa/documents/Shared Notes";
+        };
         nono = {
           enable = true;
           piProfile.enable = true;
@@ -77,7 +82,6 @@
     libqalculate
     timewarrior
     ripgrep
-    obsidian
     renderdoc
     godot_4
     qbittorrent
