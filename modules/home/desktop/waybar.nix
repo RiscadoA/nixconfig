@@ -13,6 +13,7 @@ let
   sbGmail = pkgs.writeShellScriptBin "sb-gmail" ''
     GMAIL_USERNAME_FILE=${config.age.secrets.gmail-username.path} \
     GMAIL_PASSWORD_FILE=${config.age.secrets.gmail-password.path} \
+    printf '\uf0e0 '
     exec ${pkgs.python3}/bin/python3 ${configDir}/bin/sb-gmail.py
   '';
 
