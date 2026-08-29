@@ -1,9 +1,9 @@
-# modules/home/desktop/games/steam.nix
+# modules/system/desktop/games/steam.nix
 #
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
-# steam home configuration.
+# steam system configuration.
 
 { lib, config, pkgs, ... }:
 let

@@ -10,6 +10,12 @@ let
   inherit (lib) mkEnableOption mkOption types mkIf mkMerge;
   cfg = config.modules.desktop.waybar;
 
+  sbGmail = pkgs.writeShellScriptBin "sb-gmail" ''
+    GMAIL_USERNAME_FILE=${config.age.secrets.gmail-username.path} \
+    GMAIL_PASSWORD_FILE=${config.age.secrets.gmail-password.path} \
+    exec ${pkgs.python3}/bin/python3 ${configDir}/bin/sb-gmail.py
+  '';
+
   text-color = "#cfc9c2";
   text-hovered-color = "#ffffff";
   text-active-color = "#ffffff";
@@ -62,10 +68,20 @@ in
       description = "Whether to use a compact layout for the Waybar.";
       example = true;
     };
+    gmail = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        Show the Gmail unread-count module. This decrypts the gmail agenix
+        secrets, so it must only be enabled for users who own those secrets
+        (i.e. riscadoa, not the `work` user).
+      '';
+      example = true;
+    };
   };
 
   config = mkIf cfg.enable {
-    age.secrets = {
+    age.secrets = mkIf cfg.gmail {
       gmail-username.file = "${secrets}/gmail-username.age";
       gmail-password.file = "${secrets}/gmail-password.age";
     };
@@ -89,7 +105,8 @@ in
           modules-left = (if cfg.compact then [] else [ "custom/power" ]) ++
             [ "${cfg.compositor}/workspaces" "tray" ];
           modules-center = [ "${cfg.compositor}/window" ];
-          modules-right = [ "custom/mail" "wireplumber" "network" "battery" ]
+          modules-right = (if cfg.gmail then [ "custom/mail" ] else [ ])
+            ++ [ "wireplumber" "network" "battery" ]
             ++ (if cfg.compact then [ "clock" ] else [ "clock#time" "clock#calendar" ]);
 
           "custom/power" = {
@@ -212,8 +229,8 @@ in
             on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           };
 
-          "custom/mail" = {
-            exec = "GMAIL_USERNAME_FILE=${config.age.secrets.gmail-username.path} GMAIL_PASSWORD_FILE=${config.age.secrets.gmail-password.path} /home/riscadoa/nixos/bin/sb-gmail.sh";
+          "custom/mail" = mkIf cfg.gmail {
+            exec = "${sbGmail}/bin/sb-gmail";
             interval = 30;
             tooltip = false;
           };

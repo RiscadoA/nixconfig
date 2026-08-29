@@ -34,6 +34,7 @@
 
       systemModules = mkModules ./modules/system;
       homeModules = mkModules ./modules/home;
+      profiles = mkModules ./profiles;
 
       mkPkgs = pkgs: extraOverlays: system: import pkgs {
         inherit system;
@@ -109,7 +110,7 @@
                       configDir = ./config;
                       secrets = ./secrets;
                     };
-                    sharedModules = homeModules ++ [
+                    sharedModules = homeModules ++ profiles ++ [
                       inputs.agenix.homeManagerModules.default
                       inputs.niri-flake.homeModules.niri
                       (import "${dir}/home.nix")

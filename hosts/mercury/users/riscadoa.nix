@@ -3,44 +3,61 @@
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
-# Home configuration for user 'riscadoa'.
+# Home configuration for user 'riscadoa' on mercury.
 
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   user = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "steam" "wheel" "libvirtd" ];
+    extraGroups = [ "steam" "wheel" "libvirtd" "projects" ];
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDT8C1xA3eNDJ1qoEOmyIseU/n8ClLKCtGfCgD/QBYsG0BAeBqJ9t0s41vf8rBMjmZo2AfPY5os16J9Z2FOxgNKYMgPJmmnHGPzhBQ+66LDnTwDISiINqxhSh0/2EXp4YlOiSDwpbPXeqVZx2kFXAqLQgg+D+AjQAXxfrYI1JAoGUbvHCOTN5TX2rBpdgHsUGVxhsS+lHPfMTihxc1R+KSiYFGxG9l3+QfB03GQ9w5/FyGh2/HuQrNk8iTiKxIMoZTEEd1fk0iW7qqiTirOSAdaG7YkTmF6c42boZ120YhDZjMfmSMxEaptxGt8Njp3DofqDHR8Ushj7rzyr8UDS+xZ (none)"
     ];
   };
 
-  # Modules configuration.
-  modules = {
-    shell = {
-      gdb.enable = true;
-      gpg.enable = true;
-      pass.enable = true;
-    };
+  profiles.development.enable = true;
 
+  modules = {
     desktop = {
       apps = {
+        obsidian = {
+          enable = true;
+          personalVault = "/home/riscadoa/documents/Personal Notes";
+          sharedVault = "/home/riscadoa/documents/Shared Notes";
+        };
+        firefox.enable = true;
         discord.enable = true;
         spotify.enable = true;
       };
 
       games = {
         anki.enable = true;
+        minecraft.enable = true;
+        vintagestory.enable = true;
       };
+
+      waybar.gmail = true;
+    };
+
+    shell = {
+      gpg.enable = true;
+      pass.enable = true;
     };
   };
 
-  # Extra packages.
   home.packages = with pkgs; [
     timewarrior
-    renderdoc
+    xournalpp
+    goxel
+    signal-desktop
+    blender
+    vlc
+    qbittorrent
+    ckan
   ];
+
+  home.file."projects".source = config.lib.file.mkOutOfStoreSymlink "/srv/projects";
 
   services.syncthing.enable = true;
 

@@ -3,78 +3,28 @@
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
-# Home configuration common to all users.
+# Home configuration shared by every user of mercury (riscadoa, work, guest).
 
 { pkgs, ... }:
 {
-  # Modules configuration.
+  profiles = {
+    cli.enable = true;
+    desktop.enable = true;
+  };
+
   modules = {
-    xdg.enable = true;
-
-    shell = {
-      lf.enable = true;
-      git.enable = true;
-      jj.enable = true;
-      ssh.enable = true;
-      zsh.enable = true;
-      tmux = {
-        enable = true;
-        enableExtendedKeys = true;
-      };
-      vim.enable = true;
-      pulsemixer.enable = true;
-      direnv.enable = true;
-    };
-
     desktop = {
-      wayland.enable = true;
       niri = {
-        enable = true;
         keyboardLayout = "us";
         keyboardVariant = "altgr-intl";
       };
-      hyprlock = {
-        enable = true;
-        suspend = false;
-      };
+
       waybar = {
-        enable = true;
-        sizeMultiplier = 1.1;
         compositor = "niri";
-      };
-      gtk.enable = true;
-      qt.enable = true;
-
-      services = {
-        flameshot.enable = true;
-        wallpaper.enable = true;
+        sizeMultiplier = 1.1;
       };
 
-      apps = {
-        rofi.enable = true;
-        fuzzel.enable = true;
-        mako.enable = true;
-        kitty.enable = true;
-        firefox.enable = true;
-        dolphin.enable = true;
-        vscode.enable = true;
-        zed.enable = true;
-        pi.enable = true;
-        obsidian = {
-          enable = true;
-          personalVault = "/home/riscadoa/documents/Personal Notes";
-          sharedVault = "/home/riscadoa/documents/Shared Notes";
-        };
-        nono = {
-          enable = true;
-          piProfile.enable = true;
-        };
-      };
-
-      games = {
-        minecraft.enable = true;
-        vintagestory.enable = true;
-      };
+      apps.rofi.enable = true;
     };
   };
 
@@ -83,22 +33,4 @@
     kb_variant = "altgr-intl";
     kb_options = "compose:ralt nodeadkeys";
   };
-
-  # Extra packages.
-  home.packages = with pkgs; [
-    htop
-    blender
-    xournalpp
-    libqalculate
-    kdePackages.kdenlive
-    freecad
-    ckan
-    lutris
-    vlc
-    qbittorrent
-    ripgrep
-    gemini-cli
-    signal-desktop
-    goxel
-  ];
 }

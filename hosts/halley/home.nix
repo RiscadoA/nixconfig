@@ -1,103 +1,35 @@
+# hosts/halley/home.nix
+#
+# Home configuration shared by every user of halley.
+
 { pkgs, ... }:
 {
+  # Profiles shared by every user of halley (both users are developers);
+  # browsers/media/games and other per-user bits live in the user files.
+  profiles = {
+    cli.enable = true;
+    desktop.enable = true;
+    development.enable = true;
+  };
+
   modules = {
-    xdg.enable = true;
-
-    shell = {
-      lf.enable = true;
-      git.enable = true;
-      jj.enable = true;
-      gdb.enable = true;
-      gpg.enable = true;
-      ssh.enable = true;
-      zsh.enable = true;
-      vim.enable = true;
-      pass.enable = true;
-      direnv.enable = true;
-      pulsemixer.enable = true;
-    };
-
+    # Host-specific tuning of the modules enabled by the profiles above.
     desktop = {
-      wayland.enable = true;
-      niri = {
-        enable = true;
-        keyboardLayout = "pt";
-      };
-      hyprlock = {
-        enable = true;
-        suspend = true;
-      };
+      niri.keyboardLayout = "pt";
+
       waybar = {
-        enable = true;
         compositor = "niri";
         compact = true;
       };
-      gtk.enable = true;
-      qt.enable = true;
+
+      hyprlock.suspend = true;
 
       services = {
-        flameshot = {
-          enable = true;
-          scaleFactor = 0.5;
-        };
+        flameshot.scaleFactor = 0.5;
         low-battery-notifier.enable = true;
-        wallpaper.enable = true;
-      };
-
-      apps = {
-        kitty.enable = true;
-        fuzzel.enable = true;
-        mako.enable = true;
-        discord.enable = true;
-        firefox.enable = true;
-        spotify.enable = true;
-        vscode.enable = true;
-        zed.enable = true;
-        dolphin.enable = true;
-        opencode.enable = true;
-        pi.enable = true;
-        obsidian = {
-          enable = true;
-          personalVault = "/home/riscadoa/documents/Personal Notes";
-          sharedVault = "/home/riscadoa/documents/Shared Notes";
-        };
-        nono = {
-          enable = true;
-          piProfile.enable = true;
-        };
-      };
-
-      games = {
-        anki.enable = true;
-        minecraft.enable = true;
-        vintagestory.enable = true;
       };
     };
   };
-
-  home.packages = with pkgs; [
-    htop
-    blender
-    xournalpp
-    libqalculate
-    timewarrior
-    ripgrep
-    renderdoc
-    godot_4
-    qbittorrent
-    vlc
-    lutris
-    goxel
-    czkawka-full
-    gimp
-    zathura
-    imv
-    the-powder-toy
-    gnome-network-displays
-    moonlight-qt
-    gemini-cli
-    signal-desktop
-  ];
 
   xresources.properties = {
     "Xft.dpi" = 144;
@@ -106,6 +38,4 @@
   programs.readline.extraConfig = ''
     set bell-style none
   '';
-
-  services.syncthing.enable = true;
 }

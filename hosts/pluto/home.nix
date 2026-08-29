@@ -1,22 +1,11 @@
+# hosts/pluto/home.nix
+#
+# Author: Ricardo Antunes <me@riscadoa.com>
+# URL:    https://github.com/RiscadoA/nixconfig
+#
+# Home configuration shared by every user of pluto (headless server; cli profile).
+
 { pkgs, ... }:
 {
-  # Modules configuration.
-  modules = {
-    xdg.enable = true;
-
-    shell = {
-      git.enable = true;
-      jj.enable = true;
-      ssh.enable = true;
-      zsh.enable = true;
-      vim.enable = true;
-    };
-  };
-
-  # Extra packages.
-  home.packages = with pkgs; [
-    htop
-    libqalculate
-    ripgrep
-  ];
+  profiles.cli.enable = true;
 }
