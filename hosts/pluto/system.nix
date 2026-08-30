@@ -72,6 +72,24 @@
 
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
+  # Automatic updates & garbage collection.
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:RiscadoA/nixconfig";
+    # Deploy exactly what is pushed to GitHub; never bump inputs on the box.
+    # Bump the lock manually with `nix flake update` when desired.
+    upgrade = false;
+    runGarbageCollection = true;
+  };
+
+  nix.gc = {
+    automatic = true;
+    # Keep a month of rollback generations.
+    options = "--delete-older-than 30d";
+  };
+
+  nix.settings.auto-optimise-store = true;
+
   security.acme = {
     acceptTerms = true;
     defaults = {
