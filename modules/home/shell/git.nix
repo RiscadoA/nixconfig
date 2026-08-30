@@ -19,7 +19,7 @@ in
       lfs.enable = true;
       signing = {
         key = null;
-        signByDefault = true;
+        signByDefault = false;
       };
       settings = {
         init.defaultBranch = "main";

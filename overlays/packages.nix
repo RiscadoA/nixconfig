@@ -30,4 +30,15 @@
       hash = "sha256-V8JAai4gZ1nzia4kmQVeBwidQ+Sx5A5on3SJGSevrUU=";
     };
   });
+
+  # niri-session calls `systemctl --user import-environment` without variable
+  # names, which systemd reports as deprecated on the TTY before niri maps the
+  # display. Spell the names out to silence the warning (matches the upstream
+  # fix in niri PR #3572 / #4025).
+  niri = prev.niri.overrideAttrs (oldAttrs: {
+    postInstall = (oldAttrs.postInstall or "") + ''
+      sed -i 's/systemctl --user import-environment$/systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_CURRENT_DESKTOP/' \
+        $out/bin/niri-session
+    '';
+  });
 }

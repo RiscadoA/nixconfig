@@ -8,7 +8,7 @@
     isNormalUser = true;
     createHome = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "video" "libvirtd" "docker" "networkmanager" "gamemode" "projects" ];
+    extraGroups = [ "wheel" "video" "libvirtd" "docker" "networkmanager" "gamemode" ];
   };
 
   modules = {
@@ -55,8 +55,6 @@
     xournalpp
     timewarrior
   ];
-
-  home.file."projects".source = config.lib.file.mkOutOfStoreSymlink "/srv/projects";
 
   services.syncthing.enable = true;
 }

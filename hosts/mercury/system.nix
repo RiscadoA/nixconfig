@@ -22,8 +22,6 @@
       games.steam.enable = true;
     };
 
-    services.projects.enable = true;
-
     services.minecraft = {
       enable = true;
       servers = [ "create" "castro" ];

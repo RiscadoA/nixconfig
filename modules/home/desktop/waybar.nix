@@ -103,7 +103,8 @@ in
           margin-right = int-dim 2;
           margin-top = int-dim 2;
           margin-bottom = -4;
-          modules-left = (if cfg.compact then [] else [ "custom/power" ]) ++
+          # Power/logout menu is kept even in compact mode (used by halley).
+          modules-left = [ "custom/power" ] ++
             [ "${cfg.compositor}/workspaces" "tray" ];
           modules-center = [ "${cfg.compositor}/window" ];
           modules-right = (if cfg.gmail then [ "custom/mail" ] else [ ])

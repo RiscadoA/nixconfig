@@ -1,6 +1,6 @@
 # hosts/halley/home.nix
 #
-# Home configuration shared by every user of halley.
+# Home configuration for halley (user 'riscadoa').
 
 { pkgs, ... }:
 {

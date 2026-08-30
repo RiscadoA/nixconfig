@@ -3,7 +3,7 @@
 # Author: Ricardo Antunes <me@riscadoa.com>
 # URL:    https://github.com/RiscadoA/nixconfig
 #
-# Home configuration shared by every user of mercury (riscadoa, work, guest).
+# Home configuration shared by every user of mercury (riscadoa, guest).
 
 { pkgs, ... }:
 {

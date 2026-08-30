@@ -9,7 +9,11 @@
     desktop = {
       wayland.enable = true;
       niri.enable = true;
-      greetd.enable = true;
+      sddm = {
+        enable = true;
+        users = [ "riscadoa" ];
+        auto = true;
+      };
       fonts.enable = true;
       games.steam = {
         enable = true;
@@ -19,7 +23,6 @@
 
     services = {
       tailscale.enable = true;
-      projects.enable = true;
     };
   };
 
