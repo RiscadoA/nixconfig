@@ -29,6 +29,7 @@
       "$HOME/.cache/jj",
       "$HOME/.local/share/jj",
       "$HOME/.local/state/jj",
+      "$HOME/projects/personal/rust",
       "$NONO_CONFIG/profile-drafts",
       "$TMPDIR"
     ],
