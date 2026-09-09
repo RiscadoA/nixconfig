@@ -82,6 +82,7 @@ in
         # Scoped models for Ctrl+P cycling: DeepSeek v4 flash and pro only.
         # Note: provider is opencode-go, not deepseek, in the model catalog.
         enabledModels = [
+          "opencode-go/glm-5.3-flash"
           "opencode-go/deepseek-v4-flash"
           "opencode-go/deepseek-v4-pro"
         ];
@@ -97,6 +98,7 @@ in
         defaultThinkingLevel = "medium";
         theme = "dark";
         enabledModels = [
+          "opencode-go/glm-5.3-flash"
           "opencode-go/deepseek-v4-flash"
           "opencode-go/deepseek-v4-pro"
         ];
