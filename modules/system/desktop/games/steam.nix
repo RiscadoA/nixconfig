@@ -24,6 +24,7 @@ in
   config = mkIf cfg.enable {
     programs.steam = {
       enable = true;
+      extest.enable = true;
       gamescopeSession = {
         enable = true;
         steamArgs = [
@@ -51,6 +52,9 @@ in
         ];
         extraArgs = "-forcedesktopscaling ${toString cfg.desktopScaling}";
       };
+      extraPackages = with pkgs; [
+        hidapi
+      ];
       extraCompatPackages = with pkgs; [
         proton-ge-bin
       ];
