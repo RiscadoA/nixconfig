@@ -14,6 +14,9 @@ in
   options.modules.desktop.apps.codex.enable = mkEnableOption "codex";
 
   config = mkIf cfg.enable {
-    programs.codex.enable = true;
+    programs.codex = {
+      enable = true;
+      package = pkgs.unstable.codex;
+    };
   };
 }
