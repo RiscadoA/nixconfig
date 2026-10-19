@@ -17,6 +17,7 @@ in
         vscode.enable = true;
         zed.enable = true;
         opencode.enable = true;
+        codex.enable = true;
         pi.enable = true;
         nono = {
           enable = true;
