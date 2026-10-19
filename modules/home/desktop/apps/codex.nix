@@ -14,6 +14,8 @@ in
   options.modules.desktop.apps.codex.enable = mkEnableOption "codex";
 
   config = mkIf cfg.enable {
+    home.packages = [ pkgs.bubblewrap ];
+
     programs.codex = {
       enable = true;
       package = pkgs.unstable.codex;
