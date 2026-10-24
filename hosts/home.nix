@@ -5,11 +5,12 @@
 # 
 # Default/common configuration for all host homes.
 
-{ ... }:
+{ pkgs, ... }:
 {
   home = {
     keyboard = null;
     stateVersion = "21.11";
+    packages = [ pkgs.lean4 ];
 
     shellAliases = {
       "rebuild" = "sudo nixos-rebuild switch --flake $HOME/nixos |& nom";
