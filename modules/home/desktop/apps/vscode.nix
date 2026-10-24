@@ -85,6 +85,9 @@ in
           # Nix
           jnoortheen.nix-ide
 
+          # Lean
+          leanprover.lean4
+
           # C/C++
           xaver.clang-format
           ms-vscode.cpptools
