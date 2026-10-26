@@ -18,6 +18,9 @@ in
     programs.niri = {
       enable = true;
       package = pkgs.niri;
+      # Use xdg-desktop-portal-gtk's FileChooser instead of delegating to
+      # Nautilus through the GNOME portal (which is only needed for screencast).
+      useNautilus = false;
     };
 
     environment.systemPackages = with pkgs; [ 
