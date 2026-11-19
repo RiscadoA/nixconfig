@@ -40,6 +40,10 @@ in
   };
 
   config = mkIf cfg.enable {
+    # The NixOS Niri module provides the GTK file chooser. The Home Manager
+    # portal would point the session at a backend directory containing only GNOME.
+    xdg.portal.enable = lib.mkForce false;
+
     programs.niri = {
       enable = true;
       package = pkgs.niri;
